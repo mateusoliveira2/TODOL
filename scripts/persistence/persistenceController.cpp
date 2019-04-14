@@ -6,5 +6,8 @@
 
 // Exemplo de função desse controller
 void persistirProjeto(Project project) {
-	// Salva o projeto em um arquivo
+	/* 
+		Salva o projeto em um arquivo, de preferência 
+		em uma pasta separada dos scripts
+	*/
 }
