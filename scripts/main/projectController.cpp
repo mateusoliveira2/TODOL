@@ -7,7 +7,6 @@
 #include <cstdio>
 #include <cstdlib>
 
-
 void createToDo(){
 	char nameToDo[20];
 	int duration;
@@ -15,16 +14,18 @@ void createToDo(){
 	
     printf("\tCRIAR ToDo");
     printf("\n\tDIGITE O NOME DA ToDo: ");
-    scanf("%s", nameToDo);
+    gets(nameToDo);
     
     printf("\n\tDIGITE O NOME DOS RESPONSAVEIS: ");
-	scanf("%s", responsible);
+	gets(responsible);
     
-    printf("\n\tDIGITE A DURACAO DA ToDo: ");
+    printf("\n\tDIGITE A DURACAO DA ToDo (em dias): ");
 	scanf("%d", &duration);
 	
 	printf("%s %d %s", nameToDo, duration, responsible);
 	//repassar dados para fun��o que cria todo e joga no arquivo
+
+    telaConclusao("ToDo criado");
 }
 
 void listarToDO(){
@@ -38,10 +39,10 @@ void editName(char projectName[20]){
 	printf("\tNOME ATUAL: %s", projectName);
 	
     printf("\n\tDIGITE O NOVO NOME: ");
-    scanf("%s", newName);
+    gets(newName);
 	
 	printf("%s", newName);
-	system("cls || clear");
+	telaConclusao("Nome do projeto atualizado");
 
 	//repassar dado para fun��o de edi��o
 }
@@ -55,7 +56,7 @@ void editToDo(){
 	char nameToDo[20];
 	
 	printf("\n\tDIGITE O NOME DA ToDo: ");
-    scanf("%s", nameToDo);
+    gets(nameToDo);
     
     //verificar se ToDo existe
     todoMain(nameToDo);
@@ -76,6 +77,7 @@ void projectMain(char projectName[20]) {
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
+        fflush(stdin);
 		system("cls || clear");
         switch(choice){
             case 1:
@@ -98,7 +100,7 @@ void projectMain(char projectName[20]) {
             	break;
 
             case 0:
-                system("\"C:\\workspace\\C\\include teste\\menu.exe\"");
+                system("\"C:\\workspace\\TODOL\\scripts\\main\\ToDol.exe\" ");
                 break;
 
             default:

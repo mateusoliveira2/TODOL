@@ -1,3 +1,15 @@
+void telaConclusao(char acao[20]){
+	printf("\n\t%s com sucesso!", acao);
+
+	char choice = 'n';
+	do  {
+		printf("\n\nDeseja voltar? (s/n): ");
+		scanf("%s", &choice);
+	} while(choice != 's');
+	
+	system("cls || clear");
+}
+
 void editTodoName(char name[20]){
 	char newName[20];
 	printf("\tEDITAR NOME DO ToDo\n");
@@ -5,11 +17,10 @@ void editTodoName(char name[20]){
 	printf("\tNOME ATUAL: %s", name);
 	
     printf("\n\tDIGITE O NOVO NOME: ");
-    scanf("%s", newName);
+    gets(newName);
 	
-	system("cls || clear");
-	printf("%s", newName);
-	//repassar dado para função de edição
+	//telaConclusao("Nome do ToDo atualizado");
+	//repassar dado para funï¿½ï¿½o de ediï¿½ï¿½o
 }
 
 void todoMain( char todoName[20]){
@@ -25,6 +36,7 @@ void todoMain( char todoName[20]){
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
+        fflush(stdin);
 		system("cls || clear");
         switch(choice){
             case 1:
@@ -40,7 +52,7 @@ void todoMain( char todoName[20]){
                 break;
 
             case 0:
-                system("\"C:\\workspace\\C\\include teste\\projetoMenu.exe\" ");
+                system("\"C:\\workspace\\TODOL\\scripts\\main\\projectController.exe\" ");
                 break;
 
             default:
