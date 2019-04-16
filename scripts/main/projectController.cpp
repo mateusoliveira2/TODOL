@@ -17,18 +17,18 @@ void createToDo(){
     printf("\n\tDIGITE O NOME DA ToDo: ");
     scanf("%s", nameToDo);
     
-    printf("\n\tDIGITE O NOME DOS RESPONSÁVEIS: ");
+    printf("\n\tDIGITE O NOME DOS RESPONSAVEIS: ");
 	scanf("%s", responsible);
     
-    printf("\n\tDIGITE A DURAÇÃO DA ToDo: ");
+    printf("\n\tDIGITE A DURACAO DA ToDo: ");
 	scanf("%d", &duration);
 	
 	printf("%s %d %s", nameToDo, duration, responsible);
-	//repassar dados para função que cria todo e joga no arquivo
+	//repassar dados para funï¿½ï¿½o que cria todo e joga no arquivo
 }
 
 void listarToDO(){
-	//chamar função de listagem
+	//chamar funï¿½ï¿½o de listagem
 }
 
 void editName(char projectName[20]){
@@ -43,11 +43,11 @@ void editName(char projectName[20]){
 	printf("%s", newName);
 	system("cls || clear");
 
-	//repassar dado para função de edição
+	//repassar dado para funï¿½ï¿½o de ediï¿½ï¿½o
 }
 
 void gerarRelatorio(char projectName[20]){
-	//retorna dados do projeto com avaliação de como está indo o projeto
+	//retorna dados do projeto com avaliaï¿½ï¿½o de como estï¿½ indo o projeto
 	
 }
 

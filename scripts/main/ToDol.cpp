@@ -16,7 +16,7 @@ void selecionarProjeto(){
 	
 	system("cls || clear");
 	
-	//verificação que existe para poder ir pra o projetoMenu
+	//verificaï¿½ï¿½o que existe para poder ir pra o projetoMenu
 	projectMain(nomeProjeto);
 }
 
@@ -28,15 +28,15 @@ void criarProjeto(){
 	scanf("%s", nomeProjeto);
 	
 		
-	printf("\n\tDIGITE A DESCRIÇÃO DO PROJETO: ");
+	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
 	scanf("%s", descricao);
 	
-	printf("\n\tDIGITE A PREVISÃO DE TERMINO: ");
+	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
 	scanf("%d", &previsaoConclusao);
 	
 	system("cls || clear");
 	
-	//função de criar projeto com structs e arquivos.
+	//funï¿½ï¿½o de criar projeto com structs e arquivos.
 }
 
 void concluirProjeto(){
@@ -46,7 +46,7 @@ void concluirProjeto(){
 	
 	system("cls || clear");
 
-	//aqui ja viria o retorno da função que exclui o arquivo.
+	//aqui ja viria o retorno da funï¿½ï¿½o que exclui o arquivo.
 }
 
 
