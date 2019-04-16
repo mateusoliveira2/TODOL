@@ -12,11 +12,12 @@ void selecionarProjeto(){
 	char nomeProjeto[20];
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	scanf("%s", nomeProjeto);
+	gets(nomeProjeto);
 	
 	system("cls || clear");
 	
-	//verificação que existe para poder ir pra o projetoMenu
+	//verificaï¿½ï¿½o que existe para poder ir pra o nomeProjeto
+
 	projectMain(nomeProjeto);
 }
 
@@ -25,30 +26,29 @@ void criarProjeto(){
 	int previsaoConclusao;
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	scanf("%s", nomeProjeto);
+	gets(nomeProjeto);
 	
 		
-	printf("\n\tDIGITE A DESCRIÇÃO DO PROJETO: ");
-	scanf("%s", descricao);
+	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
+	gets(descricao);
 	
-	printf("\n\tDIGITE A PREVISÃO DE TERMINO: ");
+	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
 	scanf("%d", &previsaoConclusao);
 	
-	system("cls || clear");
 	
-	//função de criar projeto com structs e arquivos.
+	//funï¿½ï¿½o de criar projeto com structs e arquivos.
+
+	telaConclusao("Projeto criado");
 }
 
 void concluirProjeto(){
 	char nomeProjeto[20];
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	scanf("%s", nomeProjeto);
-	
-	system("cls || clear");
+	gets(nomeProjeto);
 
-	//aqui ja viria o retorno da função que exclui o arquivo.
+	//aqui ja viria o retorno da funï¿½ï¿½o que exclui o arquivo.
+	telaConclusao("Conclusao feita");
 }
-
 
 int main () {
 	int escolha;
@@ -62,6 +62,7 @@ int main () {
         printf("\tESCOLHA: ");
 
         scanf("%d", &escolha);
+        fflush(stdin);
 		system("cls || clear");
         switch(escolha){
             case 1:
