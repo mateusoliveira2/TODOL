@@ -4,7 +4,7 @@
 
 #include "project.h"
 
-Project(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
+Project::Project(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
 	this->nome = _nome;
 	this->descricao = _descricao;
 	this->responsavel = _responsavel;
@@ -13,28 +13,28 @@ Project(string _nome, string _descricao, string _responsavel, int _previsaoConcl
 	this->dataCriacao = time(0);
 }
 
-void setNome(string novoNome) {
+void Project::setNome(string novoNome) {
 	this->nome = novoNome;
 }
 
-void setResponsavel(string novoResponsavel) {
+void Project::setResponsavel(string novoResponsavel) {
 	this->responsavel = novoResponsavel;
 }
 
-void setStatus(string novoStatus) {
+void Project::setStatus(string novoStatus) {
 	// checar validade de novoStatus
 	this->status = novoStatus;
 }
 
-void excluirToDo(string nomeToDo) {
+void Project::excluirToDo(string nomeToDo) {
 	// TBD
 }
 
-void criarToDo(string _descricao, string _responsavel, int _previsaoConclusao) {
+void Project::criarToDo(string _descricao, string _responsavel, int _previsaoConclusao) {
 	// TBD
 }
 
-void getRelatorio(string nome) {
+void Project::getRelatorio(string nome) {
 	// TBD
 }
 

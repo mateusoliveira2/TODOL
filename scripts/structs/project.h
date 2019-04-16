@@ -5,6 +5,7 @@
 #pragma once
 #include <string>
 #include <ctime>
+using namespace std;
 //#include "ToDo.h"
 
 struct Project {
