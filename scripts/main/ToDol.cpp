@@ -1,11 +1,11 @@
 /*
-	Main da aplica√ß√£o.
-	Controlla o loop principal e a entrada e sa√≠da de dados 
-	no menu principal para o usu√°rio.
+	Main da aplicacao.
+	Controlla o loop principal e a entrada e saida de dados 
+	no menu principal para o usuario.
 */
 
-#include<stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 #include "projectController.cpp"
 
 void selecionarProjeto(){
@@ -24,13 +24,12 @@ void criarProjeto(){
 	char nomeProjeto[20], descricao[100];
 	int previsaoConclusao;
 	
-	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	scanf("%s", nomeProjeto);
 	
 		
 	printf("\n\tDIGITE A DESCRI«√O DO PROJETO: ");
-	scanf("%s", descricao );
+	scanf("%s", descricao);
 	
 	printf("\n\tDIGITE A PREVIS√O DE TERMINO: ");
 	scanf("%d", &previsaoConclusao);
@@ -52,10 +51,9 @@ void concluirProjeto(){
 
 
 int main () {
-	int escolha=1;
+	int escolha;
 
-    do{
-    
+    do {
         printf("\n\tTODOL\n\n");
         printf("\t1. Criar Projeto\n");
         printf("\t2. Selecionar Projeto\n");
@@ -86,7 +84,6 @@ int main () {
         }
         
     } while(escolha);
-	
 	
 	return 0;
 }
