@@ -2,7 +2,7 @@
 	Controller dos fluxos após abrir para edição e visualização
 	de um Projeto
 */
-# include "../structs/project.cpp"
+
 #include "todoController.cpp"
 #include <cstdio>
 #include <cstdlib>

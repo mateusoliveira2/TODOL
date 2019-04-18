@@ -1,3 +1,6 @@
+#include <cstdio>
+#include <cstdlib>
+
 void conclusionScreen(char acao[20]){
 	printf("\n\t%s com sucesso!", acao);
 

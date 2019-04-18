@@ -8,7 +8,6 @@
 #include <cstdlib>
 #include "projectController.cpp"
 #include "../structs/project.cpp"
-#include "../persistence/persistenceController.cpp"
 
 void selectProject(){
 	char projectName[20];
