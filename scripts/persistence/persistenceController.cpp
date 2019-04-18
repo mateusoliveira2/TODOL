@@ -7,6 +7,8 @@
 
 #include <cstdlib>
 #include <fstream>
+#include <string>
+using namespace std;
 // Exemplo de função desse controller
 
 /* 
@@ -16,7 +18,7 @@
 void persistirProjeto(Project project) {
 	ofstream fs;
 	string dirProject = "../" + project.nome + "/";
-	string fileName = project.nome ".txt";
+	string fileName = project.nome + ".txt";
 	
 	fs.open(dirProject + fileName);
 	
@@ -52,10 +54,15 @@ void persistirProjeto(Project project) {
 	fs.close();
 }*/
 
+/* acho que n�o se retorna string em c
+
+
 String getTodo(String nomeToDo){
 	return "";
 }
 
 String getProject(String nomeProject) {
 	return "";
-}
+}*/
+
+

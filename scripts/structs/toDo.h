@@ -6,6 +6,7 @@
 #pragma once
 #include <ctime>
 #include <string>
+using namespace std;
 
 struct ToDo {
 	string descricao;

@@ -5,7 +5,8 @@
 
 #include "toDo.h"
 
-ToDo(string _descricao, string _responsavel, int _previsaoConclusao) {
+
+ToDo::ToDo(string _descricao, string _responsavel, int _previsaoConclusao) {
 	this->descricao = _descricao;
 	this->responsavel = _responsavel;
 	this->previsaoConclusao = _previsaoConclusao;
@@ -14,20 +15,20 @@ ToDo(string _descricao, string _responsavel, int _previsaoConclusao) {
 	this->dataCriacao = time(0);
 }
 
-string getStatus() { 
+string ToDo::getStatus() { 
 	return this->status;
 }
 
-void setStatus(string novoEstado) {
+void ToDo::setStatus(string novoEstado) {
 	if(novoEstado == "A fazer") this->status = novoEstado;
 	if(novoEstado == "Em andamento") this->status = novoEstado;
 	if(novoEstado == "Concluido") this->status = novoEstado;
 }
 
-string getResponsavel() {
+string ToDo::getResponsavel() {
 	return this->responsavel;
 }
 
-void setResponsavel(string novoResponsavel) {
+void ToDo::setResponsavel(string novoResponsavel) {
 	this->responsavel = novoResponsavel;
 }
