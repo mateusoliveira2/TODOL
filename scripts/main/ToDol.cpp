@@ -7,51 +7,56 @@
 #include <cstdio>
 #include <cstdlib>
 #include "projectController.cpp"
+#include "../structs/project.cpp"
+#include "../persistence/persistenceController.cpp"
 
-void selecionarProjeto(){
-	char nomeProjeto[20];
+void selectProject(){
+	char projectName[20];
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	gets(nomeProjeto);
+	gets(projectName);
 	
 	system("cls || clear");
 	
-	//verifica��o que existe para poder ir pra o nomeProjeto
+	//verifica��o que existe para poder ir pra o projectName
 
-	projectMain(nomeProjeto);
+	projectMain(projectName);
 }
 
-void criarProjeto(){
-	char nomeProjeto[20], descricao[100];
-	int previsaoConclusao;
+void createProject(){
+	char projectName[20], description[100], responsible[50];
+	int prevision;
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	gets(nomeProjeto);
+	gets(projectName);
 	
 		
 	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
-	gets(descricao);
+	gets(description);
+
+	printf("\n\tDIGITE OS RESPONSAVEIS PELO DO PROJETO: ");
+	gets(responsible);
 	
 	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
-	scanf("%d", &previsaoConclusao);
+	scanf("%d", &prevision);
 	
 	
 	//fun��o de criar projeto com structs e arquivos.
 
-	telaConclusao("Projeto criado");
+	conclusionScreen("Projeto criado");
 }
 
-void concluirProjeto(){
-	char nomeProjeto[20];
+void concludeProject(){
+	char projectName[20];
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	gets(nomeProjeto);
+	gets(projectName);
 
 	//aqui ja viria o retorno da fun��o que exclui o arquivo.
-	telaConclusao("Conclusao feita");
+	conclusionScreen("Conclusao feita");
 }
 
 int main () {
-	int escolha;
+	int choice;
 
     do {
         printf("\n\tTODOL\n\n");
@@ -61,20 +66,20 @@ int main () {
         printf("\t0. Sair\n\n");
         printf("\tESCOLHA: ");
 
-        scanf("%d", &escolha);
+        scanf("%d", &choice);
         fflush(stdin);
 		system("cls || clear");
-        switch(escolha){
+        switch(choice){
             case 1:
-                criarProjeto();
+                createProject();
                 break;
 
             case 2:
-                selecionarProjeto();
+                selectProject();
                 break;
 
             case 3:
-                concluirProjeto();
+                concludeProject();
                 break;
 
             case 0:
@@ -84,7 +89,7 @@ int main () {
                 printf("Digite uma opcao valida\n");
         }
         
-    } while(escolha);
+    } while(choice);
 	
 	return 0;
 }

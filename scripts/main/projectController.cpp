@@ -25,7 +25,7 @@ void createToDo(){
 	printf("%s %d %s", nameToDo, duration, responsible);
 	//repassar dados para fun��o que cria todo e joga no arquivo
 
-    telaConclusao("ToDo criado");
+    conclusionScreen("ToDo criado");
 }
 
 void listarToDO(){
@@ -42,7 +42,7 @@ void editName(char projectName[20]){
     gets(newName);
 	
 	printf("%s", newName);
-	telaConclusao("Nome do projeto atualizado");
+	conclusionScreen("Nome do projeto atualizado");
 
 	//repassar dado para fun��o de edi��o
 }

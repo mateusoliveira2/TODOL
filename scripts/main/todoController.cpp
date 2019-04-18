@@ -1,4 +1,4 @@
-void telaConclusao(char acao[20]){
+void conclusionScreen(char acao[20]){
 	printf("\n\t%s com sucesso!", acao);
 
 	char choice = 'n';
@@ -19,7 +19,7 @@ void editTodoName(char name[20]){
     printf("\n\tDIGITE O NOVO NOME: ");
     gets(newName);
 	
-	//telaConclusao("Nome do ToDo atualizado");
+	//conclusionScreen("Nome do ToDo atualizado");
 	//repassar dado para fun��o de edi��o
 }
 
