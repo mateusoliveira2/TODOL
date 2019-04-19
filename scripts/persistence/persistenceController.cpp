@@ -28,7 +28,7 @@ void persistirProjeto(Project project) {
 	}
 	
 	fs << "===Nome===:\t" + project.nome + "\n";
-	fs << "===Status===:\t" + project.status + "\n";
+	fs << "===Status===:\t" + project.status + "\n"; //project nao tem status, quem tem é toDo
 	fs << "===Responsavel===:\t" + project.responsavel + "\n";
 	fs << "===Descricao===:\t" + project.descricao + "\n";
 
