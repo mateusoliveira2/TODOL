@@ -1,8 +1,12 @@
 /*
 	Implementação da struct (model) de um Projeto.
 */
-
+#include "../persistence/persistenceController.cpp"
 #include "project.h"
+
+void gravar(string _nome, string _descricao, string _responsavel, int _previsaoConclusao){
+	persistirProjeto(_nome, _descricao, _responsavel, _previsaoConclusao);
+}
 
 Project::Project(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
 	this->nome = _nome;
@@ -11,7 +15,10 @@ Project::Project(string _nome, string _descricao, string _responsavel, int _prev
 
 	this->previsaoConclusao = _previsaoConclusao;
 	this->dataCriacao = time(0);
+	gravar(_nome, _descricao, _responsavel, _previsaoConclusao);
 }
+
+
 
 void Project::setNome(string novoNome) {
 	this->nome = novoNome;
