@@ -40,7 +40,7 @@ void createProject(){
 	scanf("%d", &prevision);
 	
 	
-	//fun��o de criar projeto com structs e arquivos.
+	Project(projectName, description, responsible, prevision);
 
 	conclusionScreen("Projeto criado");
 }
