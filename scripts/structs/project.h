@@ -3,10 +3,12 @@
 */
 
 #pragma once
+
 #include <string>
 #include <ctime>
+//#include "toDo.h"
+
 using namespace std;
-//#include "ToDo.h"
 
 struct Project {
 	// TBD implementação da parte de armazenamento de ToDo's no projeto
@@ -28,7 +30,7 @@ struct Project {
 	void excluirToDo(string nomeToDo);
 	void criarToDo(string _descricao, string _responsavel, int _previsaoConclusao);
 
-	void getRelatorio(string nome);
+	void getRelatorio();
 
 	// filterNome()
 	// filterSituacao()

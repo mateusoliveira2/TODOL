@@ -34,7 +34,7 @@ void Project::criarToDo(string _descricao, string _responsavel, int _previsaoCon
 	// TBD
 }
 
-void Project::getRelatorio(string nome) {
+void Project::getRelatorio() {
 	// TBD
 }
 

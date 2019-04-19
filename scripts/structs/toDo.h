@@ -9,6 +9,7 @@
 using namespace std;
 
 struct ToDo {
+	string nome;
 	string descricao;
 	string responsavel;
 	string status; // "A fazer", "Em andamento" e "Concluido"
@@ -16,7 +17,8 @@ struct ToDo {
 	int previsaoConclusao; // em dias
 	time_t dataCriacao;
 
-	ToDo(string _descricao, string _responsavel, int _previsaoConclusao);
+	ToDo();
+	ToDo(string _nome, string _descricao, string _responsavel, int _previsaoConclusao);
 	
 	string getStatus();
 	void setStatus(string novoEstado);

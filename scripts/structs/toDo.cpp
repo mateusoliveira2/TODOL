@@ -5,8 +5,10 @@
 
 #include "toDo.h"
 
+ToDo::Todo() {}
 
-ToDo::ToDo(string _descricao, string _responsavel, int _previsaoConclusao) {
+ToDo::ToDo(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
+	this->nome = _nome;
 	this->descricao = _descricao;
 	this->responsavel = _responsavel;
 	this->previsaoConclusao = _previsaoConclusao;
