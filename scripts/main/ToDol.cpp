@@ -7,7 +7,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include "projectController.cpp"
-#include "../structs/project.cpp"
 
 void selectProject(){
 	char projectName[20];
@@ -17,13 +16,13 @@ void selectProject(){
 	
 	system("cls || clear");
 	
-	//verifica��o que existe para poder ir pra o projectName
+	//verificacao que existe para poder ir pra o projectMain
 
 	projectMain(projectName);
 }
 
-void createProject(){
-	char projectName[20], description[100], responsible[50];
+void sendProject(){
+	char projectName[30], description[100], responsible[100];
 	int prevision;
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
@@ -40,7 +39,7 @@ void createProject(){
 	scanf("%d", &prevision);
 	
 	
-	Project(projectName, description, responsible, prevision);
+	createProject(projectName, description, responsible, prevision);
 
 	conclusionScreen("Projeto criado");
 }
@@ -50,7 +49,7 @@ void concludeProject(){
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	gets(projectName);
 
-	//aqui ja viria o retorno da fun��o que exclui o arquivo.
+	//chama setStatus de projeto
 	conclusionScreen("Conclusao feita");
 }
 
@@ -70,7 +69,7 @@ int main () {
 		system("cls || clear");
         switch(choice){
             case 1:
-                createProject();
+                sendProject();
                 break;
 
             case 2:

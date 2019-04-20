@@ -1,6 +1,10 @@
 #include <cstdio>
 #include <cstdlib>
+#include "../structs/toDo.cpp"
 
+void createToDo(string nameToDo, string description, string responsible, int duration){
+	ToDo(nameToDo, description, responsible, duration);
+}
 void conclusionScreen(char acao[20]){
 	printf("\n\t%s com sucesso!", acao);
 
@@ -23,7 +27,7 @@ void editTodoName(char name[20]){
     gets(newName);
 	
 	//conclusionScreen("Nome do ToDo atualizado");
-	//repassar dado para fun��o de edi��o
+
 }
 
 void todoMain( char todoName[20]){

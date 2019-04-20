@@ -59,6 +59,10 @@ void persistirProjeto(string _nome, string _descricao, string _responsavel, int 
 
 /* acho que não se retorna string em c
 
+os sets de todos os atributos de todo e de project
+
+void setName(string nomeToDo, string newName){
+}
 
 String getTodo(String nomeToDo){
 	return "";

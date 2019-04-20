@@ -12,13 +12,11 @@ Project::Project(string _nome, string _descricao, string _responsavel, int _prev
 	this->nome = _nome;
 	this->descricao = _descricao;
 	this->responsavel = _responsavel;
-
+	
 	this->previsaoConclusao = _previsaoConclusao;
 	this->dataCriacao = time(0);
 	gravar(_nome, _descricao, _responsavel, _previsaoConclusao);
 }
-
-
 
 void Project::setNome(string novoNome) {
 	this->nome = novoNome;

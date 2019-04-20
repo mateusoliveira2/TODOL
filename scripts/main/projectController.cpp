@@ -4,32 +4,37 @@
 */
 
 #include "todoController.cpp"
+#include "../structs/project.cpp"
 #include <cstdio>
 #include <cstdlib>
 
-void createToDo(){
-	char nameToDo[20];
+void createProject(string name, string description, string responsible, int prevision){
+	Project(name, description, responsible, prevision);
+}
+void sendToDo(){
+	char nameToDo[20], description[100], responsible[50];
 	int duration;
-	char responsible[50];
 	
     printf("\tCRIAR ToDo");
     printf("\n\tDIGITE O NOME DA ToDo: ");
     gets(nameToDo);
     
-    printf("\n\tDIGITE O NOME DOS RESPONSAVEIS: ");
+    printf("\n\tDESCRICAO DA ToDo: ");
+	gets(description);
+	
+	printf("\n\tDIGITE O NOME DOS RESPONSAVEIS: ");
 	gets(responsible);
     
     printf("\n\tDIGITE A DURACAO DA ToDo (em dias): ");
 	scanf("%d", &duration);
+		
+	createToDo(nameToDo, description, responsible, duration);
 	
-	printf("%s %d %s", nameToDo, duration, responsible);
-	//repassar dados para fun��o que cria todo e joga no arquivo
-
     conclusionScreen("ToDo criado");
 }
 
 void listarToDO(){
-	//chamar fun��o de listagem
+	//chamar funcao de listagem
 }
 
 void editName(char projectName[20]){
@@ -41,10 +46,10 @@ void editName(char projectName[20]){
     printf("\n\tDIGITE O NOVO NOME: ");
     gets(newName);
 	
-	printf("%s", newName);
+	//setNome(newName);
+	
 	conclusionScreen("Nome do projeto atualizado");
 
-	//repassar dado para fun��o de edi��o
 }
 
 void gerarRelatorio(char projectName[20]){
@@ -72,7 +77,7 @@ void projectMain(char projectName[20]) {
         printf("\t2. Editar ToDo\n");
         printf("\t3. Listar ToDo\n");
         printf("\t4. Gerar Relatorio\n");
-        printf("\t5. Editar Nome\n");
+        printf("\t5. Editar Nome do Projeto\n");
         printf("\t0. Sair\n\n");
         printf("\tEscolha: ");
 
@@ -81,7 +86,7 @@ void projectMain(char projectName[20]) {
 		system("cls || clear");
         switch(choice){
             case 1:
-                createToDo();
+                sendToDo();
                 break;
 
             case 2:

@@ -5,7 +5,7 @@
 
 #include "toDo.h"
 
-ToDo::Todo() {}
+//ToDo::Todo() {} 
 
 ToDo::ToDo(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
 	this->nome = _nome;
@@ -26,6 +26,7 @@ void ToDo::setStatus(string novoEstado) {
 	if(novoEstado == "Em andamento") this->status = novoEstado;
 	if(novoEstado == "Concluido") this->status = novoEstado;
 }
+
 
 string ToDo::getResponsavel() {
 	return this->responsavel;
