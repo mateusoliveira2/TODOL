@@ -1,10 +1,12 @@
+#pragma once
 #include <cstdio>
 #include <cstdlib>
-#include "../structs/toDo.cpp"
+#include "../util.cpp"
 
 void createToDo(string project, string nameToDo, string description, string responsible, int duration){
-	ToDo(project, nameToDo, description, responsible, duration);
+    gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
 }
+
 void conclusionScreen(char acao[20]){
 	printf("\n\t%s com sucesso!", acao);
 
@@ -28,7 +30,6 @@ void editTodoName(char name[20]){
     gets(newName);
 	
 	//conclusionScreen("Nome do ToDo atualizado");
-
 }
 
 void todoMain( char todoName[20]){
@@ -45,9 +46,6 @@ void todoMain( char todoName[20]){
 
         scanf("%d", &choice);
         getchar();
-        
-        //fflush(stdin);
-        //__fpurge(stdin);
 		
         system("cls || clear");
         switch(choice){

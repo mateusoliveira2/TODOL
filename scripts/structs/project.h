@@ -8,13 +8,10 @@
 #include <ctime>
 #include <algorithm>
 #include <vector>
-//#include "toDo.h"
 
 using namespace std;
 
 struct Project {
-	// TBD implementação da parte de armazenamento de ToDo's no projeto
-
 	string nome;
 	string descricao;
 	string status;
@@ -33,8 +30,4 @@ struct Project {
 	void criarToDo(string _descricao, string _responsavel, int _previsaoConclusao);
 
 	void getRelatorio();
-
-	// filterNome()
-	// filterSituacao()
-	// filterData()
 };

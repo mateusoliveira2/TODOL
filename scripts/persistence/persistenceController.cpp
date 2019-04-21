@@ -3,6 +3,7 @@
 	qualquer outro dado que deva ser armazenado em arquivos.
 */
 
+#pragma once
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -15,11 +16,9 @@ using namespace std;
 	em uma pasta separada dos scripts
 */
 
-
 void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
 	ofstream fs;
 
-	_nome = formatarNome(_nome);
 	string dirProject = "..\\" + _nome + "\\";
 	string fileName = _nome + ".txt";
 	
@@ -34,7 +33,7 @@ void persistirProjeto(string _nome, string _descricao, string _responsavel, int 
 	fs << "===Descricao===:\t" + _descricao + "\n"; 
 	fs << "===Responsavel===:\t" + _responsavel + "\n";
 	char sPrevisaoConclusao[3];
-	// convert  to string
+	// convert to string
 	sprintf(sPrevisaoConclusao, "%d", _previsaoConclusao);
 	fs << "===Previsao de Conclusao===:\t" + string(sPrevisaoConclusao)+ "\n";
 

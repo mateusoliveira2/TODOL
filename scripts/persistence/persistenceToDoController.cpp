@@ -3,24 +3,14 @@
 	em uma pasta separada dos scripts
 */
 
+#pragma once
 #include <cstdlib>
 #include <fstream>
 #include <string>
 #include <vector>
 using namespace std;
 
-string formatarNome(string nome){
-	for(int i = 0; i < nome.size(); i++){
-		if(nome[i] == ' ') nome[i] = '_';
-	}
-	return nome;
-}
-
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
-	
-	_nome = formatarNome(_nome);
-	projectName = formatarNome(projectName);
-	
 	ofstream fs;
 	
 	//pode existir verificacao de nome de projeto invalido
@@ -50,15 +40,15 @@ string returnAllToDos(){
 }
 
 void setNomeToDo(string nome, string novoNome){
-
+	// TBD
 }
 
 void setStatusToDo(string nome, string status){
-	
+	// TBD
 }
 
 void setResponsavelToDo(string nome, string responsavel){
-	
+	// TBD
 }
 
 /* acho que n�o se retorna string em c
@@ -80,7 +70,7 @@ void setStatusToDo(string nome, string status){
 	Retorna o caminho de todas as ToDos (uma por uma) do projeto
 */
 vector<string> returnAllTodos(string projectName){
-	//TB
+	// TBD
 
 	vector<string> teste;
 	teste.push_back("/home/whispher/Documentos/TODOL/toDo1");
