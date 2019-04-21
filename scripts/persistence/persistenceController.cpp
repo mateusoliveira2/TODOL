@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 // Exemplo de função desse controller
 
@@ -89,7 +90,6 @@ void persistirToDo(string projectName, string _nome, string _descricao, string _
 	fs.close();
 }
 
-string returnToDO(String nameToDo){
 	return "Not implemented yet";
 }
 
@@ -97,24 +97,7 @@ string returnAllToDos(){
 	return "Not implemented yet";
 }
 
-void setNomeToDo(string nome, string novoNome){
-
 }
 
-void setStatusToDo(string nome, string status){
-	
-}
-
-void setResponsavelToDo(string nome, string responsavel){
-	
-}
-
-/* acho que n�o se retorna string em c
-
-os sets de todos os atributos de todo e de project
-
-void setName(string nomeToDo, string newName){
-}
-*/
 
 

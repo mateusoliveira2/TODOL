@@ -37,6 +37,112 @@ void listarToDO(){
 	//chamar funcao de listagem
 }
 
+void filterByName(char projectName[20]){
+    char filterName[20];
+
+    printf("\n\t===== Filtro por nome ===== \n\n");
+    printf("\n\tDigite o filtro de nome: ");
+    gets(filterName);
+
+    filterByNameAllToDos(projectName, filterName);
+    
+    conclusionScreen("Filtrado por nome");
+}
+
+void filterBySituation(char projectName[20]){
+    string filterSituation;
+    int choice;
+
+    printf("\n\t===== Filtro por situacao ===== \n\n");
+    printf("\t1. A fazer\n");
+    printf("\t2. Em andamento\n");
+    printf("\t3. Concluido\n");
+    printf("\tEscolha: ");
+    scanf("%d", &choice);
+
+    if(choice == 1)         filterSituation = "A fazer";
+    else if(choice == 2)    filterSituation = "Em andamento";
+    else if(choice == 3)    filterSituation = "Concluido";
+    else{
+        printf("Opcao invalida... retornando\n");
+        return;
+    }
+
+    filterBySituationAllToDos(projectName, filterSituation);
+
+    conclusionScreen("Filtrado por situacao");
+}
+
+void filterByDate(char projectName[20]){
+    string filterDate;
+
+    printf("\n\t===== Filtro por data de criacao ===== \n\n");
+    printf("\n\tDigite o filtro de data (formato dd-mm-aaaa): ");
+    gets(filterDate);
+
+    filterByDateAllToDos(projectName, filterDate);
+    
+    conclusionScreen("Filtrado por data");
+}
+
+void filterByResponsable(char projectName[20]){
+    char filterResponsable[20];
+
+    printf("\n\t===== Filtro por responsavel ===== \n\n");
+    printf("\n\tDigite o filtro de responsavel: ");
+    gets(filterResponsable);
+
+    filterByResponsableAllToDos(projectName, filterResponsable);
+    
+    conclusionScreen("Filtrado por responsavel");
+}
+
+void filterTodo(char projectName[20]){
+
+    int choice;
+
+    do{
+        system("clear");
+        printf("\n\t===== %s ===== \n\n", projectName);
+        printf("\t1. Filtrar por nome\n");
+        printf("\t2. Filtrar por situacao\n");
+        printf("\t3. Filtrar por data\n");
+        printf("\t4. Filtrar por responsavel\n");
+        printf("\t0. Sair\n\n");
+        printf("\tEscolha: ");
+
+        scanf("%d", &choice);
+        fflush(stdin);
+        __fpurge(stdin);
+        system("clear");
+        switch(choice){
+            case 1:
+                filterByName(projectName);
+                break;
+
+            case 2:
+                filterBySituation(projectName);
+                break;
+
+            case 3:
+                filterByDate(projectName);
+                break;
+
+            case 4:
+                filterByResponsable(projectName);
+                break;
+
+            case 0:
+                break;
+
+            default:
+                printf("Digite uma opcao valida\n");
+        }
+        
+    } while(choice);
+    
+}
+
 void editName(char projectName[20]){
 	char newName[20];
 	printf("\tEDITAR NOME DO PROJETO\n");
@@ -71,19 +177,21 @@ void projectMain(char projectName[20]) {
 	int choice;
 
 	do{
-   		system("cls || clear");
+   		system("clear");
         printf("\n\t===== %s ===== \n\n", projectName);
         printf("\t1. Criar ToDo\n");
         printf("\t2. Editar ToDo\n");
         printf("\t3. Listar ToDo\n");
-        printf("\t4. Gerar Relatorio\n");
-        printf("\t5. Editar Nome do Projeto\n");
+        printf("\t4. Filtrar ToDo\n");
+        printf("\t5. Gerar Relatorio\n");
+        printf("\t6. Editar Nome do Projeto\n");
         printf("\t0. Sair\n\n");
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
         fflush(stdin);
-		system("cls || clear");
+        __fpurge(stdin);
+		system("clear");
         switch(choice){
             case 1:
                 sendToDo();
@@ -98,14 +206,18 @@ void projectMain(char projectName[20]) {
                 break;
             
             case 4:
-            	printf("%d", choice);
-            	break;
+                filterTodo(projectName);
+                break;
+
             case 5:
-            	editName(projectName);
-            	break;
+                printf("%d", choice);
+                break;
+
+            case 6:
+                editName(projectName);
+                break;
 
             case 0:
-                system("\"C:\\workspace\\TODOL\\scripts\\main\\ToDol.exe\" ");
                 break;
 
             default:

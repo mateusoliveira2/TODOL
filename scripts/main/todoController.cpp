@@ -14,7 +14,7 @@ void conclusionScreen(char acao[20]){
 		scanf("%s", &choice);
 	} while(choice != 's');
 	
-	system("cls || clear");
+	system("clear");
 }
 
 void editTodoName(char name[20]){
@@ -44,7 +44,8 @@ void todoMain( char todoName[20]){
 
         scanf("%d", &choice);
         fflush(stdin);
-		system("cls || clear");
+        __fpurge(stdin);
+		system("clear");
         switch(choice){
             case 1:
                 editTodoName(todoName);

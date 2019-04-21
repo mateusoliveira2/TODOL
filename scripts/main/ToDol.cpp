@@ -6,6 +6,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <stdio_ext.h> 
 #include "projectController.cpp"
 
 void selectProject(){
@@ -14,7 +15,7 @@ void selectProject(){
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	gets(projectName);
 	
-	system("cls || clear");
+	system("clear");
 	
 	//verificacao que existe para poder ir pra o projectMain
 
@@ -66,7 +67,8 @@ int main () {
 
         scanf("%d", &choice);
         fflush(stdin);
-		system("cls || clear");
+		__fpurge(stdin);
+		system("clear");
         switch(choice){
             case 1:
                 sendProject();
