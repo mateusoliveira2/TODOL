@@ -6,6 +6,8 @@
 
 #include <string>
 #include <ctime>
+#include <algorithm>
+#include <vector>
 //#include "toDo.h"
 
 using namespace std;

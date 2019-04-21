@@ -44,6 +44,7 @@ void todoMain( char todoName[20]){
 
         scanf("%d", &choice);
         fflush(stdin);
+        __fpurge(stdin);
 		system("cls || clear");
         switch(choice){
             case 1:
