@@ -8,16 +8,17 @@
 #include <cstdlib>
 #include "projectController.cpp"
 
-void selectProject(){
+void selectProject() {
 	char projectName[20];
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	gets(projectName);
-	
+
+	string projName = string(projectName);
+
 	system("clear");
-	
-	//verificacao que existe para poder ir pra o projectMain
-	projectMain(projectName);
+	if( projectExists(projName) ) projectMain(projectName);
+	else printf("\n\tO PROJETO REQUISITADO NÃO EXISTE.");
 }
 
 void sendProject(){
