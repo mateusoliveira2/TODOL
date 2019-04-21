@@ -11,7 +11,8 @@ void conclusionScreen(char acao[20]){
 	char choice = 'n';
 	do  {
 		printf("\n\nDeseja voltar? (s/n): ");
-		scanf("%s", &choice);
+		scanf("%c", &choice);
+        getchar();
 	} while(choice != 's');
 	
 	system("cls || clear");
@@ -43,9 +44,12 @@ void todoMain( char todoName[20]){
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
-        fflush(stdin);
+        getchar();
+        
+        //fflush(stdin);
         //__fpurge(stdin);
-		system("cls || clear");
+		
+        system("cls || clear");
         switch(choice){
             case 1:
                 editTodoName(todoName);
