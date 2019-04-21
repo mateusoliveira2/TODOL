@@ -113,7 +113,7 @@ void filterTodo(char projectName[20]){
 
         scanf("%d", &choice);
         fflush(stdin);
-        __fpurge(stdin);
+        //__fpurge(stdin);
         system("cls || clear");
         switch(choice){
             case 1:
@@ -190,7 +190,7 @@ void projectMain(char projectName[20]) {
 
         scanf("%d", &choice);
         fflush(stdin);
-        __fpurge(stdin);
+        //__fpurge(stdin);
 		system("cls || clear");
         switch(choice){
             case 1:
