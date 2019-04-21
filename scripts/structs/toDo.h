@@ -18,7 +18,7 @@ struct ToDo {
 	time_t dataCriacao;
 
 	ToDo();
-	ToDo(string _nome, string _descricao, string _responsavel, int _previsaoConclusao);
+	ToDo(string _projeto, string _nome, string _descricao, string _responsavel, int _previsaoConclusao);
 	
 	string getStatus();
 	void setStatus(string novoEstado);

@@ -68,7 +68,7 @@ int main () {
         scanf("%d", &choice);
         fflush(stdin);
 		__fpurge(stdin);
-		system("clear");
+		system("cls || clear");
         switch(choice){
             case 1:
                 sendProject();

@@ -11,7 +11,7 @@
 void createProject(string name, string description, string responsible, int prevision){
 	Project(name, description, responsible, prevision);
 }
-void sendToDo(){
+void sendToDo(char projectName[20]){
 	char nameToDo[20], description[100], responsible[50];
 	int duration;
 	
@@ -28,7 +28,7 @@ void sendToDo(){
     printf("\n\tDIGITE A DURACAO DA ToDo (em dias): ");
 	scanf("%d", &duration);
 		
-	createToDo(nameToDo, description, responsible, duration);
+	createToDo(projectName, nameToDo, description, responsible, duration);
 	
     conclusionScreen("ToDo criado");
 }
@@ -74,13 +74,13 @@ void filterBySituation(char projectName[20]){
 }
 
 void filterByDate(char projectName[20]){
-    string filterDate;
+    char filterDate[50];
 
     printf("\n\t===== Filtro por data de criacao ===== \n\n");
     printf("\n\tDigite o filtro de data (formato dd-mm-aaaa): ");
     gets(filterDate);
 
-    filterByDateAllToDos(projectName, filterDate);
+    //filterByDateAllToDos(projectName, filterDate);
     
     conclusionScreen("Filtrado por data");
 }
@@ -102,7 +102,7 @@ void filterTodo(char projectName[20]){
     int choice;
 
     do{
-        system("clear");
+        system("cls || clear");
         printf("\n\t===== %s ===== \n\n", projectName);
         printf("\t1. Filtrar por nome\n");
         printf("\t2. Filtrar por situacao\n");
@@ -114,7 +114,7 @@ void filterTodo(char projectName[20]){
         scanf("%d", &choice);
         fflush(stdin);
         __fpurge(stdin);
-        system("clear");
+        system("cls || clear");
         switch(choice){
             case 1:
                 filterByName(projectName);
@@ -177,7 +177,7 @@ void projectMain(char projectName[20]) {
 	int choice;
 
 	do{
-   		system("clear");
+   		system("cls || clear");
         printf("\n\t===== %s ===== \n\n", projectName);
         printf("\t1. Criar ToDo\n");
         printf("\t2. Editar ToDo\n");
@@ -191,10 +191,10 @@ void projectMain(char projectName[20]) {
         scanf("%d", &choice);
         fflush(stdin);
         __fpurge(stdin);
-		system("clear");
+		system("cls || clear");
         switch(choice){
             case 1:
-                sendToDo();
+                sendToDo(projectName);
                 break;
 
             case 2:

@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include "../structs/toDo.cpp"
 
-void createToDo(string nameToDo, string description, string responsible, int duration){
-	ToDo(nameToDo, description, responsible, duration);
+void createToDo(string project, string nameToDo, string description, string responsible, int duration){
+	ToDo(project, nameToDo, description, responsible, duration);
 }
 void conclusionScreen(char acao[20]){
 	printf("\n\t%s com sucesso!", acao);
@@ -14,7 +14,7 @@ void conclusionScreen(char acao[20]){
 		scanf("%s", &choice);
 	} while(choice != 's');
 	
-	system("clear");
+	system("cls || clear");
 }
 
 void editTodoName(char name[20]){
@@ -45,7 +45,7 @@ void todoMain( char todoName[20]){
         scanf("%d", &choice);
         fflush(stdin);
         __fpurge(stdin);
-		system("clear");
+		system("cls || clear");
         switch(choice){
             case 1:
                 editTodoName(todoName);
@@ -60,7 +60,6 @@ void todoMain( char todoName[20]){
                 break;
 
             case 0:
-                system("\"C:\\workspace\\TODOL\\scripts\\main\\projectController.exe\" ");
                 break;
 
             default:
