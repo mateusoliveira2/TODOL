@@ -6,20 +6,19 @@
 
 #include <cstdio>
 #include <cstdlib>
-//#include <stdio_ext.h>
 #include "projectController.cpp"
 
-void selectProject(){
+void selectProject() {
 	char projectName[20];
 	
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	gets(projectName);
-	
-	system("clear");
-	
-	//verificacao que existe para poder ir pra o projectMain
 
-	projectMain(projectName);
+	string projName = string(projectName);
+
+	system("clear");
+	if( projectExists(projName) ) projectMain(projectName);
+	else printf("\n\tO PROJETO REQUISITADO NÃO EXISTE.");
 }
 
 void sendProject(){
@@ -40,7 +39,6 @@ void sendProject(){
 	getchar();
 	
 	createProject(projectName, description, responsible, prevision);
-
 	conclusionScreen("Projeto criado");
 }
 
@@ -67,9 +65,6 @@ int main () {
 
         scanf("%d", &choice);
         getchar();
-
-        //fflush(stdin);
-		//__fpurge(stdin);
 		
 		system("cls || clear");
         switch(choice){

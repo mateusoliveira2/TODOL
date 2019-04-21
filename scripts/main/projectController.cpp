@@ -3,15 +3,17 @@
 	de um Projeto
 */
 
+#pragma once
 #include "todoController.cpp"
-#include "../structs/project.cpp"
+#include "../util.cpp"
 #include <cstdio>
 #include <cstdlib>
 
-void createProject(string name, string description, string responsible, int prevision){
-	Project(name, description, responsible, prevision);
+void createProject(string name, string description, string responsible, int prevision) {
+    gravarProjeto(name, description, responsible, prevision);
 }
-void sendToDo(char projectName[20]){
+
+void sendToDo(char projectName[20]) {
 	char nameToDo[20], description[100], responsible[50];
 	int duration;
 	
@@ -30,15 +32,14 @@ void sendToDo(char projectName[20]){
     getchar();
 		
 	createToDo(projectName, nameToDo, description, responsible, duration);
-	
     conclusionScreen("ToDo criado");
 }
 
-void listarToDO(){
+void listarToDo() {
 	//chamar funcao de listagem
 }
 
-void filterByName(char projectName[20]){
+void filterByName(char projectName[20]) {
     char filterName[20];
 
     printf("\n\t===== Filtro por nome ===== \n\n");
@@ -46,11 +47,10 @@ void filterByName(char projectName[20]){
     gets(filterName);
 
     filterByNameAllToDos(projectName, filterName);
-    
     conclusionScreen("Filtrado por nome");
 }
 
-void filterBySituation(char projectName[20]){
+void filterBySituation(char projectName[20]) {
     string filterSituation;
     int choice;
 
@@ -66,17 +66,16 @@ void filterBySituation(char projectName[20]){
     if(choice == 1)         filterSituation = "A fazer";
     else if(choice == 2)    filterSituation = "Em andamento";
     else if(choice == 3)    filterSituation = "Concluido";
-    else{
+    else {
         printf("Opcao invalida... retornando\n");
         return;
     }
 
     filterBySituationAllToDos(projectName, filterSituation);
-
     conclusionScreen("Filtrado por situacao");
 }
 
-void filterByDate(char projectName[20]){
+void filterByDate(char projectName[20]) {
     char filterDate[50];
 
     printf("\n\t===== Filtro por data de criacao ===== \n\n");
@@ -84,11 +83,10 @@ void filterByDate(char projectName[20]){
     gets(filterDate);
 
     //filterByDateAllToDos(projectName, filterDate);
-    
     conclusionScreen("Filtrado por data");
 }
 
-void filterByResponsable(char projectName[20]){
+void filterByResponsable(char projectName[20]) {
     char filterResponsable[20];
 
     printf("\n\t===== Filtro por responsavel ===== \n\n");
@@ -96,12 +94,10 @@ void filterByResponsable(char projectName[20]){
     gets(filterResponsable);
 
     filterByResponsableAllToDos(projectName, filterResponsable);
-    
     conclusionScreen("Filtrado por responsavel");
 }
 
-void filterTodo(char projectName[20]){
-
+void filterTodo(char projectName[20]) {
     int choice;
 
     do{
@@ -116,9 +112,6 @@ void filterTodo(char projectName[20]){
 
         scanf("%d", &choice);
         getchar();
-        
-        //fflush(stdin);
-        //__fpurge(stdin);
         
         system("cls || clear");
         switch(choice){
@@ -149,7 +142,7 @@ void filterTodo(char projectName[20]){
     
 }
 
-void editName(char projectName[20]){
+void editName(char projectName[20]) {
 	char newName[20];
 	printf("\tEDITAR NOME DO PROJETO\n");
 	
@@ -159,17 +152,15 @@ void editName(char projectName[20]){
     gets(newName);
 	
 	//setNome(newName);
-	
 	conclusionScreen("Nome do projeto atualizado");
 
 }
 
-void gerarRelatorio(char projectName[20]){
+void gerarRelatorio(char projectName[20]) {
 	//retorna dados do projeto com avalia��o de como est� indo o projeto
-	
 }
 
-void editToDo(){
+void editToDo() {
 	char nameToDo[20];
 	
 	printf("\n\tDIGITE O NOME DA ToDo: ");
@@ -196,12 +187,9 @@ void projectMain(char projectName[20]) {
 
         scanf("%d", &choice);
         getchar();
-
-        //fflush(stdin);
-        //__fpurge(stdin);
 		
         system("cls || clear");
-        switch(choice){
+        switch(choice) {
             case 1:
                 sendToDo(projectName);
                 break;
