@@ -74,8 +74,15 @@ void filterBySituation(char projectName[20]){
 }
 
 void filterByDate(char projectName[20]){
-    // TB
-    return;
+    string filterDate;
+
+    printf("\n\t===== Filtro por data de criacao ===== \n\n");
+    printf("\n\tDigite o filtro de data (formato dd-mm-aaaa): ");
+    gets(filterDate);
+
+    filterByDateAllToDos(projectName, filterDate);
+    
+    conclusionScreen("Filtrado por data");
 }
 
 void filterByResponsable(char projectName[20]){
@@ -170,7 +177,7 @@ void projectMain(char projectName[20]) {
 	int choice;
 
 	do{
-   		system("cls || clear");
+   		system("clear");
         printf("\n\t===== %s ===== \n\n", projectName);
         printf("\t1. Criar ToDo\n");
         printf("\t2. Editar ToDo\n");
@@ -184,7 +191,7 @@ void projectMain(char projectName[20]) {
         scanf("%d", &choice);
         fflush(stdin);
         __fpurge(stdin);
-		system("cls || clear");
+		system("clear");
         switch(choice){
             case 1:
                 sendToDo();
