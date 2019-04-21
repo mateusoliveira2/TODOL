@@ -90,7 +90,6 @@ void persistirToDo(string projectName, string _nome, string _descricao, string _
 	fs.close();
 }
 
-string returnToDO(string nameToDo){
 	return "Not implemented yet";
 }
 
@@ -98,36 +97,7 @@ string returnAllToDos(){
 	return "Not implemented yet";
 }
 
-void setNomeToDo(string nome, string novoNome){
-
 }
 
-void setStatusToDo(string nome, string status){
-	
-}
-
-void setResponsavelToDo(string nome, string responsavel){
-	
-}
-
-/* acho que n�o se retorna string em c
-os sets de todos os atributos de todo e de project
-void setName(string nomeToDo, string newName){
-}
-*/
-
-/*
-	Retorna o caminho de todas as ToDos (uma por uma) do projeto
-*/
-vector<string> returnAllTodos(string projectName){
-	//TB
-
-	vector<string> teste;
-	teste.push_back("/home/whispher/Documentos/TODOL/toDo1");
-	teste.push_back("/home/whispher/Documentos/TODOL/toDo2");
-	teste.push_back("/home/whispher/Documentos/TODOL/toDo3");
-
-	return teste;
-}
 
 
