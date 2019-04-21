@@ -6,7 +6,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-//#include <stdio_ext.h> 
+//#include <stdio_ext.h>
 #include "projectController.cpp"
 
 void selectProject(){
@@ -29,7 +29,6 @@ void sendProject(){
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	gets(projectName);
 	
-		
 	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
 	gets(description);
 
@@ -38,7 +37,7 @@ void sendProject(){
 	
 	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
 	scanf("%d", &prevision);
-	
+	getchar();
 	
 	createProject(projectName, description, responsible, prevision);
 
@@ -47,6 +46,7 @@ void sendProject(){
 
 void concludeProject(){
 	char projectName[20];
+
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	gets(projectName);
 
@@ -66,8 +66,11 @@ int main () {
         printf("\tESCOLHA: ");
 
         scanf("%d", &choice);
-        fflush(stdin);
+        getchar();
+
+        //fflush(stdin);
 		//__fpurge(stdin);
+		
 		system("cls || clear");
         switch(choice){
             case 1:

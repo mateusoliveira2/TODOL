@@ -27,6 +27,7 @@ void sendToDo(char projectName[20]){
     
     printf("\n\tDIGITE A DURACAO DA ToDo (em dias): ");
 	scanf("%d", &duration);
+    getchar();
 		
 	createToDo(projectName, nameToDo, description, responsible, duration);
 	
@@ -58,7 +59,9 @@ void filterBySituation(char projectName[20]){
     printf("\t2. Em andamento\n");
     printf("\t3. Concluido\n");
     printf("\tEscolha: ");
+    
     scanf("%d", &choice);
+    getchar();
 
     if(choice == 1)         filterSituation = "A fazer";
     else if(choice == 2)    filterSituation = "Em andamento";
@@ -112,8 +115,11 @@ void filterTodo(char projectName[20]){
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
-        fflush(stdin);
+        getchar();
+        
+        //fflush(stdin);
         //__fpurge(stdin);
+        
         system("cls || clear");
         switch(choice){
             case 1:
@@ -189,9 +195,12 @@ void projectMain(char projectName[20]) {
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
-        fflush(stdin);
+        getchar();
+
+        //fflush(stdin);
         //__fpurge(stdin);
-		system("cls || clear");
+		
+        system("cls || clear");
         switch(choice){
             case 1:
                 sendToDo(projectName);
