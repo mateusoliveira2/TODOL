@@ -16,21 +16,21 @@ void createProject(string name, string description, string responsible, int prev
 void sendToDo(char projectName[20]) {
 	char nameToDo[20], description[100], responsible[50];
 	int duration;
-	
+
     printf("\tCRIAR ToDo");
     printf("\n\tDIGITE O NOME DA ToDo: ");
-    gets(nameToDo);
-    
+    fgets( nameToDo, 20, stdin );
+
     printf("\n\tDESCRICAO DA ToDo: ");
-	gets(description);
-	
+	fgets( description, 100, stdin );
+
 	printf("\n\tDIGITE O NOME DOS RESPONSAVEIS: ");
-	gets(responsible);
-    
+	fgets(responsible, 50, stdin);
+
     printf("\n\tDIGITE A DURACAO DA ToDo (em dias): ");
 	scanf("%d", &duration);
     getchar();
-		
+
 	createToDo(projectName, nameToDo, description, responsible, duration);
     conclusionScreen("ToDo criado");
 }
@@ -44,7 +44,7 @@ void filterByName(char projectName[20]) {
 
     printf("\n\t===== Filtro por nome ===== \n\n");
     printf("\n\tDigite o filtro de nome: ");
-    gets(filterName);
+    fgets(filterName, 20, stdin);
 
     filterByNameAllToDos(projectName, filterName);
     conclusionScreen("Filtrado por nome");
@@ -59,7 +59,7 @@ void filterBySituation(char projectName[20]) {
     printf("\t2. Em andamento\n");
     printf("\t3. Concluido\n");
     printf("\tEscolha: ");
-    
+
     scanf("%d", &choice);
     getchar();
 
@@ -80,7 +80,8 @@ void filterByDate(char projectName[20]) {
 
     printf("\n\t===== Filtro por data de criacao ===== \n\n");
     printf("\n\tDigite o filtro de data (formato dd-mm-aaaa): ");
-    gets(filterDate);
+    fgets( filterDate, 50, stdin );
+
 
     //filterByDateAllToDos(projectName, filterDate);
     conclusionScreen("Filtrado por data");
@@ -91,7 +92,7 @@ void filterByResponsable(char projectName[20]) {
 
     printf("\n\t===== Filtro por responsavel ===== \n\n");
     printf("\n\tDigite o filtro de responsavel: ");
-    gets(filterResponsable);
+    fgets(filterResponsable, 20, stdin);
 
     filterByResponsableAllToDos(projectName, filterResponsable);
     conclusionScreen("Filtrado por responsavel");
@@ -112,7 +113,7 @@ void filterTodo(char projectName[20]) {
 
         scanf("%d", &choice);
         getchar();
-        
+
         system("cls || clear");
         switch(choice){
             case 1:
@@ -137,20 +138,20 @@ void filterTodo(char projectName[20]) {
             default:
                 printf("Digite uma opcao valida\n");
         }
-        
+
     } while(choice);
-    
+
 }
 
 void editName(char projectName[20]) {
 	char newName[20];
 	printf("\tEDITAR NOME DO PROJETO\n");
-	
+
 	printf("\tNOME ATUAL: %s", projectName);
-	
+
     printf("\n\tDIGITE O NOVO NOME: ");
-    gets(newName);
-	
+    fgets(newName, 20, stdin);
+
 	//setNome(newName);
 	conclusionScreen("Nome do projeto atualizado");
 
@@ -162,10 +163,10 @@ void gerarRelatorio(char projectName[20]) {
 
 void editToDo() {
 	char nameToDo[20];
-	
+
 	printf("\n\tDIGITE O NOME DA ToDo: ");
-    gets(nameToDo);
-    
+    fgets(nameToDo, 20, stdin);
+
     //verificar se ToDo existe
     todoMain(nameToDo);
 }
@@ -187,7 +188,7 @@ void projectMain(char projectName[20]) {
 
         scanf("%d", &choice);
         getchar();
-		
+
         system("cls || clear");
         switch(choice) {
             case 1:
@@ -201,7 +202,7 @@ void projectMain(char projectName[20]) {
             case 3:
                 printf("%d", choice);
                 break;
-            
+
             case 4:
                 filterTodo(projectName);
                 break;
@@ -220,9 +221,9 @@ void projectMain(char projectName[20]) {
             default:
                 printf("Digite uma opcao valida\n");
         }
-        
+
     } while(choice);
-    
-} 
+
+}
 
 

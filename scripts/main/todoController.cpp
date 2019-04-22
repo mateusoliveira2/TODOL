@@ -16,19 +16,19 @@ void conclusionScreen(char acao[20]){
 		scanf("%c", &choice);
         getchar();
 	} while(choice != 's');
-	
+
 	system("cls || clear");
 }
 
 void editTodoName(char name[20]){
 	char newName[20];
 	printf("\tEDITAR NOME DO ToDo\n");
-	
+
 	printf("\tNOME ATUAL: %s", name);
-	
+
     printf("\n\tDIGITE O NOVO NOME: ");
-    gets(newName);
-	
+    fgets( newName, 20, stdin );
+
 	//conclusionScreen("Nome do ToDo atualizado");
 }
 
@@ -36,7 +36,7 @@ void todoMain( char todoName[20]){
 	int choice;
 
 	do{
-    
+
         printf("\n\t===== %s ===== \n\n", todoName);
         printf("\t1. Editar Nome\n");
         printf("\t2. Editar Responsaveis\n");
@@ -46,7 +46,7 @@ void todoMain( char todoName[20]){
 
         scanf("%d", &choice);
         getchar();
-		
+
         system("cls || clear");
         switch(choice){
             case 1:
@@ -67,7 +67,7 @@ void todoMain( char todoName[20]){
             default:
                 printf("Digite uma opcao valida\n");
         }
-        
+
     } while(choice);
-    
-} 
+
+}

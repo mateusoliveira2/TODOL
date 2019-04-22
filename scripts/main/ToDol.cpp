@@ -1,6 +1,6 @@
 /*
 	Main da aplicacao.
-	Controlla o loop principal e a entrada e saida de dados 
+	Controlla o loop principal e a entrada e saida de dados
 	no menu principal para o usuario.
 */
 
@@ -10,9 +10,9 @@
 
 void selectProject() {
 	char projectName[20];
-	
+
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	gets(projectName);
+	fgets(projectName, 20, stdin);
 
 	string projName = string(projectName);
 
@@ -24,20 +24,20 @@ void selectProject() {
 void sendProject(){
 	char projectName[30], description[100], responsible[100];
 	int prevision;
-	
+
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	gets(projectName);
-	
+	fgets(projectName, 30, stdin);
+
 	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
-	gets(description);
+	fgets(description, 100, stdin);
 
 	printf("\n\tDIGITE OS RESPONSAVEIS PELO DO PROJETO: ");
-	gets(responsible);
-	
+	fgets(responsible, 100, stdin);
+
 	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
 	scanf("%d", &prevision);
 	getchar();
-	
+
 	createProject(projectName, description, responsible, prevision);
 	conclusionScreen("Projeto criado");
 }
@@ -46,7 +46,7 @@ void concludeProject(){
 	char projectName[20];
 
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	gets(projectName);
+	fgets(projectName, 20, stdin);
 
 	//chama setStatus de projeto
 	conclusionScreen("Conclusao feita");
@@ -65,7 +65,7 @@ int main () {
 
         scanf("%d", &choice);
         getchar();
-		
+
 		system("cls || clear");
         switch(choice){
             case 1:
@@ -86,8 +86,8 @@ int main () {
             default:
                 printf("Digite uma opcao valida\n");
         }
-        
+
     } while(choice);
-	
+
 	return 0;
 }
