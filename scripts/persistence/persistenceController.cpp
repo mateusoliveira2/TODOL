@@ -38,9 +38,7 @@ void persistirProjeto(string _nome, string _descricao, string _responsavel, int 
 
 	fs.open( (dirProject + fileName).c_str());
 
-	cout << "asdasdasd " << _nome << endl;
 	if( !fs.is_open() ){
-		cout << "asdasdasd " << _nome << endl;
 		system( ("mkdir " + dirProject).c_str() );
 		fs.open( (dirProject + fileName).c_str());
 	}
