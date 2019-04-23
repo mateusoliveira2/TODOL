@@ -11,14 +11,6 @@
 
 using namespace std;
 
-bool validProject(string projName) {
-	ofstream fs;
-	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
-
-	if( !fs.is_open() ) return false;
-	return true;
-}
-
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
 	ofstream fs;
 	

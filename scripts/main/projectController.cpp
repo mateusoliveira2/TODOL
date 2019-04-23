@@ -156,7 +156,6 @@ void editName(string projectName) {
 
 	//setNome(newName);
 	conclusionScreen("Nome do projeto atualizado");
-
 }
 
 void gerarRelatorio(string projectName) {
@@ -174,8 +173,10 @@ void editToDo() {
 }
 
 void projectMain(string projectName) {
-  Project proj = Project( getProject(projectName) );
-	int choice;
+    // TBD
+    //Project proj = Project( getProject(projectName) );
+	
+    int choice;
 
 	do {
    		system("cls || clear");

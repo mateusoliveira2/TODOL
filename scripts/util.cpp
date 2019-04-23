@@ -25,6 +25,10 @@ bool projectExists(string projName) {
 	return validProject(projName);
 }
 
+vector<string> getProject(string projName) {
+	return returnProjeto(projName);
+}
+
 bool searchMatching(string filter, string phrase) {
 	int matching[100];
 	matching[0] = matching[1] = 0;
@@ -53,7 +57,7 @@ bool searchMatching(string filter, string phrase) {
 	return false;
 }
 
-void filterByNameAllToDos(char projectName[20], string filterName){
+void filterByNameAllToDos(string projectName, string filterName){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
@@ -78,7 +82,7 @@ void filterByNameAllToDos(char projectName[20], string filterName){
 
 }
 
-void filterBySituationAllToDos(char projectName[20], string filterSituation){
+void filterBySituationAllToDos(string projectName, string filterSituation){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
@@ -101,11 +105,11 @@ void filterBySituationAllToDos(char projectName[20], string filterSituation){
 	}
 }
 
-void filterByDateAllToDos(char projectName[20]){
+void filterByDateAllToDos(string projectName){
 	// TBD
 }
 
-void filterByResponsableAllToDos(char projectName[20], string filterResponsable){
+void filterByResponsableAllToDos(string projectName, string filterResponsable){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
