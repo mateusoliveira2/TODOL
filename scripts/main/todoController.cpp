@@ -20,24 +20,24 @@ void conclusionScreen(char acao[20]){
 	system("cls || clear");
 }
 
-void editTodoName(char name[20]){
-	char newName[20];
+void editTodoName(string name){
+	string newName;
 	printf("\tEDITAR NOME DO ToDo\n");
 
-	printf("\tNOME ATUAL: %s", name);
+	printf("\tNOME ATUAL: %s", name.c_str());
 
     printf("\n\tDIGITE O NOVO NOME: ");
-    fgets( newName, 20, stdin );
+    getline (cin, newName);
 
 	//conclusionScreen("Nome do ToDo atualizado");
 }
 
-void todoMain( char todoName[20]){
+void todoMain( string todoName){
 	int choice;
 
 	do{
 
-        printf("\n\t===== %s ===== \n\n", todoName);
+        printf("\n\t===== %s ===== \n\n", todoName.c_str());
         printf("\t1. Editar Nome\n");
         printf("\t2. Editar Responsaveis\n");
         printf("\t3. Editar Situacao\n");

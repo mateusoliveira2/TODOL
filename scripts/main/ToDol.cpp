@@ -7,12 +7,16 @@
 #include <cstdio>
 #include <cstdlib>
 #include "projectController.cpp"
+#include <string>
+#include <iostream>
+using namespace std;
 
 void selectProject() {
-	char projectName[20];
+	string projectName;
 
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	fgets(projectName, 20, stdin);
+	getline (cin, projectName);
+	printf("%s", projectName.c_str());
 
 	string projName = string(projectName);
 
@@ -22,17 +26,17 @@ void selectProject() {
 }
 
 void sendProject(){
-	char projectName[30], description[100], responsible[100];
+	string projectName, description, responsible;
 	int prevision;
 
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	fgets(projectName, 30, stdin);
+	getline (cin, projectName);
 
 	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
-	fgets(description, 100, stdin);
+	getline (cin, description);
 
 	printf("\n\tDIGITE OS RESPONSAVEIS PELO DO PROJETO: ");
-	fgets(responsible, 100, stdin);
+	getline (cin, responsible);
 
 	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
 	scanf("%d", &prevision);
@@ -43,10 +47,10 @@ void sendProject(){
 }
 
 void concludeProject(){
-	char projectName[20];
+	string projectName;
 
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	fgets(projectName, 20, stdin);
+	getline (cin, projectName);
 
 	//chama setStatus de projeto
 	conclusionScreen("Conclusao feita");
