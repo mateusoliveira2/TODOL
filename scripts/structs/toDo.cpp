@@ -26,7 +26,6 @@ void ToDo::setStatus(string novoEstado) {
 	if(novoEstado == "Concluido") this->status = novoEstado;
 }
 
-
 string ToDo::getResponsavel() {
 	return this->responsavel;
 }

@@ -9,8 +9,16 @@ Project::Project(string _nome, string _descricao, string _responsavel, int _prev
 	this->descricao = _descricao;
 	this->responsavel = _responsavel;
 	
+	this->status = "A fazer";
 	this->previsaoConclusao = _previsaoConclusao;
 	this->dataCriacao = time(0);
+}
+
+Project::Project(vector<string> parametros) {
+	this->nome = parametros[0];
+	this->descricao = parametros[1];
+	this->responsavel = parametros[2];
+	this->previsaoConclusao = stoi(parametros[3]);
 }
 
 void Project::setNome(string novoNome) {
@@ -21,9 +29,10 @@ void Project::setResponsavel(string novoResponsavel) {
 	this->responsavel = novoResponsavel;
 }
 
-void Project::setStatus(string novoStatus) {
-	// checar validade de novoStatus
-	this->status = novoStatus;
+void Project::setStatus(string novoEstado) {
+	if(novoEstado == "A fazer") this->status = novoEstado;
+	if(novoEstado == "Em andamento") this->status = novoEstado;
+	if(novoEstado == "Concluido") this->status = novoEstado;
 }
 
 void Project::excluirToDo(string nomeToDo) {

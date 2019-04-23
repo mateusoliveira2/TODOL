@@ -8,63 +8,63 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
 	ofstream fs;
 	
-	//pode existir verificacao de nome de projeto invalido
-
-	string dirProject = "..\\" + projectName + "\\";;
+	string dirProject = "../../Projects/" + projectName + "/";
 	string fileName = _nome + ".txt";
 	
 	fs.open((dirProject + fileName).c_str());
 	
-	fs << "===Titulo===:\t" + _nome + "\n";
-	fs << "===Status===:\t" + _status + "\n";
-	fs << "===Responsavel===:\t" + _responsavel + "\n";
-	fs << "===Descricao===:\t" + _descricao + "\n";
-	char sPrevisao[3];
-	sprintf(sPrevisao, "%d", previsao);
-	fs << "===Previsao===:\t" + string(sPrevisao) + "\n";
+	fs << _nome + "\n";
+	fs << _status + "\n";
+	fs << _responsavel + "\n";
+	fs << _descricao + "\n";
+	fs << to_string(previsao) + "\n";
 
 	fs.close();
 }
 
-string returnToDO(string nameToDo){
-	return "Not implemented yet";
-}
+vector<string> returnToDO(string projectName, string nameToDo){
+	ifstream fs;
+	string dirProject = "../../Projects/" + projectName + "/";
+	string fileName = nameToDo + ".txt";
 
-string returnAllToDos(){
-	return "Not implemented yet";
-}
+	fs.open( (dirProject + fileName).c_str() );
 
-void setNomeToDo(string nome, string novoNome){
-	// TBD
-}
-
-void setStatusToDo(string nome, string status){
-	// TBD
-}
-
-void setResponsavelToDo(string nome, string responsavel){
-	// TBD
-}
-
-/* acho que n�o se retorna string em c
-os sets de todos os atributos de todo e de project
-void setName(string nomeToDo, string newName){
-=======
-
-void setNomeToDo(string nome, string novoNome){
-
-}
-
-void setStatusToDo(string nome, string status){
+	vector <string> lines;
+	string x;
 	
->>>>>>> master
+	while( getline(fs, x) ) lines.push_back(x);
+	fs.close();
+
+	return lines;
 }
-*/
+
+string returnAllToDos() {
+	return "Not implemented yet";
+}
+
+void setNomeToDo(string projectName, string nome, string novoNome){
+	vector<string> line;
+	line = returnToDO(projectName, nome);
+	persistirToDo(projectName, novoNome, line[3], line[2],line[1], stoi(line[4]));
+}
+
+void setStatusToDo(string projectName, string nome, string status){
+	vector<string> line;
+	line = returnToDO(projectName, nome);
+	persistirToDo(projectName, line[0], line[3], line[2], status, stoi(line[4]));
+}
+
+void setResponsavelToDo(string projectName, string nome, string responsavel){
+	vector<string> line;
+	line = returnToDO(projectName, nome);
+	persistirToDo(projectName, line[0], line[3], responsavel, line[1], stoi(line[4]));
+}
 
 /*
 	Retorna o caminho de todas as ToDos (uma por uma) do projeto

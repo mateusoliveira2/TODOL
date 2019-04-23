@@ -7,8 +7,8 @@ void createToDo(string project, string nameToDo, string description, string resp
     gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
 }
 
-void conclusionScreen(char acao[20]){
-	printf("\n\t%s com sucesso!", acao);
+void conclusionScreen(string acao){
+	printf("\n\t%s com sucesso!", acao.c_str());
 
 	char choice = 'n';
 	do  {
@@ -16,28 +16,28 @@ void conclusionScreen(char acao[20]){
 		scanf("%c", &choice);
         getchar();
 	} while(choice != 's');
-	
+
 	system("cls || clear");
 }
 
-void editTodoName(char name[20]){
-	char newName[20];
+void editTodoName(string name){
+	string newName;
 	printf("\tEDITAR NOME DO ToDo\n");
-	
-	printf("\tNOME ATUAL: %s", name);
-	
+
+	printf("\tNOME ATUAL: %s", name.c_str());
+
     printf("\n\tDIGITE O NOVO NOME: ");
-    gets(newName);
-	
+    getline (cin, newName);
+
 	//conclusionScreen("Nome do ToDo atualizado");
 }
 
-void todoMain( char todoName[20]){
+void todoMain( string todoName){
 	int choice;
 
 	do{
-    
-        printf("\n\t===== %s ===== \n\n", todoName);
+
+        printf("\n\t===== %s ===== \n\n", todoName.c_str());
         printf("\t1. Editar Nome\n");
         printf("\t2. Editar Responsaveis\n");
         printf("\t3. Editar Situacao\n");
@@ -46,7 +46,7 @@ void todoMain( char todoName[20]){
 
         scanf("%d", &choice);
         getchar();
-		
+
         system("cls || clear");
         switch(choice){
             case 1:
@@ -67,7 +67,7 @@ void todoMain( char todoName[20]){
             default:
                 printf("Digite uma opcao valida\n");
         }
-        
+
     } while(choice);
-    
-} 
+
+}
