@@ -7,7 +7,7 @@ void createToDo(string project, string nameToDo, string description, string resp
     gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
 }
 
-void conclusionScreen(char acao[20]){
+void conclusionScreen(string acao){
 	printf("\n\t%s com sucesso!", acao);
 
 	char choice = 'n';

@@ -17,7 +17,7 @@ using namespace std;
 	em uma pasta separada dos scripts
 */
 
-bool validProject(string projName) {
+bool projectExists(string projName) {
 	ofstream fs;
 	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
 

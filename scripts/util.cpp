@@ -21,10 +21,6 @@ void gravarToDo(string _projeto, string _nome, string _descricao, string _respon
 	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao);
 }
 
-bool projectExists(string projName) {
-	return validProject(projName);
-}
-
 bool searchMatching(string filter, string phrase) {
 	int matching[100];
 	matching[0] = matching[1] = 0;
