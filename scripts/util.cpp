@@ -10,17 +10,6 @@ string formatarNome(string nome) {
 	return nome;
 }
 
-void gravarProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao){
-	_nome = formatarNome(_nome);
-	persistirProjeto(_nome, _descricao, _responsavel, _previsaoConclusao);
-}
-
-void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
-	_projeto = formatarNome(_projeto);
-	_nome = formatarNome(_nome);
-	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao);
-}
-
 bool searchMatching(string filter, string phrase) {
 	int matching[100];
 	matching[0] = matching[1] = 0;

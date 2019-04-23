@@ -6,12 +6,13 @@
 #pragma once
 #include <iostream>
 #include "todoController.cpp"
+#include "../persistence/persistenceController.cpp"
 #include "../util.cpp"
 #include <cstdio>
 #include <cstdlib>
 
 void createProject(string name, string description, string responsible, int prevision) {
-    gravarProjeto(name, description, responsible, prevision);
+    persistirProjeto(name, description, responsible, prevision);
 }
 
 void sendToDo(string projectName) {

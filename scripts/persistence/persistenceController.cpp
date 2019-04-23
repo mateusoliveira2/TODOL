@@ -4,6 +4,7 @@
 */
 
 #pragma once
+#include "../util.cpp"
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -16,7 +17,6 @@ using namespace std;
 	Salva o projeto em um arquivo, de preferência 
 	em uma pasta separada dos scripts
 */
-
 bool projectExists(string projName) {
 	ofstream fs;
 	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
@@ -26,6 +26,7 @@ bool projectExists(string projName) {
 }
 
 void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
+	_nome = formatarNome(_nome);
 	ofstream fs;
 
 	string dirProject = "../../Projects/" + _nome + "/";

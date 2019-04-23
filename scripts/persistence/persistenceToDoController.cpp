@@ -4,6 +4,7 @@
 */
 
 #pragma once
+#include "../util.cpp"
 #include <cstdlib>
 #include <fstream>
 #include <string>
@@ -12,6 +13,8 @@ using namespace std;
 
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
 	ofstream fs;
+	projectName = formatarNome(projectName);
+	_nome = formatarNome(_nome);
 	
 	//pode existir verificacao de nome de projeto invalido
 

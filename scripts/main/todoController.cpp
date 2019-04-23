@@ -2,9 +2,10 @@
 #include <cstdio>
 #include <cstdlib>
 #include "../util.cpp"
+#include "../persistence/persistenceToDoController.cpp"
 
 void createToDo(string project, string nameToDo, string description, string responsible, int duration){
-    gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
+    persistirToDo(project, nameToDo, description, responsible, "A fazer", duration);
 }
 
 void conclusionScreen(string acao){
@@ -27,7 +28,7 @@ void editTodoName(string name){
 	printf("\tNOME ATUAL: %s", name.c_str());
 
     printf("\n\tDIGITE O NOVO NOME: ");
-    getline (cin, newName);
+    getline(cin, newName);
 
 	//conclusionScreen("Nome do ToDo atualizado");
 }
