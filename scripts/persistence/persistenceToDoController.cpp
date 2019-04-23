@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 
-
 using namespace std;
 
 bool validProject(string projName) {
@@ -47,16 +46,13 @@ vector<string> returnToDO(string projectName, string nameToDo){
 	vector <string> lines;
 	string x;
 	
-	while(getline(fs, x)){
-		lines.push_back(x);
-	}
-
+	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
 	return lines;
 }
 
-string returnAllToDos(){
+string returnAllToDos() {
 	return "Not implemented yet";
 }
 

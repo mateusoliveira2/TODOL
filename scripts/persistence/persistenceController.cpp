@@ -63,10 +63,7 @@ vector<string> returnProjeto(string nameProject){
 	vector <string> lines;
 	string x;
 	
-	while(getline(fs, x)){
-		lines.push_back(x);
-	}
-
+	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
 	return lines;
@@ -80,7 +77,7 @@ void setNomeProjeto(string nome, string novoNome){
 }
 
 void setStatusProjeto(string nome, string status){
-	
+	// TBD
 }
 
 void setDescricaoProjeto(string nome, string descricao){

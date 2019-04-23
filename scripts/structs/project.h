@@ -14,13 +14,14 @@ using namespace std;
 struct Project {
 	string nome;
 	string descricao;
-	string status;
+	string status; // "A fazer", "Em andamento" e "Concluido"
 	string responsavel;
 
 	int previsaoConclusao; // em dias
 	time_t dataCriacao;
 
 	Project(string _nome, string _descricao, string _responsavel, int _previsaoConclusao);
+	Project(vector<string> parametros);
 
 	void setNome(string novoNome);
 	void setResponsavel(string novoResponsavel);

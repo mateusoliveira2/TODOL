@@ -9,6 +9,7 @@
 #include "../util.cpp"
 #include <cstdio>
 #include <cstdlib>
+#include "../structs/project.cpp"
 
 void createProject(string name, string description, string responsible, int prevision) {
     gravarProjeto(name, description, responsible, prevision);
@@ -102,7 +103,7 @@ void filterByResponsable(string projectName) {
 void filterTodo(string projectName) {
     int choice;
 
-    do{
+    do {
         system("cls || clear");
         printf("\n\t===== %s ===== \n\n", projectName.c_str());
         printf("\t1. Filtrar por nome\n");
@@ -172,10 +173,11 @@ void editToDo() {
     todoMain(nameToDo);
 }
 
-void projectMain(string projectName ){
+void projectMain(string projectName) {
+  Project proj = Project( getProject(projectName) );
 	int choice;
 
-	do{
+	do {
    		system("cls || clear");
         printf("\n\t===== %s ===== \n\n", projectName.c_str());
         printf("\t1. Criar ToDo\n");

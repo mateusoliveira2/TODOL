@@ -53,7 +53,7 @@ bool searchMatching(string filter, string phrase) {
 	return false;
 }
 
-void filterByNameAllToDos(string projectName, string filterName){
+void filterByNameAllToDos(char projectName[20], string filterName){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
@@ -78,7 +78,7 @@ void filterByNameAllToDos(string projectName, string filterName){
 
 }
 
-void filterBySituationAllToDos(string projectName, string filterSituation){
+void filterBySituationAllToDos(char projectName[20], string filterSituation){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
@@ -105,7 +105,7 @@ void filterByDateAllToDos(char projectName[20]){
 	// TBD
 }
 
-void filterByResponsableAllToDos(string projectName, string filterResponsable){
+void filterByResponsableAllToDos(char projectName[20], string filterResponsable){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
