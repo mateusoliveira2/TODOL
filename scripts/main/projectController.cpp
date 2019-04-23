@@ -174,7 +174,7 @@ void editToDo() {
 }
 
 void projectMain(string projectName) {
-    Project proj = Project( getProject(projectName) );
+  Project proj = Project( getProject(projectName) );
 	int choice;
 
 	do {

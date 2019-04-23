@@ -19,6 +19,7 @@ using namespace std;
 	em uma pasta separada dos scripts
 */
 
+
 bool validProject(string projName) {
 	ofstream fs;
 	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
@@ -62,10 +63,7 @@ vector<string> returnProjeto(string nameProject){
 	vector <string> lines;
 	string x;
 	
-	while(getline(fs, x)) {
-		lines.push_back(x);
-	}
-
+	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
 	return lines;

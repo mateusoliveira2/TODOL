@@ -3,6 +3,28 @@
 #include "persistence/persistenceToDoController.cpp"
 #include <algorithm>
 
+string formatarNome(string nome) {
+	for(int i = 0; i < nome.size(); i++){
+		if(nome[i] == ' ') nome[i] = '_';
+	}
+	return nome;
+}
+
+void gravarProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao){
+	_nome = formatarNome(_nome);
+	persistirProjeto(_nome, _descricao, _responsavel, _previsaoConclusao);
+}
+
+void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
+	_projeto = formatarNome(_projeto);
+	_nome = formatarNome(_nome);
+	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao);
+}
+
+bool projectExists(string projName) {
+	return validProject(projName);
+}
+
 bool searchMatching(string filter, string phrase) {
 	int matching[100];
 	matching[0] = matching[1] = 0;
@@ -31,33 +53,7 @@ bool searchMatching(string filter, string phrase) {
 	return false;
 }
 
-string formatarNome(string nome) {
-	for(int i = 0; i < nome.size(); i++){
-		if(nome[i] == ' ') nome[i] = '_';
-	}
-	return nome;
-}
-
-void gravarProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao){
-	_nome = formatarNome(_nome);
-	persistirProjeto(_nome, _descricao, _responsavel, _previsaoConclusao);
-}
-
-void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
-	_projeto = formatarNome(_projeto);
-	_nome = formatarNome(_nome);
-	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao);
-}
-
-bool projectExists(string projName) {
-	return validProject(projName);
-}
-
-vector<string> getProject(string projName) {
-	return returnProjeto(projName);
-}
-
-void filterByNameAllToDos(string projectName, string filterName){
+void filterByNameAllToDos(char projectName[20], string filterName){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
@@ -82,7 +78,7 @@ void filterByNameAllToDos(string projectName, string filterName){
 
 }
 
-void filterBySituationAllToDos(string projectName, string filterSituation){
+void filterBySituationAllToDos(char projectName[20], string filterSituation){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
@@ -109,7 +105,7 @@ void filterByDateAllToDos(char projectName[20]){
 	// TBD
 }
 
-void filterByResponsableAllToDos(string projectName, string filterResponsable){
+void filterByResponsableAllToDos(char projectName[20], string filterResponsable){
 	vector<string> allToDos = returnAllTodos(projectName);
 
 	string line;
