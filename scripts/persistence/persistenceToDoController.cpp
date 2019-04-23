@@ -3,13 +3,7 @@
 	em uma pasta separada dos scripts
 */
 
-#pragma once
-#include <cstdlib>
-#include <fstream>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "persistenceToDoController.h"
 
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
 	ofstream fs;
