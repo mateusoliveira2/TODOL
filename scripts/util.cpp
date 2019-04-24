@@ -7,9 +7,9 @@ string formatarNome(string nome) {
 	return nome;
 }
 
-void gravarProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao){
+void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
 	_nome = formatarNome(_nome);
-	persistirProjeto(_nome, _descricao, _responsavel, _previsaoConclusao);
+	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao);
 }
 
 void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
@@ -20,6 +20,10 @@ void gravarToDo(string _projeto, string _nome, string _descricao, string _respon
 
 bool projectExists(string projName) {
 	return validProject(projName);
+}
+
+bool todoExists(string projName, string todoName) {
+	return validTodo(projName, todoName);
 }
 
 vector<string> getProject(string projName) {
@@ -106,6 +110,28 @@ void filterByResponsableAllToDos(string projectName, string filterResponsable){
 
 		if(searchMatching(filterResponsable, responsableToDo))
 			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+	}
+}
+
+void displayToDo(string titleToDo, string situationToDo, string responsableToDo){
+    
+    printf("┌───────────────────────────────────\n");
+    printf("│ Nome: %s\n", titleToDo.c_str());
+    printf("│ Situação: %s\n", situationToDo.c_str());
+    printf("│ Responsaveis: %s\n", responsableToDo.c_str());
+    printf("└───────────────────────────────────\n\n");
+}
+
+void getAllToDos(string projectName){
+	vector<vector<string>> allToDos = returnAllTodosContent(projectName);
+
+	for(int i=0; i<allToDos.size(); i++){
+		string titleToDo = allToDos[i][0];
+		string situationToDo = allToDos[i][1];
+		string responsableToDo = allToDos[i][2];
+
+		displayToDo(titleToDo, situationToDo, responsableToDo);
+		
 	}
 }
 

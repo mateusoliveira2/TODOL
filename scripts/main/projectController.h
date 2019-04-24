@@ -9,11 +9,13 @@
 #include "../util.h"
 #include "../structs/project.h"
 
-void createProject(string name, string description, string responsible, int prevision);
+void createProject(string name, string description, string responsible, string status, int prevision);
 
 void sendToDo(string projectName);
 
 void listarToDo();
+
+void listToDos();
 
 void filterTodo(string projectName);
 
@@ -21,6 +23,6 @@ void editName(string projectName);
 
 void gerarRelatorio(string projectName);
 
-void editToDo();
+void editToDo(string projName);
 
 void projectMain(string projectName);

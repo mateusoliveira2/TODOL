@@ -18,7 +18,8 @@ Project::Project(vector<string> parametros) {
 	this->nome = parametros[0];
 	this->descricao = parametros[1];
 	this->responsavel = parametros[2];
-	this->previsaoConclusao = stoi(parametros[3]);
+	this->status = parametros[3];
+	this->previsaoConclusao = stoi(parametros[4]);
 }
 
 void Project::setNome(string novoNome) {
@@ -33,6 +34,7 @@ void Project::setStatus(string novoEstado) {
 	if(novoEstado == "A fazer") this->status = novoEstado;
 	if(novoEstado == "Em andamento") this->status = novoEstado;
 	if(novoEstado == "Concluido") this->status = novoEstado;
+	//setStatusProjeto(this->nome, this->status);
 }
 
 void Project::excluirToDo(string nomeToDo) {

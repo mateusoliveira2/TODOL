@@ -39,11 +39,11 @@ void sendProject(){
 	printf("\n\tDIGITE OS RESPONSAVEIS PELO DO PROJETO: ");
 	getline (cin, responsible);
 
-	printf("\n\tDIGITE A PREVISAO DE TERMINO: ");
+	printf("\n\tDIGITE A PREVISAO DE TERMINO (em dias): ");
 	scanf("%d", &prevision);
 	getchar();
 
-	createProject(projectName, description, responsible, prevision);
+	createProject(projectName, description, responsible, "A fazer", prevision);
 	conclusionScreen("Projeto criado");
 }
 
@@ -53,7 +53,7 @@ void concludeProject(){
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	getline (cin, projectName);
 
-	//chama setStatus de projeto
+	setStatus("Concluido");
 	conclusionScreen("Conclusao feita");
 }
 

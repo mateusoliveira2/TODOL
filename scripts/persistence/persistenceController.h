@@ -18,7 +18,7 @@ using namespace std;
 
 bool validProject(string projName);
 
-void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao);
+void persistirProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao);
 
 vector<string> returnProjeto(string nameProject);
 

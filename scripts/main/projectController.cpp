@@ -5,8 +5,8 @@
 
 #include "projectController.h"
 
-void createProject(string name, string description, string responsible, int prevision) {
-    gravarProjeto(name, description, responsible, prevision);
+void createProject(string name, string description, string responsible, string status, int prevision) {
+    gravarProjeto(name, description, responsible, status, prevision);
 }
 
 void sendToDo(string projectName) {
@@ -31,10 +31,6 @@ void sendToDo(string projectName) {
     conclusionScreen("ToDo criado");
 }
 
-void listarToDo() {
-	//chamar funcao de listagem
-}
-
 void filterTodo(string projectName) {
     filterMain(projectName);
 }
@@ -48,7 +44,7 @@ void editName(string projectName) {
     printf("\n\tDIGITE O NOVO NOME: ");
     getline (cin, newName);
 
-	//setNome(newName);
+	setNomeProjeto(projectName, newName);
 	conclusionScreen("Nome do projeto atualizado");
 }
 
@@ -66,25 +62,45 @@ void gerarRelatorio(Project project) {
     conclusionScreen("Relatório gerado");
 }
 
-void editToDo() {
+void editToDo(string projName) {
 	string nameToDo;
 
 	printf("\n\tDIGITE O NOME DA ToDo: ");
     getline (cin, nameToDo);
 
-    //verificar se ToDo existe
-    todoMain(nameToDo);
+    system("clear");
+    if( todoExists(projName, nameToDo) ) todoMain(nameToDo);
+    else printf("\n\tO ToDo REQUISITADO NÃO EXISTE.");
+}
+
+void displayProject(string projectName){
+    vector<string> proj =  getProject(projectName);
+
+    printf("┌───────────────────────────────────\n");
+    printf("│ Descricao: %s\n", proj[1].c_str());
+    printf("│ Responsavel: %s\n", proj[2].c_str());
+    printf("│ Status: %s\n", proj[3].c_str());
+    printf("│ Previsao de Conclusao: %s dia(s)\n", proj[4].c_str());
+    printf("└───────────────────────────────────\n\n");
+}
+
+void listToDos(string projName){
+    getAllToDos(projName);
+    conclusionScreen("Listagem de ToDos");
 }
 
 void projectMain(string projectName) {
-    // proj reconstruído da persistencia
-    Project proj = Project( getProject(projectName) );
-    
-    int choice;
+
+    system("cls || clear");
+    int choice = 1;
 
 	do {
-   		system("cls || clear");
-        printf("\n\t===== %s ===== \n\n", projectName.c_str());
+
+        if(choice == -1) printf("Digite uma opcao valida\n");
+        printf("\n\t===== %s ===== \n", projectName.c_str());
+
+        displayProject(projectName);
+
         printf("\t1. Criar ToDo\n");
         printf("\t2. Editar ToDo\n");
         printf("\t3. Listar ToDo\n");
@@ -104,11 +120,11 @@ void projectMain(string projectName) {
                 break;
 
             case 2:
-                editToDo();
+                editToDo(projectName);
                 break;
 
             case 3:
-                printf("%d", choice);
+                listToDos(projectName);
                 break;
 
             case 4:
@@ -127,7 +143,8 @@ void projectMain(string projectName) {
                 break;
 
             default:
-                printf("Digite uma opcao valida\n");
+                choice = -1;
+                break;
         }
 
     } while(choice);
