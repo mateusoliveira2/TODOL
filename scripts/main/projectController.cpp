@@ -5,8 +5,8 @@
 
 #include "projectController.h"
 
-void createProject(string name, string description, string responsible, string status, int prevision) {
-    gravarProjeto(name, description, responsible, status, prevision);
+void createProject(string name, string description, string responsible, string status, int prevision, string data) {
+    gravarProjeto(name, description, responsible, status, prevision, data);
 }
 
 void sendToDo(string projectName) {

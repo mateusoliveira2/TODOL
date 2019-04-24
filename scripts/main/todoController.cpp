@@ -6,8 +6,8 @@
 
 #include "todoController.h"
 
-void createToDo(string project, string nameToDo, string description, string responsible, int duration){
-    gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
+void createToDo(string project, string nameToDo, string description, string responsible, int duration, string data){
+    gravarToDo(project, nameToDo, description, responsible, "A fazer", duration, data);
 }
 
 void editTodoName(string name){

@@ -24,7 +24,7 @@ bool validProject(string projName) {
 	return ret;
 }
 
-void persistirProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao) {
+void persistirProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data) {
 	ofstream fs;
 
 	string dirProject = "./Projects/" + _nome + "/";
@@ -46,6 +46,7 @@ void persistirProjeto(string _nome, string _descricao, string _responsavel, stri
 
 	// convert to string
 	fs << to_string(_previsaoConclusao) + "\n";
+	fs << _data;
 
 	fs.close();
 }
@@ -78,33 +79,32 @@ void setNomeProjeto(string nome, string novoNome){
 	system(("mv " + pathAtual + fileAtual + " " + pathAtual + fileNovo).c_str());
 	system(("mv " + pathAtual + " " + pathNovo).c_str());
 
-	persistirProjeto(novoNome, line[1], line[2], line[3], stoi(line[4]));
+	persistirProjeto(novoNome, line[1], line[2], line[3], stoi(line[4]), line[5]);
 }
 
 void setStatusProjeto(string nome, string status){
 	vector<string> line;
 	line = returnProjeto(nome);
-	persistirProjeto(line[0], line[1], line[2], status, stoi(line[4]));
+	persistirProjeto(line[0], line[1], line[2], status, stoi(line[4]), line[5]);
 }
 
 void setDescricaoProjeto(string nome, string descricao){
 	vector<string> line;
 	line = returnProjeto(nome);
-	persistirProjeto(line[0], descricao, line[2], line[3], stoi(line[4]));
+	persistirProjeto(line[0], descricao, line[2], line[3], stoi(line[4]), line[5]);
 }
 
 void setResponsavelProjeto(string nome, string responsavel){
 	vector<string> line;
 	line = returnProjeto(nome);
-	persistirProjeto(line[0], line[1], responsavel, line[3], stoi(line[4]));
+	persistirProjeto(line[0], line[1], responsavel, line[3], stoi(line[4]), line[5]);
 }
 
-/*void setDataProjeto(string nome, string responsavel){
+void setDataProjeto(string nome, string data){
 	vector<string> line;
 	line = returnProjeto(nome);
-	string data = line[4];
-	persistirProjeto(line[0], line[1], responsavel, line[3], data, stoi(line[5]));
-}*/
+	persistirProjeto(line[0], line[1], line[2], line[3], stoi(line[4]), data);
+}
 
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto

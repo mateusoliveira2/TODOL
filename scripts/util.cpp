@@ -7,15 +7,15 @@ string formatarNome(string nome) {
 	return nome;
 }
 
-void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
+void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data){
 	_nome = formatarNome(_nome);
-	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao);
+	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao, _data);
 }
 
-void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
+void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data){
 	_projeto = formatarNome(_projeto);
 	_nome = formatarNome(_nome);
-	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao);
+	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao, _data);
 }
 
 bool projectExists(string projName) {

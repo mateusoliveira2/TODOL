@@ -5,7 +5,7 @@
 
 #include "persistenceToDoController.h"
 
-void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
+void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao, string _data) {
 	ofstream fs;
 	
 	string dirProject = "./Projects/" + projectName + "/";
@@ -18,6 +18,7 @@ void persistirToDo(string projectName, string _nome, string _descricao, string _
 	fs << _responsavel + "\n";
 	fs << _descricao + "\n";
 	fs << to_string(previsao) + "\n";
+	fs << _data;
 
 	fs.close();
 }
@@ -47,7 +48,7 @@ vector<string> returnToDo(string projectName, string nameToDo, string extension 
 	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
-	persistirToDo(projectName, lines[0], lines[3], lines[2], lines[1], stoi(lines[4]));
+	persistirToDo(projectName, lines[0], lines[3], lines[2], lines[1], stoi(lines[4]), lines[5]);
 
 	return lines;
 }
@@ -61,27 +62,26 @@ void setNomeToDo(string projectName, string nome, string novoNome){
 	
 	system(("mv " + pathAtual + " " + pathNovo).c_str());
 
-	persistirToDo(projectName, novoNome, line[3], line[2],line[1], stoi(line[4]));
+	persistirToDo(projectName, novoNome, line[3], line[2],line[1], stoi(line[4]), line[5]);
 }
 
 void setStatusToDo(string projectName, string nome, string status){
 	vector<string> line;
 	line = returnToDo(projectName, nome);
-	persistirToDo(projectName, line[0], line[3], line[2], status, stoi(line[4]));
+	persistirToDo(projectName, line[0], line[3], line[2], status, stoi(line[4]), line[5]);
 }
 
 void setResponsavelToDo(string projectName, string nome, string responsavel){
 	vector<string> line;
 	line = returnToDo(projectName, nome);
-	persistirToDo(projectName, line[0], line[3], responsavel, line[1], stoi(line[4]));
+	persistirToDo(projectName, line[0], line[3], responsavel, line[1], stoi(line[4]), line[5]);
 }
 
-/*void setDataToDo(string projectName, string nome, string responsavel){
+void setDataToDo(string projectName, string nome, string data){
 	vector<string> line;
 	line = returnToDo(projectName, nome);
-	string data = line[4];
-	persistirToDo(projectName, line[0], line[3], responsavel, line[1], data, stoi(line[5]));
-}*/
+	persistirToDo(projectName, line[0], line[3], line[2], line[1], stoi(line[4]), data);
+}
 
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto
