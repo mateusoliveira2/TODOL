@@ -18,7 +18,6 @@ void selectProject() {
 
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	getline (cin, projectName);
-	printf("%s", projectName.c_str());
 
 	string projName = string(projectName);
 
