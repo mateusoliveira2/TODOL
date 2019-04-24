@@ -34,6 +34,7 @@ void Project::setStatus(string novoEstado) {
 	if(novoEstado == "A fazer") this->status = novoEstado;
 	if(novoEstado == "Em andamento") this->status = novoEstado;
 	if(novoEstado == "Concluido") this->status = novoEstado;
+	//setStatusProjeto(this->nome, this->status);
 }
 
 void Project::excluirToDo(string nomeToDo) {

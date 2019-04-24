@@ -31,10 +31,6 @@ void sendToDo(string projectName) {
     conclusionScreen("ToDo criado");
 }
 
-void listarToDo() {
-	//chamar funcao de listagem
-}
-
 void filterTodo(string projectName) {
     filterMain(projectName);
 }
@@ -67,23 +63,34 @@ void editToDo(string projName) {
     else printf("\n\tO ToDo REQUISITADO NÃO EXISTE.");
 }
 
+void displayProject(string projectName){
+    vector<string> proj =  getProject(projectName);
+
+    printf("┌───────────────────────────────────\n");
+    printf("│ Descricao: %s\n", proj[1].c_str());
+    printf("│ Responsavel: %s\n", proj[2].c_str());
+    printf("│ Status: %s\n", proj[3].c_str());
+    printf("│ Previsao de Conclusao: %s dia(s)\n", proj[4].c_str());
+    printf("└───────────────────────────────────\n\n");
+}
+
+void listToDos(string projName){
+    getAllToDos(projName);
+    conclusionScreen("Listagem de ToDos");
+}
+
 void projectMain(string projectName) {
 
-    Project proj = Project( getProject(projectName) );
-    
-    /*printf("------ %s ------\n", proj[0]);
-    printf("-- Descricao: %s --\n", proj[1]);
-    printf("-- Responsavel: %s --\n", proj[2]);
-    printf("-- Status: %s --\n", proj[3]);
-    printf("-- Previsao de Conclusao: %s --\n", proj[4]);
-    printf("-------------------------");*/
-    
+    system("cls || clear");
     int choice = 1;
 
 	do {
-        system("cls || clear");
+
         if(choice == -1) printf("Digite uma opcao valida\n");
-        printf("\n\t===== %s ===== \n\n", projectName.c_str());
+        printf("\n\t===== %s ===== \n", projectName.c_str());
+
+        displayProject(projectName);
+
         printf("\t1. Criar ToDo\n");
         printf("\t2. Editar ToDo\n");
         printf("\t3. Listar ToDo\n");
@@ -107,7 +114,7 @@ void projectMain(string projectName) {
                 break;
 
             case 3:
-                printf("%d", choice);
+                listToDos(projectName);
                 break;
 
             case 4:

@@ -113,6 +113,28 @@ void filterByResponsableAllToDos(string projectName, string filterResponsable){
 	}
 }
 
+void displayToDo(string titleToDo, string situationToDo, string responsableToDo){
+    
+    printf("┌───────────────────────────────────\n");
+    printf("│ Nome: %s\n", titleToDo.c_str());
+    printf("│ Situação: %s\n", situationToDo.c_str());
+    printf("│ Responsaveis: %s\n", responsableToDo.c_str());
+    printf("└───────────────────────────────────\n\n");
+}
+
+void getAllToDos(string projectName){
+	vector<vector<string>> allToDos = returnAllTodosContent(projectName);
+
+	for(int i=0; i<allToDos.size(); i++){
+		string titleToDo = allToDos[i][0];
+		string situationToDo = allToDos[i][1];
+		string responsableToDo = allToDos[i][2];
+
+		displayToDo(titleToDo, situationToDo, responsableToDo);
+		
+	}
+}
+
 void conclusionScreen(string acao){
 	printf("\n\t%s com sucesso!", acao.c_str());
 

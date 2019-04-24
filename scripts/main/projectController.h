@@ -15,6 +15,8 @@ void sendToDo(string projectName);
 
 void listarToDo();
 
+void listToDos();
+
 void filterTodo(string projectName);
 
 void editName(string projectName);
