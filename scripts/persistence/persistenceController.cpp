@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
+#include <experimental/filesystem>
 using namespace std;
 
 // Exemplo de função desse controller
@@ -21,11 +21,13 @@ using namespace std;
 
 
 bool validProject(string projName) {
-	ofstream fs;
+	ifstream fs;
 	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
+	bool ret = true;
+	if( !fs.is_open() ) ret = false;
+	fs.close();
 
-	if( !fs.is_open() ) return false;
-	return true;
+	return ret;
 }
 
 void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {

@@ -8,6 +8,9 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
 
 using namespace std;
 
@@ -46,10 +49,6 @@ vector<string> returnToDO(string projectName, string nameToDo){
 	return lines;
 }
 
-string returnAllToDos() {
-	return "Not implemented yet";
-}
-
 void setNomeToDo(string projectName, string nome, string novoNome){
 	vector<string> line;
 	line = returnToDO(projectName, nome);
@@ -69,17 +68,42 @@ void setResponsavelToDo(string projectName, string nome, string responsavel){
 }
 
 /*
-	Retorna o caminho de todas as ToDos (uma por uma) do projeto
+	Retorna o nome de todas as ToDos (uma por uma) do projeto
 */
 vector<string> returnAllTodos(string projectName){
-	// TBD
+	DIR *dir;
+    struct dirent *lsdir;
+	string path = "../../Projects/" + projectName + "/";
+    dir = opendir(path.c_str());
 
-	vector<string> teste;
-	teste.push_back("/home/whispher/Documentos/TODOL/toDo1");
-	teste.push_back("/home/whispher/Documentos/TODOL/toDo2");
-	teste.push_back("/home/whispher/Documentos/TODOL/toDo3");
+	vector<string> todos;
 
-	return teste;
+    /* print all the files and directories within directory */
+    while ( ( lsdir = readdir(dir) ) != NULL ){
+		string aux = string(lsdir->d_name);
+		if(aux != ".." && aux != "."){
+			todos.push_back(aux);
+		}
+    }
+
+    closedir(dir);
+
+	return todos;
+}
+
+/*
+	Retorna o conteúdo de todas as ToDos (uma por uma) do projeto.
+*/
+vector<vector<string> > returnAllTodosCont(string projectName){
+	vector<vector<string> > retorno;
+	vector<string> nomesToDo;
+	vector<string> todo;
+	nomesToDo = returnAllTodos(projectName);
+	for(int i = 0; i < nomesToDo.size(); i++){
+		todo = returnToDO(projectName, nomesToDo[i]);
+		retorno.push_back(todo);
+	}
+	return retorno;
 }
 
 
