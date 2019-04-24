@@ -25,6 +25,10 @@ void filterBySituationAllToDos(string projectName, string filterSituation);
 
 void filterByResponsableAllToDos(string projectName, string filterResponsable);
 
-void conclusionScreen(string acao);
+void displayToDo(string titleToDo, string situationToDo, string responsableToDo);
+
+void getAllToDos(string projectName);
 
 void getAllToDos(string projName);
+
+void conclusionScreen(string acao);
