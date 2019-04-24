@@ -54,7 +54,13 @@ vector<string> returnToDo(string projectName, string nameToDo, string extension 
 
 void setNomeToDo(string projectName, string nome, string novoNome){
 	vector<string> line;
+	string pathAtual = "Projects/" + projectName + "/" + nome + ".txt";
+	string pathNovo =  "Projects/" + projectName + "/" + novoNome + ".txt";
+	
 	line = returnToDo(projectName, nome);
+	
+	system(("mv " + pathAtual + " " + pathNovo).c_str());
+
 	persistirToDo(projectName, novoNome, line[3], line[2],line[1], stoi(line[4]));
 }
 
@@ -69,6 +75,13 @@ void setResponsavelToDo(string projectName, string nome, string responsavel){
 	line = returnToDo(projectName, nome);
 	persistirToDo(projectName, line[0], line[3], responsavel, line[1], stoi(line[4]));
 }
+
+/*void setDataToDo(string projectName, string nome, string responsavel){
+	vector<string> line;
+	line = returnToDo(projectName, nome);
+	string data = line[4];
+	persistirToDo(projectName, line[0], line[3], responsavel, line[1], data, stoi(line[5]));
+}*/
 
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto
