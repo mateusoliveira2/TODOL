@@ -11,8 +11,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include "persistenceToDoController.h"
 
 using namespace std;
+
 
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
 	ofstream fs;

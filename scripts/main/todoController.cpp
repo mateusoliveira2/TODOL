@@ -1,7 +1,10 @@
-#pragma once
-#include <cstdio>
-#include <cstdlib>
-#include "../util.cpp"
+
+/*
+    Controller dos fluxos após abrir para edição e visualização
+    de uma toDo
+*/
+
+#include "todoController.h"
 
 void createToDo(string project, string nameToDo, string description, string responsible, int duration){
     gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);

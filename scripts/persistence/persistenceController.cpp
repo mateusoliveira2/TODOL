@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <dirent.h>
 
+#include "persistenceController.h"
+
 using namespace std;
 
 // Exemplo de função desse controller
@@ -21,7 +23,6 @@ using namespace std;
 	Salva o projeto em um arquivo, de preferência 
 	em uma pasta separada dos scripts
 */
-
 
 bool validProject(string projName) {
 	ifstream fs;

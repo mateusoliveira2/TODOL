@@ -3,13 +3,7 @@
 	de um Projeto
 */
 
-#pragma once
-#include <iostream>
-#include "todoController.cpp"
-#include "../util.cpp"
-#include <cstdio>
-#include <cstdlib>
-#include "../structs/project.cpp"
+#include "projectController.h"
 
 void createProject(string name, string description, string responsible, int prevision) {
     gravarProjeto(name, description, responsible, prevision);

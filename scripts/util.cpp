@@ -1,7 +1,4 @@
-#pragma once
-#include "persistence/persistenceController.cpp"
-#include "persistence/persistenceToDoController.cpp"
-#include <algorithm>
+#include "util.h"
 
 string formatarNome(string nome) {
 	for(int i = 0; i < nome.size(); i++){
