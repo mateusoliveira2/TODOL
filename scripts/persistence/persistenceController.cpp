@@ -3,22 +3,7 @@
 	qualquer outro dado que deva ser armazenado em arquivos.
 */
 
-#pragma once
-#include <cstdlib>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <iostream>
-
-using namespace std;
-
-// Exemplo de função desse controller
-
-/* 
-	Salva o projeto em um arquivo, de preferência 
-	em uma pasta separada dos scripts
-*/
-
+#include "persistenceController.h"
 
 bool validProject(string projName) {
 	ofstream fs;

@@ -6,9 +6,11 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include "projectController.cpp"
 #include <string>
 #include <iostream>
+
+#include "projectController.h"
+
 using namespace std;
 
 void selectProject() {
