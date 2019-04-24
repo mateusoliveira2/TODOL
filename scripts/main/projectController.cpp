@@ -68,8 +68,15 @@ void editToDo(string projName) {
 }
 
 void projectMain(string projectName) {
-    // proj reconstruído da persistencia
+
     Project proj = Project( getProject(projectName) );
+    
+    /*printf("------ %s ------\n", proj[0]);
+    printf("-- Descricao: %s --\n", proj[1]);
+    printf("-- Responsavel: %s --\n", proj[2]);
+    printf("-- Status: %s --\n", proj[3]);
+    printf("-- Previsao de Conclusao: %s --\n", proj[4]);
+    printf("-------------------------");*/
     
     int choice = 1;
 
