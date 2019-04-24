@@ -77,8 +77,7 @@ vector<string> returnAllTodos(string projectName){
     dir = opendir(path.c_str());
 
 	vector<string> todos;
-
-    /* print all the files and directories within directory */
+	
     while ( ( lsdir = readdir(dir) ) != NULL ){
 		string aux = string(lsdir->d_name);
 		if(aux != ".." && aux != "."){

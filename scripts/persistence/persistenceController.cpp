@@ -9,7 +9,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <experimental/filesystem>
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+
 using namespace std;
 
 // Exemplo de função desse controller
@@ -94,4 +97,42 @@ void setResponsavelProjeto(string nome, string responsavel){
 	vector<string> line;
 	line = returnProjeto(nome);
 	persistirProjeto(line[0], line[1], responsavel, stoi(line[3]));
+}
+
+/*
+	Retorna o nome de todas as ToDos (uma por uma) do projeto
+*/
+vector<string> returnAllProjectsName(string projectName){
+	DIR *dir;
+    struct dirent *lsdir;
+	string path = "../../Projects/";
+    dir = opendir(path.c_str());
+
+	vector<string> projects;
+	
+    while ( ( lsdir = readdir(dir) ) != NULL ){
+		string aux = string(lsdir->d_name);
+		if(aux != ".." && aux != "."){
+			projects.push_back(aux);
+		}
+    }
+
+    closedir(dir);
+
+	return projects;
+}
+
+/*
+	Retorna o conteúdo de todos os projetos (um por um).
+*/
+vector<vector<string> > returnAllProjectsContent(string projectName){
+	vector<vector<string> > retorno;
+	vector<string> nomesProjects;
+	vector<string> project;
+	nomesProjects = returnAllProjectsName(projectName);
+	for(int i = 0; i < nomesProjects.size(); i++){
+		project = returnProjeto(projectName);
+		retorno.push_back(project);
+	}
+	return retorno;
 }
