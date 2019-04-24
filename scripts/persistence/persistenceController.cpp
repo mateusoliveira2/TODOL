@@ -63,19 +63,28 @@ vector<string> returnProjeto(string nameProject){
 	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
-	persistirProjeto(lines[0], lines[1], lines[2], lines[3], stoi(lines[4]));
-
 	return lines;
 }
 
 void setNomeProjeto(string nome, string novoNome){
 	vector<string> line;
+	string pathAtual = "Projects/" + nome + "/";
+	string pathNovo =  "Projects/" + novoNome + "/";
+	string fileAtual = nome + ".txt";
+	string fileNovo = novoNome + ".txt";
+	
 	line = returnProjeto(nome);
+	
+	system(("mv " + pathAtual + fileAtual + " " + pathAtual + fileNovo).c_str());
+	system(("mv " + pathAtual + " " + pathNovo).c_str());
+
 	persistirProjeto(novoNome, line[1], line[2], line[3], stoi(line[4]));
 }
 
 void setStatusProjeto(string nome, string status){
-	// TBD
+	vector<string> line;
+	line = returnProjeto(nome);
+	persistirProjeto(line[0], line[1], line[2], status, stoi(line[4]));
 }
 
 void setDescricaoProjeto(string nome, string descricao){
@@ -89,6 +98,13 @@ void setResponsavelProjeto(string nome, string responsavel){
 	line = returnProjeto(nome);
 	persistirProjeto(line[0], line[1], responsavel, line[3], stoi(line[4]));
 }
+
+/*void setDataProjeto(string nome, string responsavel){
+	vector<string> line;
+	line = returnProjeto(nome);
+	string data = line[4];
+	persistirProjeto(line[0], line[1], responsavel, line[3], data, stoi(line[5]));
+}*/
 
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto

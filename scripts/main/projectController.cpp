@@ -48,7 +48,7 @@ void editName(string projectName) {
     printf("\n\tDIGITE O NOVO NOME: ");
     getline (cin, newName);
 
-	//setNome(newName);
+	setNomeProjeto(projectName, newName);
 	conclusionScreen("Nome do projeto atualizado");
 }
 
