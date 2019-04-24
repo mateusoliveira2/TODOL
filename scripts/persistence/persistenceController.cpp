@@ -3,14 +3,35 @@
 	qualquer outro dado que deva ser armazenado em arquivos.
 */
 
+#pragma once
+#include <cstdlib>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
+
 #include "persistenceController.h"
 
-bool validProject(string projName) {
-	ofstream fs;
-	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
+using namespace std;
 
-	if( !fs.is_open() ) return false;
-	return true;
+// Exemplo de função desse controller
+
+/* 
+	Salva o projeto em um arquivo, de preferência 
+	em uma pasta separada dos scripts
+*/
+
+bool validProject(string projName) {
+	ifstream fs;
+	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
+	bool ret = true;
+	if( !fs.is_open() ) ret = false;
+	fs.close();
+
+	return ret;
 }
 
 void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
@@ -51,6 +72,8 @@ vector<string> returnProjeto(string nameProject){
 	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
+	persistirProjeto(lines[0], lines[1], lines[2], stoi(lines[3]));
+
 	return lines;
 }
 
@@ -75,4 +98,42 @@ void setResponsavelProjeto(string nome, string responsavel){
 	vector<string> line;
 	line = returnProjeto(nome);
 	persistirProjeto(line[0], line[1], responsavel, stoi(line[3]));
+}
+
+/*
+	Retorna o nome de todas as ToDos (uma por uma) do projeto
+*/
+vector<string> returnAllProjectsName(string projectName){
+	DIR *dir;
+    struct dirent *lsdir;
+	string path = "../../Projects/";
+    dir = opendir(path.c_str());
+
+	vector<string> projects;
+	
+    while ( ( lsdir = readdir(dir) ) != NULL ){
+		string aux = string(lsdir->d_name);
+		if(aux != ".." && aux != "."){
+			projects.push_back(aux);
+		}
+    }
+
+    closedir(dir);
+
+	return projects;
+}
+
+/*
+	Retorna o conteúdo de todos os projetos (um por um).
+*/
+vector<vector<string> > returnAllProjectsContent(string projectName){
+	vector<vector<string> > retorno;
+	vector<string> nomesProjects;
+	vector<string> project;
+	nomesProjects = returnAllProjectsName(projectName);
+	for(int i = 0; i < nomesProjects.size(); i++){
+		project = returnProjeto(projectName);
+		retorno.push_back(project);
+	}
+	return retorno;
 }
