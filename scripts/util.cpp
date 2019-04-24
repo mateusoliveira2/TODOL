@@ -58,12 +58,15 @@ void filterByNameAllToDos(string projectName, string filterName){
 	vector<vector<string>> allToDosCont = returnAllTodosContent(projectName);
 	transform(filterName.begin(), filterName.end(), filterName.begin(), ::tolower);
 
-	printf("\t=== ToDos filtradas por nome ===\n");
+	printf("\n\t=== ToDos filtradas por nome ===\n");
 
 	for(int i=0; i<allToDosCont.size(); i++){
 		string titleToDo = allToDosCont[i][0];
 		string situationToDo = allToDosCont[i][1];
 		string responsableToDo = allToDosCont[i][2];
+
+		transform(titleToDo.begin(), titleToDo.end(), titleToDo.begin(), ::tolower);
+
 		if(searchMatching(filterName, titleToDo))
 			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
 	}
@@ -74,12 +77,15 @@ void filterBySituationAllToDos(string projectName, string filterSituation){
 	vector<vector<string>> allToDosCont = returnAllTodosContent(projectName);
 	transform(filterSituation.begin(), filterSituation.end(), filterSituation.begin(), ::tolower);
 
-	printf("\t=== ToDos filtradas por situacao ===\n");
+	printf("\n\t=== ToDos filtradas por situacao ===\n");
 
 	for(int i=0; i<allToDosCont.size(); i++){
 		string titleToDo = allToDosCont[i][0];
 		string situationToDo = allToDosCont[i][1];
 		string responsableToDo = allToDosCont[i][2];
+
+		transform(situationToDo.begin(), situationToDo.end(), situationToDo.begin(), ::tolower);
+
 		if(searchMatching(filterSituation, situationToDo))
 			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
 	}
@@ -89,12 +95,15 @@ void filterByResponsableAllToDos(string projectName, string filterResponsable){
 	vector<vector<string>> allToDosCont = returnAllTodosContent(projectName);
 	transform(filterResponsable.begin(), filterResponsable.end(), filterResponsable.begin(), ::tolower);
 
-	printf("\t=== ToDos filtradas por responsavel ===\n");
+	printf("\n\t=== ToDos filtradas por responsavel ===\n");
 
 	for(int i=0; i<allToDosCont.size(); i++){
 		string titleToDo = allToDosCont[i][0];
 		string situationToDo = allToDosCont[i][1];
 		string responsableToDo = allToDosCont[i][2];
+
+		transform(responsableToDo.begin(), responsableToDo.end(), responsableToDo.begin(), ::tolower);
+
 		if(searchMatching(filterResponsable, responsableToDo))
 			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
 	}
