@@ -52,7 +52,7 @@ void filterMain(string projectName){
 
     do {
         system("cls || clear");
-        printf("\n\t===== %s ===== \n\n", projectName.c_str());
+        printf("\n\t===== Filtro de toDos do Projeto %s ===== \n\n", projectName.c_str());
         printf("\t1. Filtrar por nome\n");
         printf("\t2. Filtrar por situacao\n");
         printf("\t3. Filtrar por responsavel\n");
