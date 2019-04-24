@@ -66,6 +66,8 @@ vector<string> returnProjeto(string nameProject){
 	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
+	persistirProjeto(lines[0], lines[1], lines[2], stoi(lines[3]));
+
 	return lines;
 }
 

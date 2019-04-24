@@ -41,6 +41,8 @@ vector<string> returnToDO(string projectName, string nameToDo){
 	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
+	persistirToDo(projectName, lines[0], lines[3], lines[2], lines[1], stoi(lines[4]));
+
 	return lines;
 }
 
