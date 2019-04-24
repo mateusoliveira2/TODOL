@@ -9,14 +9,15 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
 
 using namespace std;
 
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao);
 
-vector<string> returnToDO(string projectName, string nameToDo);
-
-string returnAllToDos();
+vector<string> returnToDo(string projectName, string nameToDo, string extension);
 
 void setNomeToDo(string projectName, string nome, string novoNome);
 
@@ -25,6 +26,11 @@ void setStatusToDo(string projectName, string nome, string status);
 void setResponsavelToDo(string projectName, string nome, string responsavel);
 
 /*
-	Retorna o caminho de todas as ToDos (uma por uma) do projeto
+	Retorna o nome de todas as ToDos (uma por uma) do projeto
 */
 vector<string> returnAllTodos(string projectName);
+
+/*
+	Retorna o conteúdo de todas as ToDos (uma por uma) do projeto.
+*/
+vector<vector<string>> returnAllTodosContent(string projectName);

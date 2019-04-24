@@ -55,76 +55,69 @@ bool searchMatching(string filter, string phrase) {
 }
 
 void filterByNameAllToDos(string projectName, string filterName){
-	vector<string> allToDos = returnAllTodos(projectName);
-
-	string line;
+	vector<vector<string>> allToDosCont = returnAllTodosContent(projectName);
 	transform(filterName.begin(), filterName.end(), filterName.begin(), ::tolower);
 
-	for(int i=0; i<allToDos.size(); i++){
-		string pathToDo = allToDos[i];
+	printf("\n\t=== ToDos filtradas por nome ===\n");
 
-		ifstream toDo(pathToDo.c_str());
-		if(!toDo) { toDo.close(); continue; }
+	for(int i=0; i<allToDosCont.size(); i++){
+		string titleToDo = allToDosCont[i][0];
+		string situationToDo = allToDosCont[i][1];
+		string responsableToDo = allToDosCont[i][2];
 
-  		while(getline(toDo, line)){
-  			transform(line.begin(), line.end(), line.begin(), ::tolower);
-  			if(searchMatching("===titulo===", line) &&
-  				searchMatching(filterName, line)){
-  				printf("\t%s\n", pathToDo.c_str());
-  			}
-  		}
+		transform(titleToDo.begin(), titleToDo.end(), titleToDo.begin(), ::tolower);
 
-  		toDo.close();
+		if(searchMatching(filterName, titleToDo))
+			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
 	}
 
 }
 
 void filterBySituationAllToDos(string projectName, string filterSituation){
-	vector<string> allToDos = returnAllTodos(projectName);
-
-	string line;
+	vector<vector<string>> allToDosCont = returnAllTodosContent(projectName);
 	transform(filterSituation.begin(), filterSituation.end(), filterSituation.begin(), ::tolower);
 
-	for(int i=0; i<allToDos.size(); i++){
-		string pathToDo = allToDos[i];
-		ifstream toDo(pathToDo.c_str());
-		if(!toDo) { toDo.close(); continue; }
+	printf("\n\t=== ToDos filtradas por situacao ===\n");
 
-  		while(getline(toDo, line)){
-  			transform(line.begin(), line.end(), line.begin(), ::tolower);
-  			if(searchMatching("===status===", line) &&
-  				searchMatching(filterSituation, line)){
-  				printf("%s\n", pathToDo.c_str());
-  			}
-  		}
+	for(int i=0; i<allToDosCont.size(); i++){
+		string titleToDo = allToDosCont[i][0];
+		string situationToDo = allToDosCont[i][1];
+		string responsableToDo = allToDosCont[i][2];
 
-  		toDo.close();
+		transform(situationToDo.begin(), situationToDo.end(), situationToDo.begin(), ::tolower);
+
+		if(searchMatching(filterSituation, situationToDo))
+			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
 	}
-}
-
-void filterByDateAllToDos(string projectName){
-	// TBD
 }
 
 void filterByResponsableAllToDos(string projectName, string filterResponsable){
-	vector<string> allToDos = returnAllTodos(projectName);
-
-	string line;
+	vector<vector<string>> allToDosCont = returnAllTodosContent(projectName);
 	transform(filterResponsable.begin(), filterResponsable.end(), filterResponsable.begin(), ::tolower);
 
-	for(int i=0; i<allToDos.size(); i++){
-		string pathToDo = allToDos[i];
-		ifstream toDo(pathToDo.c_str());
-		if(!toDo) { toDo.close(); continue; }
+	printf("\n\t=== ToDos filtradas por responsavel ===\n");
 
-  		while(getline(toDo, line)){
-  			transform(line.begin(), line.end(), line.begin(), ::tolower);
-  			if(searchMatching("===responsavel===", line) &&
-  				searchMatching(filterResponsable, line)){
-  				printf("%s\n", pathToDo.c_str());
-  			}
-  		}
+	for(int i=0; i<allToDosCont.size(); i++){
+		string titleToDo = allToDosCont[i][0];
+		string situationToDo = allToDosCont[i][1];
+		string responsableToDo = allToDosCont[i][2];
 
-  		toDo.close();
+		transform(responsableToDo.begin(), responsableToDo.end(), responsableToDo.begin(), ::tolower);
+
+		if(searchMatching(filterResponsable, responsableToDo))
+			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
 	}
+}
+
+void conclusionScreen(string acao){
+	printf("\n\t%s com sucesso!", acao.c_str());
+
+	char choice = 'n';
+	do  {
+		printf("\n\nDeseja voltar? (s/n): ");
+		scanf("%c", &choice);
+        getchar();
+	} while(choice != 's');
+
+	system("cls || clear");
 }

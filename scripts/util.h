@@ -21,6 +21,6 @@ void filterByNameAllToDos(string projectName, string filterName);
 
 void filterBySituationAllToDos(string projectName, string filterSituation);
 
-void filterByDateAllToDos(string projectName);
-
 void filterByResponsableAllToDos(string projectName, string filterResponsable);
+
+void conclusionScreen(string acao);

@@ -3,19 +3,7 @@
 	qualquer outro dado que deva ser armazenado em arquivos.
 */
 
-#pragma once
-#include <cstdlib>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <dirent.h>
-
 #include "persistenceController.h"
-
-using namespace std;
 
 // Exemplo de função desse controller
 
@@ -26,7 +14,7 @@ using namespace std;
 
 bool validProject(string projName) {
 	ifstream fs;
-	fs.open( ("../../Projects/" + projName + "/" + projName + ".txt").c_str() );
+	fs.open( ("./Projects/" + projName + "/" + projName + ".txt").c_str() );
 	bool ret = true;
 	if( !fs.is_open() ) ret = false;
 	fs.close();
@@ -37,10 +25,10 @@ bool validProject(string projName) {
 void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
 	ofstream fs;
 
-	string dirProject = "../../Projects/" + _nome + "/";
+	string dirProject = "./Projects/" + _nome + "/";
 	string fileName = _nome + ".txt";
 	
-	system("mkdir -p ../../Projects/");
+	system("mkdir -p ./Projects/");
 
 	fs.open( (dirProject + fileName).c_str());
 
@@ -61,7 +49,7 @@ void persistirProjeto(string _nome, string _descricao, string _responsavel, int 
 
 vector<string> returnProjeto(string nameProject){
 	ifstream fs;
-	string dirProject = "../../Projects/" + nameProject + "/";
+	string dirProject = "./Projects/" + nameProject + "/";
 	string fileName = nameProject + ".txt";
 
 	fs.open( (dirProject + fileName).c_str() );
@@ -106,7 +94,7 @@ void setResponsavelProjeto(string nome, string responsavel){
 vector<string> returnAllProjectsName(string projectName){
 	DIR *dir;
     struct dirent *lsdir;
-	string path = "../../Projects/";
+	string path = "./Projects/";
     dir = opendir(path.c_str());
 
 	vector<string> projects;

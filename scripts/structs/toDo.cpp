@@ -3,7 +3,6 @@
 	fundamental de um Projeto.
 */
 
-#pragma once
 #include "toDo.h"
 
 ToDo::ToDo(string _projeto, string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
