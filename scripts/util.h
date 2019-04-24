@@ -7,11 +7,13 @@
 
 string formatarNome(string nome);
 
-void gravarProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao);
+void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao);
 
 void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao);
 
 bool projectExists(string projName);
+
+bool todoExists(string projName, string todoName);
 
 vector<string> getProject(string projName);
 

@@ -18,7 +18,8 @@ Project::Project(vector<string> parametros) {
 	this->nome = parametros[0];
 	this->descricao = parametros[1];
 	this->responsavel = parametros[2];
-	this->previsaoConclusao = stoi(parametros[3]);
+	this->status = parametros[3];
+	this->previsaoConclusao = stoi(parametros[4]);
 }
 
 void Project::setNome(string novoNome) {

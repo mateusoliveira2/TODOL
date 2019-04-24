@@ -25,6 +25,8 @@ void setStatusToDo(string projectName, string nome, string status);
 
 void setResponsavelToDo(string projectName, string nome, string responsavel);
 
+bool validTodo(string projName, string todoName);
+
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto
 */

@@ -5,8 +5,8 @@
 
 #include "projectController.h"
 
-void createProject(string name, string description, string responsible, int prevision) {
-    gravarProjeto(name, description, responsible, prevision);
+void createProject(string name, string description, string responsible, string status, int prevision) {
+    gravarProjeto(name, description, responsible, status, prevision);
 }
 
 void sendToDo(string projectName) {
@@ -56,24 +56,26 @@ void gerarRelatorio(string projectName) {
 	//retorna dados do projeto com avaliacao de como esta indo o projeto
 }
 
-void editToDo() {
+void editToDo(string projName) {
 	string nameToDo;
 
 	printf("\n\tDIGITE O NOME DA ToDo: ");
     getline (cin, nameToDo);
 
-    //verificar se ToDo existe
-    todoMain(nameToDo);
+    system("clear");
+    if( todoExists(projName, nameToDo) ) todoMain(nameToDo);
+    else printf("\n\tO ToDo REQUISITADO NÃO EXISTE.");
 }
 
 void projectMain(string projectName) {
     // proj reconstruído da persistencia
     Project proj = Project( getProject(projectName) );
     
-    int choice;
+    int choice = 1;
 
 	do {
-   		system("cls || clear");
+        system("cls || clear");
+        if(choice == -1) printf("Digite uma opcao valida\n");
         printf("\n\t===== %s ===== \n\n", projectName.c_str());
         printf("\t1. Criar ToDo\n");
         printf("\t2. Editar ToDo\n");
@@ -94,7 +96,7 @@ void projectMain(string projectName) {
                 break;
 
             case 2:
-                editToDo();
+                editToDo(projectName);
                 break;
 
             case 3:
@@ -117,7 +119,8 @@ void projectMain(string projectName) {
                 break;
 
             default:
-                printf("Digite uma opcao valida\n");
+                choice = -1;
+                break;
         }
 
     } while(choice);

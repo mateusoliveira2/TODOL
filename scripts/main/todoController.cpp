@@ -22,11 +22,10 @@ void editTodoName(string name){
 	//conclusionScreen("Nome do ToDo atualizado");
 }
 
-void todoMain( string todoName){
+void todoMain(string todoName) {
 	int choice;
 
-	do{
-
+	do {
         printf("\n\t===== %s ===== \n\n", todoName.c_str());
         printf("\t1. Editar Nome\n");
         printf("\t2. Editar Responsaveis\n");

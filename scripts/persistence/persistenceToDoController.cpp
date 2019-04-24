@@ -22,6 +22,18 @@ void persistirToDo(string projectName, string _nome, string _descricao, string _
 	fs.close();
 }
 
+bool validTodo(string projName, string todoName) {
+	ifstream fs;
+
+	fs.open( ("./Projects/" + projName + "/" + todoName + ".txt").c_str() );
+	bool ret = true;
+	
+	if( !fs.is_open() ) ret = false;
+	fs.close();
+
+	return ret;
+}
+
 vector<string> returnToDo(string projectName, string nameToDo, string extension = ".txt"){
 	ifstream fs;
 	string dirProject = "./Projects/" + projectName + "/";
