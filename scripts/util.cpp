@@ -7,9 +7,9 @@ string formatarNome(string nome) {
 	return nome;
 }
 
-void gravarProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao){
+void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
 	_nome = formatarNome(_nome);
-	persistirProjeto(_nome, _descricao, _responsavel, _previsaoConclusao);
+	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao);
 }
 
 void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
@@ -20,6 +20,10 @@ void gravarToDo(string _projeto, string _nome, string _descricao, string _respon
 
 bool projectExists(string projName) {
 	return validProject(projName);
+}
+
+bool todoExists(string projName, string todoName) {
+	return validTodo(projName, todoName);
 }
 
 vector<string> getProject(string projName) {

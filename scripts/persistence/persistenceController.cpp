@@ -14,15 +14,17 @@
 
 bool validProject(string projName) {
 	ifstream fs;
+
 	fs.open( ("./Projects/" + projName + "/" + projName + ".txt").c_str() );
 	bool ret = true;
+	
 	if( !fs.is_open() ) ret = false;
 	fs.close();
 
 	return ret;
 }
 
-void persistirProjeto(string _nome, string _descricao, string _responsavel, int _previsaoConclusao) {
+void persistirProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao) {
 	ofstream fs;
 
 	string dirProject = "./Projects/" + _nome + "/";
@@ -40,6 +42,7 @@ void persistirProjeto(string _nome, string _descricao, string _responsavel, int 
 	fs << _nome + "\n";
 	fs << _descricao + "\n"; 
 	fs << _responsavel + "\n";
+	fs << _status + "\n";
 
 	// convert to string
 	fs << to_string(_previsaoConclusao) + "\n";
@@ -60,7 +63,7 @@ vector<string> returnProjeto(string nameProject){
 	while( getline(fs, x) ) lines.push_back(x);
 	fs.close();
 
-	persistirProjeto(lines[0], lines[1], lines[2], stoi(lines[3]));
+	persistirProjeto(lines[0], lines[1], lines[2], lines[3], stoi(lines[4]));
 
 	return lines;
 }
@@ -68,8 +71,7 @@ vector<string> returnProjeto(string nameProject){
 void setNomeProjeto(string nome, string novoNome){
 	vector<string> line;
 	line = returnProjeto(nome);
-	persistirProjeto(novoNome, line[1], line[2], stoi(line[3]));
-
+	persistirProjeto(novoNome, line[1], line[2], line[3], stoi(line[4]));
 }
 
 void setStatusProjeto(string nome, string status){
@@ -79,13 +81,13 @@ void setStatusProjeto(string nome, string status){
 void setDescricaoProjeto(string nome, string descricao){
 	vector<string> line;
 	line = returnProjeto(nome);
-	persistirProjeto(line[0], descricao, line[2], stoi(line[3]));
+	persistirProjeto(line[0], descricao, line[2], line[3], stoi(line[4]));
 }
 
 void setResponsavelProjeto(string nome, string responsavel){
 	vector<string> line;
 	line = returnProjeto(nome);
-	persistirProjeto(line[0], line[1], responsavel, stoi(line[3]));
+	persistirProjeto(line[0], line[1], responsavel, line[3], stoi(line[4]));
 }
 
 /*

@@ -43,7 +43,7 @@ void sendProject(){
 	scanf("%d", &prevision);
 	getchar();
 
-	createProject(projectName, description, responsible, prevision);
+	createProject(projectName, description, responsible, "A fazer", prevision);
 	conclusionScreen("Projeto criado");
 }
 
