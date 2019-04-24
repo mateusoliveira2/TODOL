@@ -53,7 +53,7 @@ void editName(string projectName) {
 }
 
 void gerarRelatorio(string projectName) {
-	//retorna dados do projeto com avalia��o de como est� indo o projeto
+	//retorna dados do projeto com avaliacao de como esta indo o projeto
 }
 
 void editToDo() {
@@ -67,9 +67,9 @@ void editToDo() {
 }
 
 void projectMain(string projectName) {
-    // TBD
-    //Project proj = Project( getProject(projectName) );
-	
+    // proj reconstruído da persistencia
+    Project proj = Project( getProject(projectName) );
+    
     int choice;
 
 	do {
