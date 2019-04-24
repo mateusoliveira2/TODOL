@@ -3,23 +3,12 @@
 	em uma pasta separada dos scripts
 */
 
-#pragma once
-#include <cstdlib>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <stdio.h>
-#include <stdlib.h>
-#include <dirent.h>
 #include "persistenceToDoController.h"
-
-using namespace std;
-
 
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao) {
 	ofstream fs;
 	
-	string dirProject = "../../Projects/" + projectName + "/";
+	string dirProject = "./Projects/" + projectName + "/";
 	string fileName = _nome + ".txt";
 	
 	fs.open((dirProject + fileName).c_str());
@@ -33,10 +22,10 @@ void persistirToDo(string projectName, string _nome, string _descricao, string _
 	fs.close();
 }
 
-vector<string> returnToDO(string projectName, string nameToDo){
+vector<string> returnToDo(string projectName, string nameToDo, string extension = ".txt"){
 	ifstream fs;
-	string dirProject = "../../Projects/" + projectName + "/";
-	string fileName = nameToDo + ".txt";
+	string dirProject = "./Projects/" + projectName + "/";
+	string fileName = nameToDo + extension;
 
 	fs.open( (dirProject + fileName).c_str() );
 
@@ -53,19 +42,19 @@ vector<string> returnToDO(string projectName, string nameToDo){
 
 void setNomeToDo(string projectName, string nome, string novoNome){
 	vector<string> line;
-	line = returnToDO(projectName, nome);
+	line = returnToDo(projectName, nome);
 	persistirToDo(projectName, novoNome, line[3], line[2],line[1], stoi(line[4]));
 }
 
 void setStatusToDo(string projectName, string nome, string status){
 	vector<string> line;
-	line = returnToDO(projectName, nome);
+	line = returnToDo(projectName, nome);
 	persistirToDo(projectName, line[0], line[3], line[2], status, stoi(line[4]));
 }
 
 void setResponsavelToDo(string projectName, string nome, string responsavel){
 	vector<string> line;
-	line = returnToDO(projectName, nome);
+	line = returnToDo(projectName, nome);
 	persistirToDo(projectName, line[0], line[3], responsavel, line[1], stoi(line[4]));
 }
 
@@ -75,14 +64,16 @@ void setResponsavelToDo(string projectName, string nome, string responsavel){
 vector<string> returnAllTodos(string projectName){
 	DIR *dir;
     struct dirent *lsdir;
-	string path = "../../Projects/" + projectName + "/";
+	string path = "./Projects/" + projectName + "/";
     dir = opendir(path.c_str());
 
 	vector<string> todos;
-	
+
+	if(!dir) return todos;
+
     while ( ( lsdir = readdir(dir) ) != NULL ){
 		string aux = string(lsdir->d_name);
-		if(aux != ".." && aux != "."){
+		if(aux != ".." && aux != "." && aux != projectName + ".txt"){
 			todos.push_back(aux);
 		}
     }
@@ -95,16 +86,14 @@ vector<string> returnAllTodos(string projectName){
 /*
 	Retorna o conteúdo de todas as ToDos (uma por uma) do projeto.
 */
-vector<vector<string> > returnAllTodosCont(string projectName){
+vector<vector<string> > returnAllTodosContent(string projectName){
 	vector<vector<string> > retorno;
 	vector<string> nomesToDo;
 	vector<string> todo;
 	nomesToDo = returnAllTodos(projectName);
 	for(int i = 0; i < nomesToDo.size(); i++){
-		todo = returnToDO(projectName, nomesToDo[i]);
+		todo = returnToDo(projectName, nomesToDo[i], "");
 		retorno.push_back(todo);
 	}
 	return retorno;
 }
-
-

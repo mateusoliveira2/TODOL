@@ -35,108 +35,8 @@ void listarToDo() {
 	//chamar funcao de listagem
 }
 
-void filterByName(string projectName) {
-    string filterName;
-
-    printf("\n\t===== Filtro por nome ===== \n\n");
-    printf("\n\tDigite o filtro de nome: ");
-    getline (cin, filterName);
-
-    filterByNameAllToDos(projectName, filterName);
-    conclusionScreen("Filtrado por nome");
-}
-
-void filterBySituation(string projectName ){
-    string filterSituation;
-    int choice;
-
-    printf("\n\t===== Filtro por situacao ===== \n\n");
-    printf("\t1. A fazer\n");
-    printf("\t2. Em andamento\n");
-    printf("\t3. Concluido\n");
-    printf("\tEscolha: ");
-
-    scanf("%d", &choice);
-    getchar();
-
-    if(choice == 1)         filterSituation = "A fazer";
-    else if(choice == 2)    filterSituation = "Em andamento";
-    else if(choice == 3)    filterSituation = "Concluido";
-    else {
-        printf("Opcao invalida... retornando\n");
-        return;
-    }
-
-    filterBySituationAllToDos(projectName, filterSituation);
-    conclusionScreen("Filtrado por situacao");
-}
-
-void filterByDate(string projectName) {
-    string filterDate;
-
-    printf("\n\t===== Filtro por data de criacao ===== \n\n");
-    printf("\n\tDigite o filtro de data (formato dd-mm-aaaa): ");
-    getline (cin, filterDate);
-
-
-    //filterByDateAllToDos(projectName, filterDate);
-    conclusionScreen("Filtrado por data");
-}
-
-void filterByResponsable(string projectName) {
-    string filterResponsable;
-
-    printf("\n\t===== Filtro por responsavel ===== \n\n");
-    printf("\n\tDigite o filtro de responsavel: ");
-    getline (cin, filterResponsable);
-
-    filterByResponsableAllToDos(projectName, filterResponsable);
-    conclusionScreen("Filtrado por responsavel");
-}
-
 void filterTodo(string projectName) {
-    int choice;
-
-    do {
-        system("cls || clear");
-        printf("\n\t===== %s ===== \n\n", projectName.c_str());
-        printf("\t1. Filtrar por nome\n");
-        printf("\t2. Filtrar por situacao\n");
-        printf("\t3. Filtrar por data\n");
-        printf("\t4. Filtrar por responsavel\n");
-        printf("\t0. Sair\n\n");
-        printf("\tEscolha: ");
-
-        scanf("%d", &choice);
-        getchar();
-
-        system("cls || clear");
-        switch(choice){
-            case 1:
-                filterByName(projectName);
-                break;
-
-            case 2:
-                filterBySituation(projectName);
-                break;
-
-            case 3:
-                filterByDate(projectName);
-                break;
-
-            case 4:
-                filterByResponsable(projectName);
-                break;
-
-            case 0:
-                break;
-
-            default:
-                printf("Digite uma opcao valida\n");
-        }
-
-    } while(choice);
-
+    filterMain(projectName);
 }
 
 void editName(string projectName) {
@@ -221,7 +121,6 @@ void projectMain(string projectName) {
         }
 
     } while(choice);
-
 }
 
 

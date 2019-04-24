@@ -10,19 +10,6 @@ void createToDo(string project, string nameToDo, string description, string resp
     gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
 }
 
-void conclusionScreen(string acao){
-	printf("\n\t%s com sucesso!", acao.c_str());
-
-	char choice = 'n';
-	do  {
-		printf("\n\nDeseja voltar? (s/n): ");
-		scanf("%c", &choice);
-        getchar();
-	} while(choice != 's');
-
-	system("cls || clear");
-}
-
 void editTodoName(string name){
 	string newName;
 	printf("\tEDITAR NOME DO ToDo\n");

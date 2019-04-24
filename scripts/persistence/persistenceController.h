@@ -10,6 +10,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
 
 using namespace std;
 
