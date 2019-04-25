@@ -19,7 +19,7 @@ string editTodoName(string projectName, string name){
 
 	printf("\tNome atual: %s", removeFormatWithUnderscore(name).c_str());
 
-    printf("\n\tDigite o nome nome: ");
+    printf("\n\tDigite o novo nome: ");
     getline (cin, newName);
 
     name = formatWithUnderscore(name);
