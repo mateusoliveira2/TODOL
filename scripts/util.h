@@ -5,7 +5,9 @@
 #include "persistence/persistenceController.h"
 #include "persistence/persistenceToDoController.h"
 
-string formatarNome(string nome);
+string formatWithUnderscore(string word);
+
+string removeFormatWithUnderscore(string word);
 
 void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data);
 
@@ -24,6 +26,8 @@ void filterByNameAllToDos(string projectName, string filterName);
 void filterBySituationAllToDos(string projectName, string filterSituation);
 
 void filterByResponsableAllToDos(string projectName, string filterResponsable);
+
+void displayProject(string projectName);
 
 void displayToDo(string titleToDo, string situationToDo, string responsableToDo);
 

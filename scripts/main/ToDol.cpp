@@ -16,32 +16,32 @@ using namespace std;
 void selectProject() {
 	string projectName;
 
-	printf("\n\tDIGITE O NOME DO PROJETO: ");
+	printf("\n\tDigite o nome do projeto: ");
 	getline (cin, projectName);
 
 	string projName = string(projectName);
 
 	system("clear");
 	if( projectExists(projName) ) projectMain(projectName);
-	else printf("\n\tO PROJETO REQUISITADO NÃO EXISTE.");
+	else printf("\n\tO projeto requisitado não existe.");
 }
 
 void sendProject(){
 	string projectName, description, responsible;
 	int prevision;
 
-	printf("\n\tDIGITE O NOME DO PROJETO: ");
+	printf("\n\tDigite o nome do projeto: ");
 	getline (cin, projectName);
 
-	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
+	printf("\n\tDigite a descrição do projeto: ");
 	getline (cin, description);
 
-	printf("\n\tDIGITE OS RESPONSAVEIS PELO DO PROJETO: ");
+	printf("\n\tDigite os responsaveis pelo projeto: ");
 	getline (cin, responsible);
 
-	printf("\n\tDIGITE A PREVISAO DE TERMINO (em dias): ");
+	printf("\n\tDigite a previsao de termino (em dias): ");
 	scanf("%d", &prevision);
-	getchar();
+	cin.ignore();
 
 	createProject(projectName, description, responsible, "A fazer", prevision);
 	conclusionScreen("Projeto criado");
@@ -50,7 +50,7 @@ void sendProject(){
 void concludeProject(){
 	string projectName;
 
-	printf("\n\tDIGITE O NOME DO PROJETO: ");
+	printf("\n\tDigite o nome do projeto: ");
 	getline (cin, projectName);
 
 	setStatusProjeto(projectName, "Concluido");
@@ -69,7 +69,7 @@ int main () {
         printf("\tESCOLHA: ");
 
         scanf("%d", &choice);
-        getchar();
+        cin.ignore();
 
 		system("cls || clear");
         switch(choice){

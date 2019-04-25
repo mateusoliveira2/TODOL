@@ -1,29 +1,36 @@
 #include "util.h"
 
-string formatarNome(string nome) {
-	for(int i = 0; i < nome.size(); i++){
-		if(nome[i] == ' ') nome[i] = '_';
+string formatWithUnderscore(string word) {
+	for(int i = 0; i < word.size(); i++){
+		if(word[i] == ' ') word[i] = '_';
 	}
-	return nome;
+	return word;
+}
+
+string removeFormatWithUnderscore(string word){
+	for(int i = 0; i < word.size(); i++){
+		if(word[i] == '_') word[i] = ' ';
+	}
+	return word;
 }
 
 void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data){
-	_nome = formatarNome(_nome);
+	_nome = formatWithUnderscore(_nome);
 	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao, _data);
 }
 
 void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data){
-	_projeto = formatarNome(_projeto);
-	_nome = formatarNome(_nome);
+	_projeto = formatWithUnderscore(_projeto);
+	_nome = formatWithUnderscore(_nome);
 	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao, _data);
 }
 
 bool projectExists(string projName) {
-	return validProject(projName);
+	return validProject(formatWithUnderscore(projName));
 }
 
 bool todoExists(string projName, string todoName) {
-	return validTodo(projName, todoName);
+	return validTodo(projName, formatWithUnderscore(todoName));
 }
 
 vector<string> getProject(string projName) {
@@ -113,10 +120,21 @@ void filterByResponsableAllToDos(string projectName, string filterResponsable){
 	}
 }
 
+void displayProject(string projectName){
+    vector<string> proj =  getProject(projectName);
+
+    printf("┌───────────────────────────────────\n");
+    printf("│ Descricao: %s\n", removeFormatWithUnderscore(proj[1]).c_str());
+    printf("│ Responsavel: %s\n", proj[2].c_str());
+    printf("│ Status: %s\n", proj[3].c_str());
+    printf("│ Previsao de Conclusao: %s dia(s)\n", proj[4].c_str());
+    printf("└───────────────────────────────────\n\n");
+}
+
 void displayToDo(string titleToDo, string situationToDo, string responsableToDo){
     
     printf("┌───────────────────────────────────\n");
-    printf("│ Nome: %s\n", titleToDo.c_str());
+    printf("│ Nome: %s\n", removeFormatWithUnderscore(titleToDo).c_str());
     printf("│ Situação: %s\n", situationToDo.c_str());
     printf("│ Responsaveis: %s\n", responsableToDo.c_str());
     printf("└───────────────────────────────────\n\n");
@@ -136,13 +154,13 @@ void getAllToDos(string projectName){
 }
 
 void conclusionScreen(string acao){
+	
 	printf("\n\t%s com sucesso!", acao.c_str());
 
 	char choice = 'n';
 	do  {
 		printf("\n\nDeseja voltar? (s/n): ");
-		scanf("%c", &choice);
-        getchar();
+		cin >> choice;
 	} while(choice != 's');
 
 	system("cls || clear");
