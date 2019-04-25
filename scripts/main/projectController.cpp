@@ -90,7 +90,7 @@ void editToDo(string projName) {
         printf("\n\tDigite o nome da ToDo: ");
         getline (cin, nameToDo);
 
-        system("clear");
+        system("cls || clear");
         if( todoExists(projName, nameToDo) ) todoMain(projName, nameToDo);
         else printf("\n\tO ToDo requisitado não existe.");
     }

@@ -37,7 +37,7 @@ void selectProject() {
 
 		string projName = string(projectName);
 
-		system("clear");
+		system("cls || clear");
 		if( projectExists(projName) ) projectMain(projectName);
 		else printf("\n\tO projeto requisitado não existe.");
 	}
@@ -71,7 +71,7 @@ void concludeProject(){
 		printf("\n\tDigite o nome do projeto que você deseja marcar como concluído: ");
 		getline(cin, projName);
 
-		system("clear");
+		system("cls || clear");
 		if( projectExists(projName) ) {
 			setStatusProjeto(projName, "Concluido");
 			conclusionScreen("Conclusao feita");
