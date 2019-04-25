@@ -7,15 +7,15 @@ string formatarNome(string nome) {
 	return nome;
 }
 
-void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
+void gravarProjeto(string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data){
 	_nome = formatarNome(_nome);
-	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao);
+	persistirProjeto(_nome, _descricao, _responsavel, _status, _previsaoConclusao, _data);
 }
 
-void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao){
+void gravarToDo(string _projeto, string _nome, string _descricao, string _responsavel, string _status, int _previsaoConclusao, string _data){
 	_projeto = formatarNome(_projeto);
 	_nome = formatarNome(_nome);
-	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao);
+	persistirToDo(_projeto, _nome, _descricao, _responsavel, _status, _previsaoConclusao, _data);
 }
 
 bool projectExists(string projName) {
@@ -72,7 +72,7 @@ void filterByNameAllToDos(string projectName, string filterName){
 		transform(titleToDo.begin(), titleToDo.end(), titleToDo.begin(), ::tolower);
 
 		if(searchMatching(filterName, titleToDo))
-			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+			displayToDo(titleToDo, situationToDo, responsableToDo);
 	}
 
 }
@@ -91,7 +91,7 @@ void filterBySituationAllToDos(string projectName, string filterSituation){
 		transform(situationToDo.begin(), situationToDo.end(), situationToDo.begin(), ::tolower);
 
 		if(searchMatching(filterSituation, situationToDo))
-			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+			displayToDo(titleToDo, situationToDo, responsableToDo);
 	}
 }
 
@@ -109,7 +109,7 @@ void filterByResponsableAllToDos(string projectName, string filterResponsable){
 		transform(responsableToDo.begin(), responsableToDo.end(), responsableToDo.begin(), ::tolower);
 
 		if(searchMatching(filterResponsable, responsableToDo))
-			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+			displayToDo(titleToDo, situationToDo, responsableToDo);
 	}
 }
 
