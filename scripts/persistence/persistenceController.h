@@ -29,3 +29,7 @@ void setStatusProjeto(string nome, string status);
 void setDescricaoProjeto(string nome, string descricao);
 
 void setResponsavelProjeto(string nome, string responsavel);
+
+vector<string> returnAllProjectsName(string projectName);
+
+vector<vector<string> > returnAllProjectsContent(string projectName);

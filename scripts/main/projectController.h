@@ -25,4 +25,8 @@ void gerarRelatorio(string projectName);
 
 void editToDo(string projName);
 
+void displayProject(string projectName);
+
+void listToDos(string projName);
+
 void projectMain(string projectName);
