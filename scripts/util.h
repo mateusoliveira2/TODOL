@@ -19,6 +19,8 @@ bool todoExists(string projName, string todoName);
 
 vector<string> getProject(string projName);
 
+vector<string> getAllProjectsNames();
+
 bool searchMatching(string filter, string phrase);
 
 void filterByNameAllToDos(string projectName, string filterName);

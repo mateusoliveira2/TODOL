@@ -32,6 +32,6 @@ void setResponsavelProjeto(string nome, string responsavel);
 
 void setDataProjeto(string nome, string data);
 
-vector<string> returnAllProjectsName(string projectName);
+vector<string> returnAllProjectsName();
 
-vector<vector<string> > returnAllProjectsContent(string projectName);
+vector<vector<string> > returnAllProjectsContent();

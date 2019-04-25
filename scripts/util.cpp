@@ -37,6 +37,10 @@ vector<string> getProject(string projName) {
 	return returnProjeto(projName);
 }
 
+vector<string> getAllProjectsNames() {
+	return returnAllProjectsName();
+}
+
 bool searchMatching(string filter, string phrase) {
 	int matching[100];
 	matching[0] = matching[1] = 0;

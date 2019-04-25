@@ -85,7 +85,6 @@ void listToDos(string projName){
 }
 
 void projectMain(string projectName) {
-
     projectName = formatWithUnderscore(projectName);
 
     system("cls || clear");
