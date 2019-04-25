@@ -59,7 +59,7 @@ void editToDo(string projName) {
     getline (cin, nameToDo);
 
     system("clear");
-    if( todoExists(projName, nameToDo) ) todoMain(nameToDo);
+    if( todoExists(projName, nameToDo) ) todoMain(projName, nameToDo);
     else printf("\n\tO ToDo REQUISITADO NÃO EXISTE.");
 }
 

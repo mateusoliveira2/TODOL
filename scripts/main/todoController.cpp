@@ -10,7 +10,7 @@ void createToDo(string project, string nameToDo, string description, string resp
     gravarToDo(project, nameToDo, description, responsible, "A fazer", duration);
 }
 
-void editTodoName(string name){
+void editTodoName(string projectName, string name){
 	string newName;
 	printf("\tEDITAR NOME DO ToDo\n");
 
@@ -19,10 +19,37 @@ void editTodoName(string name){
     printf("\n\tDIGITE O NOVO NOME: ");
     getline (cin, newName);
 
-	//conclusionScreen("Nome do ToDo atualizado");
+    setNomeToDo(projectName, name, newName);
+
+	conclusionScreen("Nome do ToDo atualizado");
 }
 
-void todoMain(string todoName) {
+
+void editResponsible(string projectName, string todoName){
+	string respon;
+	printf("\tEDITAR RESPONSAVEIS DO ToDo\n");
+
+    printf("\n\tDIGITE OS NOVOS RESPONSAVEIS: ");
+    getline (cin, respon);
+
+    setResponsavelToDo(projectName, todoName, respon);
+
+	conclusionScreen("Responsaveis do ToDo atualizado");
+}
+
+void editSituation(string projectName, string todoName){
+	string status;
+	printf("\tEDITAR SITUAÇÃO DO ToDo\n");
+
+    printf("\n\tDIGITE O NOVO STATUS: ");
+    getline (cin, status);
+
+    setStatusToDo(projectName, todoName, status);
+
+	conclusionScreen("Status do ToDo atualizado");
+}
+
+void todoMain(string projName, string todoName) {
 	int choice;
 
 	do {
@@ -39,15 +66,15 @@ void todoMain(string todoName) {
         system("cls || clear");
         switch(choice){
             case 1:
-                editTodoName(todoName);
+                editTodoName(projName, todoName);
                 break;
 
             case 2:
-                printf("%d", choice);
+                editResponsible(projName, todoName);
                 break;
 
             case 3:
-                printf("%d", choice);
+                editSituation(projName, todoName);
                 break;
 
             case 0:
