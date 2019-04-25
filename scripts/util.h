@@ -21,6 +21,8 @@ vector<string> getProject(string projName);
 
 vector<string> getAllProjectsNames();
 
+vector<string> getAllTodosNames(string projName);
+
 bool searchMatching(string filter, string phrase);
 
 void filterByNameAllToDos(string projectName, string filterName);

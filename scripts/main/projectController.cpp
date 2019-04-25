@@ -5,6 +5,21 @@
 
 #include "projectController.h"
 
+bool showExistentTodos(string projName) {
+    vector<string> todos = getAllTodosNames(projName);
+    
+    if(todos.size() > 0) {
+        printf("\n\tToDo's existentes:\n");
+        for(int i = 0; i < (int) todos.size(); i++) {
+            printf("\t%d. %s\n", i+1, (todos[i].substr(0, todos[i].size() - 4)).c_str());
+        }
+        return true;
+    }
+    
+    printf("\n\tAtenção: Opção inválida. Atualmente não existem ToDo's cadastradas.\n");
+    return false;
+}
+
 void createProject(string name, string description, string responsible, string status, int prevision) {
     //converte data para string e passa para o gravar projeto
     string data = "dd/mm/aaaa"; //
@@ -69,14 +84,16 @@ void gerarRelatorio(string projectName) {
 }
 
 void editToDo(string projName) {
-	string nameToDo;
+    if( showExistentTodos(projName) ) {
+    	string nameToDo;
 
-    printf("\n\tDigite o nome da ToDo: ");
-    getline (cin, nameToDo);
+        printf("\n\tDigite o nome da ToDo: ");
+        getline (cin, nameToDo);
 
-    system("clear");
-    if( todoExists(projName, nameToDo) ) todoMain(projName, nameToDo);
-    else printf("\n\tO ToDo requisitado não existe.");
+        system("clear");
+        if( todoExists(projName, nameToDo) ) todoMain(projName, nameToDo);
+        else printf("\n\tO ToDo requisitado não existe.");
+    }
 }
 
 void listToDos(string projName){
