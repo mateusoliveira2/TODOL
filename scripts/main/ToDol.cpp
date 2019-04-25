@@ -53,7 +53,7 @@ void concludeProject(){
 	printf("\n\tDIGITE O NOME DO PROJETO: ");
 	getline (cin, projectName);
 
-	//setStatus("Concluido");
+	setStatusProjeto(projectName, "Concluido");
 	conclusionScreen("Conclusao feita");
 }
 
