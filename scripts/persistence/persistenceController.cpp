@@ -73,9 +73,9 @@ void setNomeProjeto(string nome, string novoNome){
 	string pathNovo =  "Projects/" + novoNome + "/";
 	string fileAtual = nome + ".txt";
 	string fileNovo = novoNome + ".txt";
-	
+
 	line = returnProjeto(nome);
-	
+
 	system(("mv " + pathAtual + fileAtual + " " + pathAtual + fileNovo).c_str());
 	system(("mv " + pathAtual + " " + pathNovo).c_str());
 

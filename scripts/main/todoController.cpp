@@ -6,30 +6,44 @@
 
 #include "todoController.h"
 
-void createToDo(string project, string nameToDo, string description, string responsible, int duration, string data){
+void createToDo(string project, string nameToDo, string description, string responsible, int duration){
+    //converte data para string e passa para o gravar toDo
+    string data = "dd/mm/aaaa"; //
+
     gravarToDo(project, nameToDo, description, responsible, "A fazer", duration, data);
 }
 
-void editTodoName(string projectName, string name){
+string editTodoName(string projectName, string name){
 	string newName;
-	printf("\tEDITAR NOME DO ToDo\n");
+	printf("\tEditar nome do ToDo\n");
 
-	printf("\tNOME ATUAL: %s", name.c_str());
+	printf("\tNome atual: %s", removeFormatWithUnderscore(name).c_str());
 
-    printf("\n\tDIGITE O NOVO NOME: ");
+    printf("\n\tDigite o novo nome: ");
     getline (cin, newName);
+
+    name = formatWithUnderscore(name);
+    newName = formatWithUnderscore(newName);
+
+    if(name == newName){
+        system("cls || clear");
+        printf("\n\tOs nomes de ToDos são iguais");
+        return name;
+    }
 
     setNomeToDo(projectName, name, newName);
 
 	conclusionScreen("Nome do ToDo atualizado");
+
+    return newName;
 }
 
 
 void editResponsible(string projectName, string todoName){
 	string respon;
-	printf("\tEDITAR RESPONSAVEIS DO ToDo\n");
+    printf("\tEditar responsaveis do ToDo\n");
 
-    printf("\n\tDIGITE OS NOVOS RESPONSAVEIS: ");
+    printf("\n\tDigite os novos responsaveis: ");
     getline (cin, respon);
 
     setResponsavelToDo(projectName, todoName, respon);
@@ -39,10 +53,25 @@ void editResponsible(string projectName, string todoName){
 
 void editSituation(string projectName, string todoName){
 	string status;
-	printf("\tEDITAR SITUAÇÃO DO ToDo\n");
+    int choice;
 
-    printf("\n\tDIGITE O NOVO STATUS: ");
-    getline (cin, status);
+	printf("\tEditar situação do ToDo\n");
+
+    printf("\t1. A fazer\n");
+    printf("\t2. Em andamento\n");
+    printf("\t3. Concluido\n");
+    printf("\tEscolha: ");
+
+    scanf("%d", &choice);
+    cin.ignore();
+
+    if(choice == 1)         status = "A fazer";
+    else if(choice == 2)    status = "Em andamento";
+    else if(choice == 3)    status = "Concluido";
+    else {
+        printf("Opcao invalida... retornando\n");
+        return;
+    }
 
     setStatusToDo(projectName, todoName, status);
 
@@ -50,10 +79,12 @@ void editSituation(string projectName, string todoName){
 }
 
 void todoMain(string projName, string todoName) {
+    todoName = formatWithUnderscore(todoName);
+
 	int choice;
 
 	do {
-        printf("\n\t===== %s ===== \n\n", todoName.c_str());
+        printf("\n\t===== %s ===== \n\n", removeFormatWithUnderscore(todoName).c_str());
         printf("\t1. Editar Nome\n");
         printf("\t2. Editar Responsaveis\n");
         printf("\t3. Editar Situacao\n");
@@ -61,12 +92,12 @@ void todoMain(string projName, string todoName) {
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
-        getchar();
+        cin.ignore();
 
         system("cls || clear");
         switch(choice){
             case 1:
-                editTodoName(projName, todoName);
+                todoName = editTodoName(projName, todoName);
                 break;
 
             case 2:
