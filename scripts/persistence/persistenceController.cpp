@@ -109,7 +109,7 @@ void setDataProjeto(string nome, string data){
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto
 */
-vector<string> returnAllProjectsName(string projectName){
+vector<string> returnAllProjectsName(){
 	DIR *dir;
     struct dirent *lsdir;
 	string path = "./Projects/";
@@ -132,13 +132,15 @@ vector<string> returnAllProjectsName(string projectName){
 /*
 	Retorna o conteúdo de todos os projetos (um por um).
 */
-vector<vector<string> > returnAllProjectsContent(string projectName){
-	vector<vector<string> > retorno;
-	vector<string> nomesProjects;
+vector<vector<string> > returnAllProjectsContent(){
 	vector<string> project;
-	nomesProjects = returnAllProjectsName(projectName);
+	vector<string> nomesProjects;
+	vector<vector<string> > retorno;
+
+	nomesProjects = returnAllProjectsName();
+	
 	for(int i = 0; i < nomesProjects.size(); i++){
-		project = returnProjeto(projectName);
+		project = returnProjeto( nomesProjects[i] );
 		retorno.push_back(project);
 	}
 	return retorno;
