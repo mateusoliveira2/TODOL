@@ -72,7 +72,7 @@ void filterByNameAllToDos(string projectName, string filterName){
 		transform(titleToDo.begin(), titleToDo.end(), titleToDo.begin(), ::tolower);
 
 		if(searchMatching(filterName, titleToDo))
-			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+			displayToDo(titleToDo, situationToDo, responsableToDo);
 	}
 
 }
@@ -91,7 +91,7 @@ void filterBySituationAllToDos(string projectName, string filterSituation){
 		transform(situationToDo.begin(), situationToDo.end(), situationToDo.begin(), ::tolower);
 
 		if(searchMatching(filterSituation, situationToDo))
-			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+			displayToDo(titleToDo, situationToDo, responsableToDo);
 	}
 }
 
@@ -109,7 +109,7 @@ void filterByResponsableAllToDos(string projectName, string filterResponsable){
 		transform(responsableToDo.begin(), responsableToDo.end(), responsableToDo.begin(), ::tolower);
 
 		if(searchMatching(filterResponsable, responsableToDo))
-			printf("\t#%s - %s - %s\n", titleToDo.c_str(), situationToDo.c_str(), responsableToDo.c_str());
+			displayToDo(titleToDo, situationToDo, responsableToDo);
 	}
 }
 

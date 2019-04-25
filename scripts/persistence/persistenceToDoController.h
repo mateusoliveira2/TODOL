@@ -15,6 +15,8 @@
 
 using namespace std;
 
+bool validTodo(string projName, string todoName);
+
 void persistirToDo(string projectName, string _nome, string _descricao, string _responsavel, string _status, int previsao, string _data);
 
 vector<string> returnToDo(string projectName, string nameToDo, string extension);
@@ -26,8 +28,6 @@ void setStatusToDo(string projectName, string nome, string status);
 void setResponsavelToDo(string projectName, string nome, string responsavel);
 
 void setDataToDo(string projectName, string nome, string data);
-
-bool validTodo(string projName, string todoName);
 
 /*
 	Retorna o nome de todas as ToDos (uma por uma) do projeto
