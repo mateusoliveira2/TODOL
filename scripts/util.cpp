@@ -148,6 +148,27 @@ void displayToDo(string titleToDo, string situationToDo, string responsableToDo)
     printf("└───────────────────────────────────\n\n");
 }
 
+long long segundosParaDias(long long segundos) {
+	return segundos / 86400LL;;
+}
+
+long long diasParaSegundos(long long dias){
+	return dias * 86400LL;
+}
+
+long long diasParaHoras(long long dias){
+	return dias * 24LL;
+}
+
+long long horasParaDias(long long horas){
+	return horas / 24LL;
+}
+
+string formatarPlural(long long variavel) {
+	if (variavel == 1LL) return " ";
+	return "s ";
+}
+
 void getAllToDos(string projectName){
 	vector<vector<string>> allToDos = returnAllTodosContent(projectName);
 
@@ -171,4 +192,55 @@ void conclusionScreen(string acao){
 	} while(choice != 's');
 
 	system("cls || clear");
+}
+
+void displaySituacaoPrevisao(string projectName, long long previsaoToDos) {
+	vector<string> project =  getProject(projectName);
+	long long previsaoConclusaoProject = stoi(project[4]);
+	long long saldo = previsaoToDos - previsaoConclusaoProject;
+	
+	printf("\n");
+	if (saldo > 0) {
+		printf("\tAtualmente são necessários mais dias do que o previsto para concluir o projeto! ");
+		printf("- Deficit de %lld dia%s\n", abs(saldo), formatarPlural(abs(saldo)).c_str());
+
+	} else {
+		printf("\tO projeto deve ser concluído a tempo do previsto! ");
+		printf("- Saldo de %lld dia%s\n", abs(saldo), formatarPlural(abs(saldo)).c_str());
+	}
+}
+
+void displayAllToDoStatistics(string projectName) {
+	vector< vector<string> > allToDos = returnAllTodosContent(projectName);
+	int toDosConcluidos = 0;
+	int toDosEmAndamento = 0;
+	int toDosAFazer = 0;
+	long long estimativaTotal = 0;
+
+	if (allToDos.size() == 0) {
+		printf("\t Não há nenhum toDo cadastrado nesse projeto!\n");
+		return;
+	}
+	
+	for (vector <string> toDo : allToDos) {
+		string situationToDo = toDo[1];
+		long long previsaoToDo = stoi(toDo[4]);
+		long long criacaoToDo = stoi(toDo[5]);
+		estimativaTotal += diasParaHoras(previsaoToDo);
+
+		if (situationToDo == "A fazer") toDosAFazer++;
+		if (situationToDo == "Em andamento") toDosEmAndamento++;
+		if (situationToDo == "Concluido") toDosConcluidos++;
+	}
+	
+	printf("\t %d ToDo%sa fazer\n", toDosAFazer, formatarPlural(toDosAFazer).c_str());
+	printf("\t %d ToDo%sem andamento\n", toDosEmAndamento, formatarPlural(toDosEmAndamento).c_str());
+	printf("\t %d ToDo%sconcluído%s\n", toDosConcluidos, formatarPlural(toDosConcluidos).c_str(), formatarPlural(toDosConcluidos).c_str());
+
+	printf("\t Estimativa total para concluir todos os ToDos: %lld hora%s- %lld dia%s\n",
+					estimativaTotal, formatarPlural(estimativaTotal).c_str(), horasParaDias(estimativaTotal), formatarPlural(horasParaDias(estimativaTotal)).c_str());
+
+	displaySituacaoPrevisao(projectName, horasParaDias(estimativaTotal));
+
+	printf("\n\n");
 }

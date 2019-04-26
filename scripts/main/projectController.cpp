@@ -83,12 +83,14 @@ string editName(string projectName) {
     O Relatório é gerado a partir das informações persistidas durante a modificação do projeto,
     incluindo adição de toDos e mudança de estado destes.
 */
-void gerarRelatorio(Project project) {
+void gerarRelatorio(string projectName) {
     system("cls || clear");
 
-    printf("\t ===== Relatório de %s =====\n\n", project.nome.c_str());
+    printf("\t===== %s =====\n\n", projectName.c_str());
 
-    
+    displayProject(projectName);
+
+    displayAllToDoStatistics(projectName);
 
     conclusionScreen("Relatório gerado");
 }
@@ -118,6 +120,7 @@ void projectMain(string projectName) {
     int choice = 1;
 
 	do {
+        system("cls || clear");
         printf("\n\t===== %s ===== \n", removeFormatWithUnderscore(projectName).c_str());
 
         displayProject(projectName);
@@ -153,7 +156,7 @@ void projectMain(string projectName) {
                 break;
 
             case 5:
-                gerarRelatorio(proj);
+                gerarRelatorio(projectName);
                 break;
 
             case 6:
