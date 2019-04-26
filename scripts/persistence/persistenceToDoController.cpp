@@ -18,7 +18,7 @@ void persistirToDo(string projectName, string _nome, string _descricao, string _
 	fs << _responsavel + "\n";
 	fs << _descricao + "\n";
 	fs << to_string(previsao) + "\n";
-	fs << _data;
+	fs << to_string(time(0));
 
 	fs.close();
 }

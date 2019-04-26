@@ -35,6 +35,8 @@ void displayProject(string projectName);
 
 void displayToDo(string titleToDo, string situationToDo, string responsableToDo);
 
+void displayAllToDoStatistics(string projectName);
+
 void getAllToDos(string projectName);
 
 void getAllToDos(string projName);
