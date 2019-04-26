@@ -194,20 +194,51 @@ void conclusionScreen(string acao){
 	system("cls || clear");
 }
 
-void displaySituacaoPrevisao(string projectName, long long previsaoToDos) {
+long long saldoParaConclusaoProjeto(string projectName, long long estimativaTotal) {
 	vector<string> project =  getProject(projectName);
 	long long previsaoConclusaoProject = stoi(project[4]);
-	long long saldo = previsaoToDos - previsaoConclusaoProject;
-	
+	long long saldo = estimativaTotal - previsaoConclusaoProject;
+
+	return saldo;
+}
+
+void displaySituacaoPrevisao(long long saldoDiasTrabalho) {
 	printf("\n");
-	if (saldo > 0) {
-		printf("\tAtualmente são necessários mais dias do que o previsto para concluir o projeto! ");
-		printf("- Deficit de %lld dia%s\n", abs(saldo), formatarPlural(abs(saldo)).c_str());
+	if (saldoDiasTrabalho > 0) {
+		printf("\t!! Atualmente são necessários mais dias do que o previsto para concluir o projeto !!");
+		printf("- Deficit de %lld dia%s\n", abs(saldoDiasTrabalho), formatarPlural(abs(saldoDiasTrabalho)).c_str());
 
 	} else {
-		printf("\tO projeto deve ser concluído a tempo do previsto! ");
-		printf("- Saldo de %lld dia%s\n", abs(saldo), formatarPlural(abs(saldo)).c_str());
+		printf("\t!! O projeto deve ser concluído a tempo do previsto !!");
+		printf("- Saldo de %lld dia%s\n", abs(saldoDiasTrabalho), formatarPlural(abs(saldoDiasTrabalho)).c_str());
 	}
+}
+
+void estatisticasDesenvolvedores(long long estimativaConcluida, long long estimativaTotal, long long saldoHoras) {
+	
+	printf("\n\nDeseja ver previsões para a equipe? (s/n): ");
+	char choice;
+	cin >> choice;
+
+	if (choice == 's') {
+		printf("\n┌───────────────────────────────────\n");
+		int numeroDesenvolvedores;
+		int horasDiarias;
+
+		printf("|Quantos desenvolvedores na equipe? ");
+		cin >> numeroDesenvolvedores;
+		printf("|Qual a carga horária diária de trabalho? ");
+		cin >> horasDiarias;
+
+		long long totalHorasDia = numeroDesenvolvedores * horasDiarias;
+
+		long long diasRestantes = horasParaDias( (estimativaTotal - estimativaConcluida + totalHorasDia - 1LL) / totalHorasDia);
+		
+		printf("|\n|São necessários %lld dia%spara concluir o projeto com esse time\n", diasRestantes, formatarPlural(diasRestantes).c_str());
+    	printf("└───────────────────────────────────\n\n");
+	}
+
+	cin.ignore();
 }
 
 void displayAllToDoStatistics(string projectName) {
@@ -216,6 +247,7 @@ void displayAllToDoStatistics(string projectName) {
 	int toDosEmAndamento = 0;
 	int toDosAFazer = 0;
 	long long estimativaTotal = 0;
+	long long estimativaConcluida = 0;
 
 	if (allToDos.size() == 0) {
 		printf("\t Não há nenhum toDo cadastrado nesse projeto!\n");
@@ -230,7 +262,10 @@ void displayAllToDoStatistics(string projectName) {
 
 		if (situationToDo == "A fazer") toDosAFazer++;
 		if (situationToDo == "Em andamento") toDosEmAndamento++;
-		if (situationToDo == "Concluido") toDosConcluidos++;
+		if (situationToDo == "Concluido") {
+			estimativaConcluida += diasParaHoras(previsaoToDo);
+			toDosConcluidos++;
+		}
 	}
 	
 	printf("\t %d ToDo%sa fazer\n", toDosAFazer, formatarPlural(toDosAFazer).c_str());
@@ -240,7 +275,11 @@ void displayAllToDoStatistics(string projectName) {
 	printf("\t Estimativa total para concluir todos os ToDos: %lld hora%s- %lld dia%s\n",
 					estimativaTotal, formatarPlural(estimativaTotal).c_str(), horasParaDias(estimativaTotal), formatarPlural(horasParaDias(estimativaTotal)).c_str());
 
-	displaySituacaoPrevisao(projectName, horasParaDias(estimativaTotal));
+	long long saldoHoras = saldoParaConclusaoProjeto(projectName, horasParaDias(estimativaTotal));
+
+	displaySituacaoPrevisao(saldoHoras);
+
+	estatisticasDesenvolvedores(estimativaConcluida, estimativaTotal, saldoHoras);
 
 	printf("\n\n");
 }
