@@ -5,7 +5,25 @@
 
 #include "projectController.h"
 
-void createProject(string name, string description, string responsible, string status, int prevision, string data) {
+bool showExistentTodos(string projName) {
+    vector<string> todos = getAllTodosNames(projName);
+    
+    if(todos.size() > 0) {
+        printf("\n\tToDo's existentes:\n");
+        for(int i = 0; i < (int) todos.size(); i++) {
+            printf("\t%d. %s\n", i+1, (todos[i].substr(0, todos[i].size() - 4)).c_str());
+        }
+        return true;
+    }
+    
+    printf("\n\tAtenção: Opção inválida. Atualmente não existem ToDo's cadastradas.\n");
+    return false;
+}
+
+void createProject(string name, string description, string responsible, string status, int prevision) {
+    //converte data para string e passa para o gravar projeto
+    string data = "dd/mm/aaaa"; //
+
     gravarProjeto(name, description, responsible, status, prevision, data);
 }
 
@@ -13,19 +31,21 @@ void sendToDo(string projectName) {
 	string nameToDo, description, responsible;
 	int duration;
 
-    printf("\tCRIAR ToDo");
-    printf("\n\tDIGITE O NOME DA ToDo: ");
+    //criar checagem para impedir se o projeto estiver concluido
+
+    printf("\tCriar ToDo");
+    printf("\n\tDigite o nome da ToDo: ");
     getline (cin, nameToDo);
 
-    printf("\n\tDESCRICAO DA ToDo: ");
+    printf("\n\tDescricao da ToDo: ");
 	getline (cin, description);
 
-	printf("\n\tDIGITE O NOME DOS RESPONSAVEIS: ");
+	printf("\n\tDigite o nome dos responsaveis: ");
 	getline (cin, responsible);
 
-    printf("\n\tDIGITE A DURACAO DA ToDo (em dias): ");
+    printf("\n\tDigite a duração da ToDo (em dias): ");
 	scanf("%d", &duration);
-    getchar();
+    cin.ignore();
 
 	createToDo(projectName, nameToDo, description, responsible, duration);
     conclusionScreen("ToDo criado");
@@ -35,17 +55,28 @@ void filterTodo(string projectName) {
     filterMain(projectName);
 }
 
-void editName(string projectName) {
+string editName(string projectName) {
 	string newName;
-	printf("\tEDITAR NOME DO PROJETO\n");
+    printf("\tEditar nome do projeto\n");
 
-	printf("\tNOME ATUAL: %s", projectName.c_str());
+	printf("\tNome atual: %s", removeFormatWithUnderscore(projectName).c_str());
 
-    printf("\n\tDIGITE O NOVO NOME: ");
+    printf("\n\tDigite o novo nome: ");
     getline (cin, newName);
+
+    projectName = formatWithUnderscore(projectName);
+    newName = formatWithUnderscore(newName);
+
+    if(projectName == newName){
+        system("cls || clear");
+        printf("\n\tOs nomes de projeto são iguais");
+        return projectName;
+    }
 
 	setNomeProjeto(projectName, newName);
 	conclusionScreen("Nome do projeto atualizado");
+
+    return newName;
 }
 
 /*
@@ -63,25 +94,16 @@ void gerarRelatorio(Project project) {
 }
 
 void editToDo(string projName) {
-	string nameToDo;
+    if( showExistentTodos(projName) ) {
+    	string nameToDo;
 
-	printf("\n\tDIGITE O NOME DA ToDo: ");
-    getline (cin, nameToDo);
+        printf("\n\tDigite o nome da ToDo: ");
+        getline (cin, nameToDo);
 
-    system("clear");
-    if( todoExists(projName, nameToDo) ) todoMain(projName, nameToDo);
-    else printf("\n\tO ToDo REQUISITADO NÃO EXISTE.");
-}
-
-void displayProject(string projectName){
-    vector<string> proj =  getProject(projectName);
-
-    printf("┌───────────────────────────────────\n");
-    printf("│ Descricao: %s\n", proj[1].c_str());
-    printf("│ Responsavel: %s\n", proj[2].c_str());
-    printf("│ Status: %s\n", proj[3].c_str());
-    printf("│ Previsao de Conclusao: %s dia(s)\n", proj[4].c_str());
-    printf("└───────────────────────────────────\n\n");
+        system("cls || clear");
+        if( todoExists(projName, nameToDo) ) todoMain(projName, nameToDo);
+        else printf("\n\tO ToDo requisitado não existe.");
+    }
 }
 
 void listToDos(string projName){
@@ -90,14 +112,13 @@ void listToDos(string projName){
 }
 
 void projectMain(string projectName) {
+    projectName = formatWithUnderscore(projectName);
 
     system("cls || clear");
     int choice = 1;
 
 	do {
-
-        if(choice == -1) printf("Digite uma opcao valida\n");
-        printf("\n\t===== %s ===== \n", projectName.c_str());
+        printf("\n\t===== %s ===== \n", removeFormatWithUnderscore(projectName).c_str());
 
         displayProject(projectName);
 
@@ -111,7 +132,7 @@ void projectMain(string projectName) {
         printf("\tEscolha: ");
 
         scanf("%d", &choice);
-        getchar();
+        cin.ignore();
 
         system("cls || clear");
         switch(choice) {
@@ -136,14 +157,14 @@ void projectMain(string projectName) {
                 break;
 
             case 6:
-                editName(projectName);
+                projectName = editName(projectName);
                 break;
 
             case 0:
                 break;
 
             default:
-                choice = -1;
+                printf("Digite uma opcao valida\n");
                 break;
         }
 

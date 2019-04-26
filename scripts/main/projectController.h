@@ -19,13 +19,11 @@ void listToDos();
 
 void filterTodo(string projectName);
 
-void editName(string projectName);
+string editName(string projectName);
 
 void gerarRelatorio(string projectName);
 
 void editToDo(string projName);
-
-void displayProject(string projectName);
 
 void listToDos(string projName);
 

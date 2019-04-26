@@ -8,53 +8,76 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
-
 #include "projectController.h"
+#include "../util.h"
 
 using namespace std;
+
+bool showExistentProjects() {
+	vector<string> projects = getAllProjectsNames();
+	
+	if(projects.size() > 0) {
+		printf("\n\tProjetos existentes:\n");
+		for(int i = 0; i < (int) projects.size(); i++) {
+			printf("\t%d. %s\n", i+1, projects[i].c_str());
+		}
+		return true;
+	}
+	
+	printf("\n\tAtenção: Opção inválida. Atualmente não existem projetos cadastrados.\n");
+	return false;
+}
 
 void selectProject() {
 	string projectName;
 
-	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	getline (cin, projectName);
+	if( showExistentProjects() ) {
+		printf("\n\tDigite o nome do projeto que você deseja selecionar: ");
+		getline(cin, projectName);
 
-	string projName = string(projectName);
+		string projName = string(projectName);
 
-	system("clear");
-	if( projectExists(projName) ) projectMain(projectName);
-	else printf("\n\tO PROJETO REQUISITADO NÃO EXISTE.");
+		system("cls || clear");
+		if( projectExists(projName) ) projectMain(projectName);
+		else printf("\n\tO projeto requisitado não existe.");
+	}
 }
 
 void sendProject(){
 	string projectName, description, responsible;
 	int prevision;
 
-	printf("\n\tDIGITE O NOME DO PROJETO: ");
+	printf("\n\tDigite o nome do projeto: ");
 	getline (cin, projectName);
 
-	printf("\n\tDIGITE A DESCRICAO DO PROJETO: ");
+	printf("\n\tDigite a descrição do projeto: ");
 	getline (cin, description);
 
-	printf("\n\tDIGITE OS RESPONSAVEIS PELO DO PROJETO: ");
+	printf("\n\tDigite os responsaveis pelo projeto: ");
 	getline (cin, responsible);
 
-	printf("\n\tDIGITE A PREVISAO DE TERMINO (em dias): ");
+	printf("\n\tDigite a previsao de termino (em dias): ");
 	scanf("%d", &prevision);
-	getchar();
+	cin.ignore();
 
 	createProject(projectName, description, responsible, "A fazer", prevision);
 	conclusionScreen("Projeto criado");
 }
 
 void concludeProject(){
-	string projectName;
+	if( showExistentProjects() ) {
+		string projName;
 
-	printf("\n\tDIGITE O NOME DO PROJETO: ");
-	getline (cin, projectName);
+		printf("\n\tDigite o nome do projeto que você deseja marcar como concluído: ");
+		getline(cin, projName);
 
-	setStatusProjeto(projectName, "Concluido");
-	conclusionScreen("Conclusao feita");
+		system("cls || clear");
+		if( projectExists(projName) ) {
+			setStatusProjeto(projName, "Concluido");
+			conclusionScreen("Conclusao feita");
+		}
+		else printf("\n\tO projeto requisitado não existe.");
+	}
 }
 
 int main () {
@@ -69,7 +92,7 @@ int main () {
         printf("\tESCOLHA: ");
 
         scanf("%d", &choice);
-        getchar();
+        cin.ignore();
 
 		system("cls || clear");
         switch(choice){

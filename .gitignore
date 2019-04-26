@@ -2,3 +2,4 @@ run
 *.o
 Projects/
 .vscode/
+scripts/main/ToDol
