@@ -8,7 +8,7 @@ editTodoName projectName todoName = do
     putStrLn "Digite o novo nome: "
     newName <- getLine
     --pegar o nome de vdd
-    if("name" == newName) then
+    if(todoName == newName) then
         putStrLn "Os nomes de ToDos são iguais"
     else
         putStrLn "Ok"
