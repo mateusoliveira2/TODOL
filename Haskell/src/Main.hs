@@ -40,16 +40,18 @@ concludeProject = do
 
 main :: IO()
 main = do 
+    clear
     putStrLn "TODOL \n"
     putStrLn "1. Criar Projeto"
     putStrLn "2. Selecionar Projeto"
     putStrLn "3. Concluir projeto"
     putStrLn "0. Sair"
-    putStrLn "Escolha: "
+    putStr "Escolha: \n"
     choice <- getLine
 
     case choice of
         "1" -> receiverProjectsData
         "2" -> selectProject
         "3" -> concludeProject
-        "0" -> exitWith (ExitFailure 44)
+        "0" -> returnScreen
+        _   -> main
