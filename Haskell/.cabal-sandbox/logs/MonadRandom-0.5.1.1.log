@@ -1,0 +1,55 @@
+Configuring MonadRandom-0.5.1.1...
+Building MonadRandom-0.5.1.1...
+Preprocessing library MonadRandom-0.5.1.1...
+[1 of 7] Compiling Control.Monad.Random.Class ( Control/Monad/Random/Class.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Random/Class.o )
+
+Control/Monad/Random/Class.hs:57:1: Warning:
+    Module ‘Control.Monad.Trans.Error’ is deprecated:
+      Use Control.Monad.Trans.Except instead
+
+Control/Monad/Random/Class.hs:133:11: Warning:
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random/Class.hs:133:51: Warning:
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random/Class.hs:230:11: Warning:
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random/Class.hs:230:53: Warning:
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random/Class.hs:321:11: Warning:
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random/Class.hs:321:59: Warning:
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+Control/Monad/Random/Class.hs:322:16: Warning:
+    In the use of ‘mapErrorT’
+    (imported from Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+[2 of 7] Compiling Control.Monad.Trans.Random.Lazy ( Control/Monad/Trans/Random/Lazy.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Trans/Random/Lazy.o )
+[3 of 7] Compiling Control.Monad.Trans.Random ( Control/Monad/Trans/Random.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Trans/Random.o )
+[4 of 7] Compiling Control.Monad.Trans.Random.Strict ( Control/Monad/Trans/Random/Strict.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Trans/Random/Strict.o )
+[5 of 7] Compiling Control.Monad.Random.Strict ( Control/Monad/Random/Strict.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Random/Strict.o )
+[6 of 7] Compiling Control.Monad.Random.Lazy ( Control/Monad/Random/Lazy.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Random/Lazy.o )
+[7 of 7] Compiling Control.Monad.Random ( Control/Monad/Random.hs, dist/dist-sandbox-c1029b9/build/Control/Monad/Random.o )
+In-place registering MonadRandom-0.5.1.1...
+Creating package registration file:
+/tmp/pkgConf-MonadRandom-0.5.11194953865894429689.1
+Installing library in
+/home/thiagoyuri/workspace/TODOL/Haskell/.cabal-sandbox/lib/x86_64-linux-ghc-7.10.3/MonadRandom-0.5.1.1-1ZGGR6JQ23dHN5zfYaUpV6
+Registering MonadRandom-0.5.1.1...
