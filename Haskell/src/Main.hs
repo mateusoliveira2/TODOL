@@ -10,13 +10,13 @@ receiverProjectsData = do
     name <- getLine
 
     putStrLn "Digite a descrição do projeto: "
-    descricao <- getLine
+    description <- getLine
 
     putStrLn "Digite os responsaveis pelo projeto: "
-    responsaveis <- getLine
+    responsible <- getLine
 
     putStrLn "Digite a previsao de termino (em dias): "
-    previsao_termino <- getLine
+    duration <- getLine
 
     concludeScreen("cadastro ")
     main
