@@ -13,6 +13,7 @@ editToDo projectName = do
     --verificar validade
 
     mainTodo projectName todoName
+    mainProject projectName
     
 filterTodo :: String -> IO()
 filterTodo projectName = mainFilter projectName
@@ -33,6 +34,7 @@ createToDo projectName = do
     duration <- getLine
 
     concludeScreen("ToDo criado");
+    mainProject projectName
 
 editProjectName :: String -> IO()
 editProjectName projectName = do
@@ -47,11 +49,12 @@ editProjectName projectName = do
         putStrLn "Ok"
     -- setar nome do projeto
     concludeScreen("Nome do ToDo atualizado")
+    mainProject projectName
 
 mainProject :: String -> IO()
 mainProject projectName = do 
     clear
-    putStrLn projectName 
+    putStrLn ("===== " ++ projectName ++ " ===== \n")
     putStrLn "1. Criar ToDo"
     putStrLn "2. Editar ToDo"
     putStrLn "3. Listar ToDo"

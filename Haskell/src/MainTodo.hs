@@ -14,6 +14,7 @@ editTodoName projectName todoName = do
         putStrLn "Ok"
     -- setar nome do projeto
     concludeScreen("Nome do ToDo atualizado")
+    mainTodo projectName todoName
     
 
 editResponsible :: String -> String -> IO()
@@ -24,6 +25,7 @@ editResponsible projectName todoName = do
 
     -- setar responsavel
     concludeScreen("Responsaveis do ToDo atualizado")
+    mainTodo projectName todoName
 
 editSituation :: String -> String -> IO()
 editSituation projectName todoName = do
@@ -36,7 +38,7 @@ editSituation projectName todoName = do
     responsible <- getLine
     -- setar situacao
     concludeScreen("Status do ToDo atualizado")
-    putStrLn ""
+    mainTodo projectName todoName
 
 mainTodo :: String -> String -> IO()
 mainTodo projectName todoName = do 
@@ -52,5 +54,4 @@ mainTodo projectName todoName = do
         "1" -> editTodoName projectName todoName
         "2" -> editResponsible projectName todoName
         "3" -> editSituation projectName todoName
-        "0" -> putStrLn "ok"
-    putStrLn ""
+        "0" -> putStrLn ""
