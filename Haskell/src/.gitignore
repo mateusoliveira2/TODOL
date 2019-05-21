@@ -1,0 +1,9 @@
+Haskell/.vscode/
+Haskell/dist/
+
+C/.vscode/
+C/run
+C/*.o
+C/Projects/
+C/.vscode/
+C/scripts/main/ToDol
