@@ -11,3 +11,9 @@ testeTodo name description responsible duration = do
 
     -- lembrar de usar o show quando quiser printar inteiros
     putStrLn (show duration)
+
+--persistirTodo :: Args
+--persistirTodo 
+
+--setNomeTodo :: Args
+--setNomeTodo

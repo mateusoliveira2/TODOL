@@ -19,7 +19,9 @@ receiverProjectsData = do
     putStrLn "Digite a previsao de termino (em dias): "
     duration <- getLine
 
-    -- 
+    -- testando envio de info da ToDo para a persistencia.
+    -- lembrar de passar a duracao como (read duration), para haver
+    -- a conversão para Int
     testeProj name description responsible (read duration)
 
     concludeScreen("cadastro")
@@ -28,9 +30,12 @@ receiverProjectsData = do
 selectProject :: IO()
 selectProject = do
     -- listagem dos projetos
+
     putStrLn "Digite o nome do projeto que você deseja selecionar: "
     projectName <- getLine
+    
     -- verificacao se existe
+    
     mainProject projectName
     main
 

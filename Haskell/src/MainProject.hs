@@ -48,13 +48,17 @@ editProjectName projectName = do
     putStrLn "Editar nome do Projeto"
     putStrLn ("Nome atual: " ++ projectName)
     putStrLn "Digite o novo nome: "
+    
     newName <- getLine
     --pegar o nome de vdd
+    
     if(projectName == newName) then
         putStrLn "Os nomes dos Projetos são iguais"
     else
         putStrLn "Ok"
+    
     -- setar nome do projeto
+    
     concludeScreen("Nome do ToDo atualizado")
     mainProject projectName
 
