@@ -3,6 +3,7 @@ module Main where
 import System.Exit
 import Util
 import MainProject
+import PersistenceProject
 
 receiverProjectsData :: IO()
 receiverProjectsData = do
@@ -18,7 +19,10 @@ receiverProjectsData = do
     putStrLn "Digite a previsao de termino (em dias): "
     duration <- getLine
 
-    concludeScreen("cadastro ")
+    -- 
+    testeProj name description responsible (read duration)
+
+    concludeScreen("cadastro")
     main
 
 selectProject :: IO()

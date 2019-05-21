@@ -1,8 +1,10 @@
 module MainProject where
+
 import System.Exit
 import MainTodo
 import MainFilter
 import Util
+import PersistenceTodo
 
 editToDo :: String -> IO()
 editToDo projectName = do
@@ -32,6 +34,11 @@ createToDo projectName = do
 
     putStrLn("Digite a duração da ToDo (em dias): ")
     duration <- getLine
+
+    -- testando envio de info da ToDo para a persistencia.
+    -- lembrar de passar a duracao como (read duration), para haver
+    -- a conversão para Int
+    testeTodo name description responsible (read duration)
 
     concludeScreen("ToDo criado");
     mainProject projectName
