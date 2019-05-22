@@ -16,7 +16,7 @@ receiverProjectsData = do
     putStrLn "Digite os responsaveis pelo projeto: "
     responsible <- getLine
 
-    putStrLn "Digite a previsao de termino (em dias): "
+    putStrLn "Digite a previsao de termino (em horas): "
     duration <- getLine
 
     let status = "A fazer"

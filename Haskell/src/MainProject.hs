@@ -32,7 +32,7 @@ createToDo projectName = do
     putStrLn("Digite o nome dos responsaveis: ")
     responsible <- getLine
 
-    putStrLn("Digite a duração da ToDo (em dias): ")
+    putStrLn("Digite a duração da ToDo (em horas): ")
     duration <- getLine
 
     let status = "A fazer";

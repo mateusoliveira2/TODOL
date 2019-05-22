@@ -29,7 +29,7 @@ persistirProjeto :: String -> String -> String -> String -> Int -> IO()
 persistirProjeto nome descricao responsavel status previsao = do
     criaDiretorio "Projects"
     let nomeDiretorio = "Projects/" ++ nome ++ "/"
-    let conteudoProjeto = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" ++ status ++ "\n" ++ (show previsao) ++ "\n" ++ "\n"
+    let conteudoProjeto = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" ++ status ++ "\n" ++ (show previsao) ++ "\n"
     criaDiretorio (nomeDiretorio)
     writeFile (nomeDiretorio ++ nome ++ ".txt") (conteudoProjeto)
  
