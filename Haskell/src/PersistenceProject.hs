@@ -22,10 +22,7 @@ criaDiretorio nome = do
 
 -- Recebe uma lista, a posicao, e um novo elemento para a posicao.
 alteraLista :: [t] -> Int -> t -> [t]
-alteraLista lista indice elemento = do
-    parte1 <- take (indice - 1)
-    parte2 <- drop indice
-    parte1 ++ elemento ++ parte2 
+alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
 
 persistirProjeto :: String -> String -> String -> String -> Int -> String -> IO()
 persistirProjeto nome descricao responsavel status previsao deta = do
@@ -37,35 +34,34 @@ persistirProjeto nome descricao responsavel status previsao deta = do
  
 setNomeProjeto :: String -> String -> IO()
 setNomeProjeto nome novoNome = do
+    -- alteraLista (returnProjeto nome) 1 nome
     let diretorioAntigo = "../Projects/" ++ nome ++ "/"
     let diretorioNovo = "../Projects/" ++ novoNome ++ "/"
-    projeto <- returnProjeto nome
-    lista <- alteraLista projeto 1 nome
     renameFile (diretorioAntigo ++ nome ++ ".txt") (diretorioAntigo ++ novoNome ++ ".txt")
     renameDirectory (diretorioAntigo) (diretorioNovo)
 
 setDescricaoProjeto :: String -> String -> [String]
 setDescricaoProjeto nome descricao = do
-    projeto <- returnProjeto nome
-    lista <- alteraLista projeto 2 descricao
+    alteraLista (returnProjeto nome) 2 descricao
     
 setResponsavelProjeto :: String -> String -> [String]
 setResponsavelProjeto nome responsavel = do
-    projeto <- returnProjeto nome
-    lista <- alteraLista projeto 3 responsavel
+    alteraLista (returnProjeto nome) 3 responsavel
 
 setStatusProjeto :: String -> String -> [String]
 setStatusProjeto nome status = do
-    projeto <- returnProjeto nome
-    lista <- alteraLista projeto 4 status
+    alteraLista (returnProjeto nome) 4 status
 
 setDataProjeto :: String -> String -> [String]
 setDataProjeto nome deta = do
-    projeto <- returnProjeto nome
-    lista <- alteraLista projeto 6 status
+    alteraLista (returnProjeto nome) 6 deta
+
+readProjeto :: String -> IO String
+readProjeto nomeProjeto = do
+    let nome = ("../Projects/" ++ nomeProjeto ++ "/" ++ nomeProjeto)
+    readFile (nome ++ ".txt")
 
 returnProjeto :: String -> [String]
-returnProjeto nomeProjeto = do
-    let nome = "../Projects/" ++ nomeProjeto ++ "/" ++ nomeProjeto ++ ".txt"
-    contents <- readFile nome
-    lines contents
+returnProjeto nome = do
+    contents <- readProjeto nome
+    contents
