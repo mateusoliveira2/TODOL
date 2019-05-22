@@ -19,10 +19,14 @@ receiverProjectsData = do
     putStrLn "Digite a previsao de termino (em dias): "
     duration <- getLine
 
+    let status = "A fazer"
+    
     -- testando envio de info da ToDo para a persistencia.
     -- lembrar de passar a duracao como (read duration), para haver
     -- a conversão para Int
-    testeProj name description responsible (read duration)
+    -- testeProj name description responsible (read duration)
+
+    persistirProjeto name description responsible status (read duration)
 
     concludeScreen("cadastro")
     main

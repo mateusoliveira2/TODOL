@@ -25,19 +25,19 @@ criaDiretorio nome = do
 alteraLista :: [t] -> Int -> t -> [t]
 alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
 
-persistirProjeto :: String -> String -> String -> String -> Int -> String -> IO()
-persistirProjeto nome descricao responsavel status previsao deta = do
-    criaDiretorio "../Projects"
-    let nomeDiretorio = "../Projects/" ++ nome ++ "/"
-    let conteudoProjeto = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" ++ status ++ "\n" ++ (show previsao) ++ "\n" ++ deta ++ "\n"
+persistirProjeto :: String -> String -> String -> String -> Int -> IO()
+persistirProjeto nome descricao responsavel status previsao = do
+    criaDiretorio "Projects"
+    let nomeDiretorio = "Projects/" ++ nome ++ "/"
+    let conteudoProjeto = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" ++ status ++ "\n" ++ (show previsao) ++ "\n" ++ "\n"
     criaDiretorio (nomeDiretorio)
     writeFile (nomeDiretorio ++ nome ++ ".txt") (conteudoProjeto)
  
 setNomeProjeto :: String -> String -> IO()
 setNomeProjeto nome novoNome = do
     -- alteraLista (returnProjeto nome) 1 nome
-    let diretorioAntigo = "../Projects/" ++ nome ++ "/"
-    let diretorioNovo = "../Projects/" ++ novoNome ++ "/"
+    let diretorioAntigo = "Projects/" ++ nome ++ "/"
+    let diretorioNovo = "Projects/" ++ novoNome ++ "/"
     renameFile (diretorioAntigo ++ nome ++ ".txt") (diretorioAntigo ++ novoNome ++ ".txt")
     renameDirectory (diretorioAntigo) (diretorioNovo)
 
@@ -59,7 +59,7 @@ setDataProjeto nome deta = do
 
 readProjeto :: String -> String
 readProjeto nomeProjeto = do
-    let nome = ("../Projects/" ++ nomeProjeto ++ "/" ++ nomeProjeto)
+    let nome = ("Projects/" ++ nomeProjeto ++ "/" ++ nomeProjeto)
     unsafePerformIO $ readFile (nome ++ ".txt")
 
 returnProjeto :: String -> [String]

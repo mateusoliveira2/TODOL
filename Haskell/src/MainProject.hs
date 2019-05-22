@@ -35,6 +35,8 @@ createToDo projectName = do
     putStrLn("Digite a duração da ToDo (em dias): ")
     duration <- getLine
 
+    let status = "A fazer";
+
     -- testando envio de info da ToDo para a persistencia.
     -- lembrar de passar a duracao como (read duration), para haver
     -- a conversão para Int
