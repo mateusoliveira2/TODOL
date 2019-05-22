@@ -1,6 +1,7 @@
 module PersistenceProject where
 
 import System.IO
+import System.IO.Unsafe
 import System.Directory
 
 testeProj :: String -> String -> String -> Int -> IO()
@@ -56,12 +57,12 @@ setDataProjeto :: String -> String -> [String]
 setDataProjeto nome deta = do
     alteraLista (returnProjeto nome) 6 deta
 
-readProjeto :: String -> IO String
+readProjeto :: String -> String
 readProjeto nomeProjeto = do
     let nome = ("../Projects/" ++ nomeProjeto ++ "/" ++ nomeProjeto)
-    readFile (nome ++ ".txt")
+    unsafePerformIO $ readFile (nome ++ ".txt")
 
 returnProjeto :: String -> [String]
 returnProjeto nome = do
-    contents <- readProjeto nome
-    contents
+    let contents = readProjeto nome
+    lines contents
