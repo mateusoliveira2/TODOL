@@ -1,8 +1,10 @@
 module MainProject where
+
 import System.Exit
 import MainTodo
 import MainFilter
 import Util
+import PersistenceTodo
 
 editToDo :: String -> IO()
 editToDo projectName = do
@@ -30,8 +32,15 @@ createToDo projectName = do
     putStrLn("Digite o nome dos responsaveis: ")
     responsible <- getLine
 
-    putStrLn("Digite a duração da ToDo (em dias): ")
+    putStrLn("Digite a duração da ToDo (em horas): ")
     duration <- getLine
+
+    let status = "A fazer";
+
+    -- testando envio de info da ToDo para a persistencia.
+    -- lembrar de passar a duracao como (read duration), para haver
+    -- a conversão para Int
+    testeTodo name description responsible (read duration)
 
     concludeScreen("ToDo criado");
     mainProject projectName
@@ -41,13 +50,17 @@ editProjectName projectName = do
     putStrLn "Editar nome do Projeto"
     putStrLn ("Nome atual: " ++ projectName)
     putStrLn "Digite o novo nome: "
+    
     newName <- getLine
     --pegar o nome de vdd
+    
     if(projectName == newName) then
         putStrLn "Os nomes dos Projetos são iguais"
     else
         putStrLn "Ok"
+    
     -- setar nome do projeto
+    
     concludeScreen("Nome do ToDo atualizado")
     mainProject projectName
 
