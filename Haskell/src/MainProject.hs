@@ -5,16 +5,27 @@ import MainTodo
 import MainFilter
 import Util
 import PersistenceTodo
+import System.Directory
 
 editToDo :: String -> IO()
 editToDo projectName = do
     clear
     -- mostrar todas ToDos
+
     putStrLn "Digite o nome da ToDo: "
     todoName <- getLine
+    
     --verificar validade
+    toDoExists <- doesFileExist ("Projects/" ++ projectName ++ "/" ++ todoName ++ ".txt")
 
-    mainTodo projectName todoName
+    if toDoExists then
+        mainTodo projectName todoName
+    else do
+        putStrLn "\nO toDo selecionado não existe!"
+        putStrLn "Pressione a tecla Enter para voltar."
+        getLine
+        putStr ""
+
     mainProject projectName
     
 filterTodo :: String -> IO()
@@ -37,10 +48,13 @@ createToDo projectName = do
 
     let status = "A fazer";
 
-    -- testando envio de info da ToDo para a persistencia.
-    -- lembrar de passar a duracao como (read duration), para haver
-    -- a conversão para Int
-    testeTodo name description responsible (read duration)
+    if projectName == name 
+        then do
+            clear
+            putStrLn "O nome da ToDo não pode ser o mesmo nome do projeto!"
+            putStrLn "Por favor, pense em um nome válido e tente novamente.\n"
+            createToDo projectName
+        else persistirTodo projectName name description responsible status (read duration)
 
     concludeScreen("ToDo criado");
     mainProject projectName

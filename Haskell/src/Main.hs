@@ -4,6 +4,7 @@ import System.Exit
 import Util
 import MainProject
 import PersistenceProject
+import System.Directory
 
 receiverProjectsData :: IO()
 receiverProjectsData = do
@@ -21,11 +22,7 @@ receiverProjectsData = do
 
     let status = "A fazer"
     
-    -- testando envio de info da ToDo para a persistencia.
-    -- lembrar de passar a duracao como (read duration), para haver
-    -- a conversão para Int
-    -- testeProj name description responsible (read duration)
-
+    -- lembrar de passar a duracao como (read duration), para haver a conversão para Int
     persistirProjeto name description responsible status (read duration)
 
     concludeScreen("cadastro")
@@ -38,9 +35,16 @@ selectProject = do
     putStrLn "Digite o nome do projeto que você deseja selecionar: "
     projectName <- getLine
     
-    -- verificacao se existe
-    
-    mainProject projectName
+    projectExists <- doesDirectoryExist ("Projects/" ++ projectName)
+
+    if projectExists then
+        mainProject projectName
+    else do
+        putStrLn "\nO projeto selecionado não existe!"
+        putStrLn "Pressione a tecla Enter para voltar."
+        getLine
+        putStr ""
+
     main
 
 concludeProject :: IO()
