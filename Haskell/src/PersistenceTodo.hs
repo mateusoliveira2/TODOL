@@ -19,13 +19,13 @@ persistirTodo nomeProjeto nome descricao responsavel status previsao = do
  
 setNomeTodo :: String -> String -> String -> IO()
 setNomeTodo nomeProjeto nome novoNome = do
-    let diretorio = "Projects/" ++ nomeProjeto ++ "/"
     let infos = alteraLista (returnTodo nomeProjeto nome) 1 novoNome
     persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
 
 setDescricaoTodo :: String -> String -> String -> [String]
 setDescricaoTodo nomeProjeto nome descricao = do
-    alteraLista (returnTodo nomeProjeto nome) 2 descricao
+    let infos = alteraLista (returnTodo nomeProjeto nome) 2 descricao
+    persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
     
 setResponsavelTodo :: String -> String -> String -> IO()
 setResponsavelTodo nomeProjeto nome responsavel = do

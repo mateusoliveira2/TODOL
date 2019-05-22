@@ -66,7 +66,6 @@ editProjectName projectName = do
     putStrLn "Digite o novo nome: "
     
     newName <- getLine
-    --pegar o nome de vdd
     
     if(projectName == newName) then do
         putStrLn "\nOs nomes dos Projetos são iguais"
