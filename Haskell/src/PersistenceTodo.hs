@@ -22,11 +22,11 @@ setNomeTodo nomeProjeto nome novoNome = do
     let infos = alteraLista (returnTodo nomeProjeto nome) 1 novoNome
     persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
 
-setDescricaoTodo :: String -> String -> String -> [String]
+setDescricaoTodo :: String -> String -> String -> IO()
 setDescricaoTodo nomeProjeto nome descricao = do
     let infos = alteraLista (returnTodo nomeProjeto nome) 2 descricao
     persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
-    
+
 setResponsavelTodo :: String -> String -> String -> IO()
 setResponsavelTodo nomeProjeto nome responsavel = do
     let infos = alteraLista (returnTodo nomeProjeto nome) 3 responsavel
