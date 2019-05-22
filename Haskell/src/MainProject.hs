@@ -5,6 +5,7 @@ import MainTodo
 import MainFilter
 import Util
 import PersistenceTodo
+import PersistenceProject
 import System.Directory
 
 editToDo :: String -> IO()
@@ -15,7 +16,6 @@ editToDo projectName = do
     putStrLn "Digite o nome da ToDo: "
     todoName <- getLine
     
-    --verificar validade
     toDoExists <- doesFileExist ("Projects/" ++ projectName ++ "/" ++ todoName ++ ".txt")
 
     if toDoExists then
@@ -68,14 +68,16 @@ editProjectName projectName = do
     newName <- getLine
     --pegar o nome de vdd
     
-    if(projectName == newName) then
-        putStrLn "Os nomes dos Projetos são iguais"
-    else
+    if(projectName == newName) then do
+        putStrLn "\nOs nomes dos Projetos são iguais"
+        putStrLn "Pressione a tecla Enter para voltar."
+        getLine
+        putStr ""
+    else do
         putStrLn "Ok"
+        setNomeProjeto projectName newName
+        concludeScreen("Nome do Projeto atualizado")
     
-    -- setar nome do projeto
-    
-    concludeScreen("Nome do ToDo atualizado")
     mainProject projectName
 
 mainProject :: String -> IO()

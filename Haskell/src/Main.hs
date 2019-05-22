@@ -50,9 +50,13 @@ selectProject = do
 concludeProject :: IO()
 concludeProject = do
     -- listagem dos projetos
+
     putStrLn "Digite o nome do projeto que você deseja concluir: "
     projectName <- getLine
+    
     -- verificacao se existe
+    -- marcar como concluido
+
     main
 
 main :: IO()
