@@ -21,11 +21,14 @@ receiverProjectsData = do
     duration <- getLine
 
     let status = "A fazer"
-    
-    -- lembrar de passar a duracao como (read duration), para haver a conversão para Int
-    persistirProjeto name description responsible status (read duration)
 
-    concludeScreen("cadastro")
+    if  name `elem` returnAllProjectsName then do
+        putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
+    else do
+        -- lembrar de passar a duracao como (read duration), para haver a conversão para Int
+        persistirProjeto name description responsible status (read duration)
+        concludeScreen("cadastro")
+
     main
 
 selectProject :: IO()
