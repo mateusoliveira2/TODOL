@@ -3,6 +3,7 @@ module PersistenceTodo where
 import System.IO
 import System.IO.Unsafe
 import System.Directory
+import Data.List.Split
 
 alteraLista :: [t] -> Int -> t -> [t]
 alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
@@ -54,3 +55,24 @@ returnTodo :: String -> String -> [String]
 returnTodo nomeProjeto nome = do
     let contents = unsafePerformIO $ readTodo nomeProjeto nome
     lines contents
+
+returnAllTodosName :: String -> [String]
+returnAllTodosName projectName = do
+    let contents = unsafePerformIO $ getDirectoryContents ("Projects/" ++ projectName)
+    x <- contents
+    lines x
+
+returnAllTodosContent :: String -> [[String]]
+returnAllTodosContent projectName = do
+    let lista = returnAllTodosName projectName
+    adicionaLista projectName lista
+
+teste :: String -> String
+teste x = (splitOn "." x) !! 0
+
+adicionaLista :: String -> [String] -> [[String]]
+adicionaLista projectName [] = []
+adicionaLista projectName (x:xs)
+    |x == "." || x == ".." || x == projectName = adicionaLista projectName xs
+    |xs == [] = [(returnTodo projectName (teste x))]
+    |otherwise = (returnTodo projectName (teste x)):(adicionaLista projectName xs)

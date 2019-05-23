@@ -4,6 +4,7 @@ import System.IO
 import System.IO.Unsafe
 import System.Directory
 
+
 criaDiretorio :: String -> IO()
 criaDiretorio nome = do
     success <- doesDirectoryExist nome
@@ -72,3 +73,21 @@ returnProjeto :: String -> [String]
 returnProjeto nome = do
     let contents = unsafePerformIO $ readProjeto nome
     lines contents
+
+returnAllProjectsName :: [String]
+returnAllProjectsName = do
+    let contents = unsafePerformIO $ getDirectoryContents "Projects"
+    x <- contents
+    lines x
+
+
+returnAllProjectsContent :: [[String]]
+returnAllProjectsContent = do
+    let lista = returnAllProjectsName
+    adicionaLista lista
+
+adicionaLista :: [String] -> [[String]]
+adicionaLista (x:xs)
+    |x == "." || x == ".." = adicionaLista xs
+    |xs == [] = [(returnProjeto x)]
+    |otherwise = (returnProjeto x):(adicionaLista xs)
