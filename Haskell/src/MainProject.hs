@@ -110,6 +110,7 @@ exibeToDos projectName = do
 	putStrLn ("===== ToDos de " ++ projectName ++ " ===== \n")
 	let todos = returnAllTodosContent projectName
 	exibeCadaToDo projectName todos
+	mainProject projectName
 
 mainProject :: String -> IO()
 mainProject projectName = do 
