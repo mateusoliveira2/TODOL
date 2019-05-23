@@ -3,6 +3,18 @@ module MainTodo where
 import Util
 import PersistenceTodo
 
+exibeToDo :: String -> String -> IO()
+exibeToDo projectName todoName = do
+	let todo = returnTodo projectName todoName
+	putStrLn ("┌────────────────────────────────────────────────")
+	putStrLn ("│ Nome: " ++ (todo !! 0))
+	putStrLn ("│ Descricao: " ++ (todo !! 1))
+	putStrLn ("│ Responsavel: " ++ (todo !! 2))
+	putStrLn ("│ Status:" ++ (todo !! 3))
+	putStrLn ("│ Previsao de Conclusao: " ++ (todo !! 4)  ++ " hora(s)")
+	putStrLn ("│ Horas Cadastradas: " ++ (todo !! 5)  ++ " hora(s)")
+	putStrLn ("└────────────────────────────────────────────────\n\n")
+
 editTodoName :: String -> String -> IO()
 editTodoName projectName todoName = do
     putStrLn "Editar nome do ToDo"
@@ -61,18 +73,40 @@ editSituation projectName todoName = do
         putStrLn "Por favor, digite uma opção válida!"
         editSituation projectName todoName
 
+todoConcluido :: String -> String -> Bool
+todoConcluido projectName todoName = (getStatus	projectName todoName) == "Concluido"
+
+editHours :: String -> String -> IO()
+editHours projectName todoName
+    | todoConcluido projectName todoName = do 
+        concludeScreen("Este ToDo já foi")
+        mainTodo projectName todoName
+    | otherwise = do
+        putStrLn "Quantas horas deseja cadastrar?"
+        horasCadastradas <- getLine
+        addHorasTrabalhadas projectName todoName (read horasCadastradas :: Int)
+        concludeScreen("Horas cadastradas")
+        mainTodo projectName todoName
+
+
 mainTodo :: String -> String -> IO()
 mainTodo projectName todoName = do 
-    putStrLn ("===== " ++ todoName ++ " ===== \n")
-    putStrLn "1. Editar Nome"
-    putStrLn "2. Editar Responsaveis"
-    putStrLn "3. Editar Situacao"
-    putStrLn "0. Sair\n"
-    putStrLn ("Escolha: ")
-    choice <- getLine
+	clear
+	putStrLn ("===== " ++ todoName ++ " ===== \n")
 
-    case choice of
-        "1" -> editTodoName projectName todoName
-        "2" -> editResponsible projectName todoName
-        "3" -> editSituation projectName todoName
-        "0" -> putStrLn ""
+	exibeToDo projectName todoName
+
+	putStrLn "1. Editar Nome"
+	putStrLn "2. Editar Responsaveis"
+	putStrLn "3. Editar Situacao"
+	putStrLn "4. Cadastrar horas"
+	putStrLn "0. Sair\n"
+	putStrLn ("Escolha: ")
+	choice <- getLine
+
+	case choice of
+		"1" -> editTodoName projectName todoName
+		"2" -> editResponsible projectName todoName
+		"3" -> editSituation projectName todoName
+		"4" -> editHours projectName todoName
+		"0" -> putStrLn ""
