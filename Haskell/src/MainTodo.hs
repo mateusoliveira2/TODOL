@@ -18,11 +18,13 @@ editTodoName projectName todoName = do
         putStr ""
         mainTodo projectName todoName
     else do
-        putStrLn "Ok"
+        if  (newName++".txt") `elem` (returnAllTodosName projectName) then do
+            putStrLn "\nToDo com este nome ja existe!\n\nEscolha outro nome\n\n"
+            editTodoName projectName todoName
+        else do
+            setNomeTodo projectName todoName newName
+            concludeScreen("Nome do ToDo atualizado")
 
-        setNomeTodo projectName todoName newName
-
-        concludeScreen("Nome do ToDo atualizado")
         mainTodo projectName newName
 
 editResponsible :: String -> String -> IO()
