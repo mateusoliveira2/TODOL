@@ -8,6 +8,7 @@ import Data.List.Split
 alteraLista :: [t] -> Int -> t -> [t]
 alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
 
+
 removeArquivo :: String -> IO()
 removeArquivo nome = do
     success <- doesFileExist nome
@@ -17,10 +18,11 @@ removeArquivo nome = do
     else return ()
 
 
-persistirTodo :: String -> String -> String -> String -> String -> Int -> IO()
-persistirTodo nomeProjeto nome descricao responsavel status previsao = do
+persistirTodo :: String -> String -> String -> String -> String -> String -> String -> IO()
+persistirTodo nomeProjeto nome descricao responsavel status previsao horas = do
     let nomeDiretorio = "Projects/" ++ nomeProjeto ++ "/"
-    let conteudoTodo = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" ++ status ++ "\n" ++ (show previsao) ++ "\n"
+    let conteudoTodo = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" 
+							++ status ++ "\n" ++ previsao ++ "\n" ++ horas ++ "\n"
     
     removeArquivo (nomeDiretorio ++ nome ++ ".txt") 
     
@@ -28,23 +30,35 @@ persistirTodo nomeProjeto nome descricao responsavel status previsao = do
 
 setNomeTodo :: String -> String -> String -> IO()
 setNomeTodo nomeProjeto nome novoNome = do
-    let infos = alteraLista (returnTodo nomeProjeto nome) 1 novoNome
-    persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let todo = returnTodo nomeProjeto nome
+    persistirTodo nomeProjeto novoNome (todo !! 1) (todo !! 2) (todo !! 3) (todo !! 4) (todo !! 5)
 
 setDescricaoTodo :: String -> String -> String -> IO()
 setDescricaoTodo nomeProjeto nome descricao = do
-    let infos = alteraLista (returnTodo nomeProjeto nome) 2 descricao
-    persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let todo = returnTodo nomeProjeto nome
+    persistirTodo nomeProjeto (todo !! 0) descricao (todo !! 2) (todo !! 3) (todo !! 4) (todo !! 5)
 
 setResponsavelTodo :: String -> String -> String -> IO()
 setResponsavelTodo nomeProjeto nome responsavel = do
-    let infos = alteraLista (returnTodo nomeProjeto nome) 3 responsavel
-    persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let todo = returnTodo nomeProjeto nome
+    persistirTodo nomeProjeto (todo !! 0) (todo !! 1) responsavel (todo !! 3) (todo !! 4) (todo !! 5)
 
 setStatusTodo :: String -> String -> String -> IO()
 setStatusTodo nomeProjeto nome status = do
-    let infos = alteraLista (returnTodo nomeProjeto nome) 4 status
-    persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let todo = returnTodo nomeProjeto nome
+    persistirTodo nomeProjeto (todo !! 0) (todo !! 1) (todo !! 2) status (todo !! 4) (todo !! 5)
+
+addHorasTrabalhadas :: String -> String -> Int -> IO()
+addHorasTrabalhadas nomeProjeto nome horas = do
+    let todo = returnTodo nomeProjeto nome
+    let horasFinais = (show (horas + (read (todo !! 5)) :: Int))
+    persistirTodo nomeProjeto (todo !! 0) (todo !! 1) (todo !! 2) (todo !! 3) (todo !! 4) horasFinais
+
+getStatus :: String -> String -> String
+getStatus nomeProjeto nome = (returnTodo nomeProjeto nome)!!3
+
+getHorasTrabalhadas :: String -> String -> String
+getHorasTrabalhadas nomeProjeto nome = (returnTodo nomeProjeto nome)!!4
 
 readTodo :: String -> String -> IO String
 readTodo nomeProjeto nomeTodo = do

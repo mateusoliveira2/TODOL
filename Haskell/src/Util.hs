@@ -1,7 +1,7 @@
 module Util where
 
 clear :: IO()
-clear = putStrLn "\n\n\n\n\n\n\n\n\n\n\n\n"
+clear = putStrLn "\ESC[2J"
 
 returnScreen :: IO()
 returnScreen = putStrLn ""
