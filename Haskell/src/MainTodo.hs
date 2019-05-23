@@ -1,22 +1,29 @@
 module MainTodo where
     
 import Util
+import PersistenceTodo
 
 editTodoName :: String -> String -> IO()
 editTodoName projectName todoName = do
     putStrLn "Editar nome do ToDo"
     putStrLn ("Nome atual: " ++ todoName)
+    
     putStrLn "Digite o novo nome: "
     newName <- getLine
-    --pegar o nome de vdd
-    if(todoName == newName) then
-        putStrLn "Os nomes de ToDos são iguais"
-    else
+
+    if(todoName == newName) then do
+        putStrLn "\nOs nomes das ToDo's são iguais"
+        putStrLn "Pressione a tecla Enter para voltar."
+        getLine
+        putStr ""
+        mainTodo projectName todoName
+    else do
         putStrLn "Ok"
-    -- setar nome do projeto
-    concludeScreen("Nome do ToDo atualizado")
-    mainTodo projectName todoName
-    
+
+        setNomeTodo projectName todoName newName
+
+        concludeScreen("Nome do ToDo atualizado")
+        mainTodo projectName newName
 
 editResponsible :: String -> String -> IO()
 editResponsible projectName todoName = do
@@ -24,22 +31,35 @@ editResponsible projectName todoName = do
     putStrLn "Digite os novos responsaveis: "
     responsible <- getLine
 
-    -- setar responsavel
-    concludeScreen("Responsaveis do ToDo atualizado")
+    setResponsavelTodo projectName todoName responsible
+
+    concludeScreen("Os responsaveis do ToDo foram atualizados")
     mainTodo projectName todoName
+
+options :: String -> String
+options choice
+    | choice == "1" = "A fazer"
+    | choice == "2" = "Em andamento"
+    | otherwise = "Concluido"
 
 editSituation :: String -> String -> IO()
 editSituation projectName todoName = do
+    clear   
     putStrLn "Editar situação do ToDo\n"
     putStrLn "1. A fazer"
     putStrLn "2. Em andamento"
     putStrLn "3. Concluido"
     putStrLn "Escolha: "
 
-    responsible <- getLine
-    -- setar situacao
-    concludeScreen("Status do ToDo atualizado")
-    mainTodo projectName todoName
+    choice <- getLine
+
+    if (choice == "1") || (choice == "2") || (choice == "3") then do
+        setStatusTodo projectName todoName (options choice)
+        concludeScreen("Status do ToDo atualizado")
+        mainTodo projectName todoName
+    else do
+        putStrLn "Por favor, digite uma opção válida!"
+        editSituation projectName todoName
 
 mainTodo :: String -> String -> IO()
 mainTodo projectName todoName = do 

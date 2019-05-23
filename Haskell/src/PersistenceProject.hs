@@ -4,15 +4,6 @@ import System.IO
 import System.IO.Unsafe
 import System.Directory
 
-testeProj :: String -> String -> String -> Int -> IO()
-testeProj name description responsible duration = do
-    putStrLn name
-    putStrLn description
-    putStrLn responsible
-
-    -- lembrar de usar o show quando quiser printar inteiros
-    putStrLn (show duration)
-
 criaDiretorio :: String -> IO()
 criaDiretorio nome = do
     success <- doesDirectoryExist nome
@@ -52,10 +43,6 @@ setResponsavelProjeto nome responsavel = do
 setStatusProjeto :: String -> String -> [String]
 setStatusProjeto nome status = do
     alteraLista (returnProjeto nome) 4 status
-
-setDataProjeto :: String -> String -> [String]
-setDataProjeto nome deta = do
-    alteraLista (returnProjeto nome) 6 deta
 
 readProjeto :: String -> String
 readProjeto nomeProjeto = do
