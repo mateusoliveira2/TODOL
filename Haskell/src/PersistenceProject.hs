@@ -24,8 +24,8 @@ removeArquivo nome = do
 
 
 -- Recebe uma lista, a posicao, e um novo elemento para a posicao.
-alteraLista :: [t] -> Int -> t -> [t]
-alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
+-- alteraLista :: [t] -> Int -> t -> [t]
+-- alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
 
 persistirProjeto :: String -> String -> String -> String -> Int -> IO()
 persistirProjeto nome descricao responsavel status previsao = do
@@ -44,25 +44,25 @@ setNomeProjeto :: String -> String -> IO()
 setNomeProjeto nome novoNome = do
     let diretorioAntigo = "Projects/" ++ nome ++ "/"
     let diretorioNovo = "Projects/" ++ novoNome ++ "/"
-    let infos = alteraLista (returnProjeto nome) 1 novoNome
-    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let infos = returnProjeto nome
+    persistirProjeto novoNome (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
     removeFile ("Projects/" ++ nome ++ "/" ++ nome ++ ".txt")
     removeDirectory (diretorioAntigo)
 
 setDescricaoProjeto :: String -> String -> IO()
 setDescricaoProjeto nome descricao = do
-    let infos = alteraLista (returnProjeto nome) 2 descricao
-    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let infos = returnProjeto nome
+    persistirProjeto (infos !! 0) descricao (infos !! 2) (infos !! 3) (read (infos !! 4))
     
 setResponsavelProjeto :: String -> String -> IO()
 setResponsavelProjeto nome responsavel = do
-    let infos = alteraLista (returnProjeto nome) 3 responsavel
-    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let infos = returnProjeto nome
+    persistirProjeto (infos !! 0) (infos !! 1) responsavel (infos !! 3) (read (infos !! 4))
 
 setStatusProjeto :: String -> String -> IO()
 setStatusProjeto nome status = do
-    let infos = alteraLista (returnProjeto nome) 4 status
-    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    let infos = returnProjeto nome
+    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) status (read (infos !! 4))
 
 readProjeto :: String -> IO String
 readProjeto nomeProjeto = do

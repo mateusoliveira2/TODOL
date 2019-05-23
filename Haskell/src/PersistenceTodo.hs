@@ -5,8 +5,8 @@ import System.IO.Unsafe
 import System.Directory
 import Data.List.Split
 
-alteraLista :: [t] -> Int -> t -> [t]
-alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
+-- alteraLista :: [t] -> Int -> t -> [t]
+-- alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
 
 
 removeArquivo :: String -> IO()
