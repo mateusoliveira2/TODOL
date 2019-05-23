@@ -42,12 +42,12 @@ persistirProjeto nome descricao responsavel status previsao = do
  
 setNomeProjeto :: String -> String -> IO()
 setNomeProjeto nome novoNome = do
-    let infos = alteraLista (returnProjeto nome) 1 nome
-    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
     let diretorioAntigo = "Projects/" ++ nome ++ "/"
     let diretorioNovo = "Projects/" ++ novoNome ++ "/"
-    renameFile (diretorioAntigo ++ nome ++ ".txt") (diretorioAntigo ++ novoNome ++ ".txt")
-    renameDirectory (diretorioAntigo) (diretorioNovo)
+    let infos = alteraLista (returnProjeto nome) 1 novoNome
+    persistirProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
+    removeFile ("Projects/" ++ nome ++ "/" ++ nome ++ ".txt")
+    removeDirectory (diretorioAntigo)
 
 setDescricaoProjeto :: String -> String -> IO()
 setDescricaoProjeto nome descricao = do
