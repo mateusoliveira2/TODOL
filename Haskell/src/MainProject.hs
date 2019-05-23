@@ -29,7 +29,9 @@ editToDo projectName = do
     mainProject projectName
     
 filterTodo :: String -> IO()
-filterTodo projectName = mainFilter projectName
+filterTodo projectName = do
+    mainFilter projectName
+    mainProject projectName
 
 createToDo :: String -> IO()
 createToDo projectName = do
@@ -54,9 +56,14 @@ createToDo projectName = do
             putStrLn "O nome da ToDo não pode ser o mesmo nome do projeto!"
             putStrLn "Por favor, pense em um nome válido e tente novamente.\n"
             createToDo projectName
-        else persistirTodo projectName name description responsible status duration "0"
-
-    concludeScreen("ToDo criado")
+        else do
+            if  (name++".txt") `elem` (returnAllTodosName projectName) then do
+                putStrLn "\nToDo com este nome ja existe!\n\nEscolha outro nome\n\n"
+                createToDo projectName
+            else do
+                persistirTodo projectName name description responsible status duration "0"
+                concludeScreen("ToDo cadastrada")            
+            
     mainProject projectName
 
 editProjectName :: String -> IO()
@@ -73,18 +80,20 @@ editProjectName projectName = do
 		getLine
 		putStr ""
 	else do
-        putStrLn "Ok"
-        setNomeProjeto projectName newName
-        concludeScreen("Nome do Projeto atualizado")
+        if  newName `elem` returnAllProjectsName then do
+            putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
+        else do
+            setNomeProjeto projectName newName
+            concludeScreen("Nome do Projeto atualizado")
     
     mainProject projectName
 
 gerarRelatorio :: String -> IO()
 gerarRelatorio projectName = do 
     clear
-	putStrLn ("===== Relatório de " ++ projectName ++ " ===== \n")
+    putStrLn ("===== Relatório de " ++ projectName ++ " ===== \n")
     concludeScreen("relatório gerado")
-    mainProject projectName
+    mainProject projectName 
 
 mainProject :: String -> IO()
 mainProject projectName = do 
@@ -105,7 +114,7 @@ mainProject projectName = do
                "2" -> editToDo projectName
                "3" -> putStrLn "ok"
                "4" -> filterTodo projectName
-               "5" -> gerarRelatorio projectName
+               --"5" -> gerarRelatorio projectName
                "6" -> editProjectName projectName
                "0" -> returnScreen
                _   -> mainProject projectName
