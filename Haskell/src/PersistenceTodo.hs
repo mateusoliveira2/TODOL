@@ -7,16 +7,24 @@ import System.Directory
 alteraLista :: [t] -> Int -> t -> [t]
 alteraLista lista indice elemento = (take (indice - 1) lista) ++ [elemento] ++ (drop indice lista)
 
+removeArquivo :: String -> IO()
+removeArquivo nome = do
+    success <- doesFileExist nome
+    
+    if success 
+    then removeFile nome
+    else return ()
+
+
 persistirTodo :: String -> String -> String -> String -> String -> Int -> IO()
 persistirTodo nomeProjeto nome descricao responsavel status previsao = do
     let nomeDiretorio = "Projects/" ++ nomeProjeto ++ "/"
     let conteudoTodo = nome ++ "\n" ++ descricao ++ "\n" ++ responsavel ++ "\n" ++ status ++ "\n" ++ (show previsao) ++ "\n"
     
-    delete <- doesFileExist (nomeDiretorio ++ nome ++ ".txt")
-    if delete then removeFile (nomeDiretorio ++ nome ++ ".txt") else putStr ""
-
+    removeArquivo (nomeDiretorio ++ nome ++ ".txt") 
+    
     writeFile (nomeDiretorio ++ nome ++ ".txt") (conteudoTodo)
- 
+
 setNomeTodo :: String -> String -> String -> IO()
 setNomeTodo nomeProjeto nome novoNome = do
     let infos = alteraLista (returnTodo nomeProjeto nome) 1 novoNome
@@ -37,12 +45,12 @@ setStatusTodo nomeProjeto nome status = do
     let infos = alteraLista (returnTodo nomeProjeto nome) 4 status
     persistirTodo nomeProjeto (infos !! 0) (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
 
-readTodo :: String -> String -> String
+readTodo :: String -> String -> IO String
 readTodo nomeProjeto nomeTodo = do
     let nome = ("Projects/" ++ nomeProjeto ++ "/" ++ nomeTodo)
-    unsafePerformIO $ readFile (nome ++ ".txt")
+    readFile (nome ++ ".txt")
 
 returnTodo :: String -> String -> [String]
 returnTodo nomeProjeto nome = do
-    let contents = readTodo nomeProjeto nome
+    let contents = unsafePerformIO $ readTodo nomeProjeto nome
     lines contents
