@@ -61,12 +61,29 @@ editSituation projectName todoName = do
         putStrLn "Por favor, digite uma opção válida!"
         editSituation projectName todoName
 
+todoConcluido :: String -> String -> Bool
+todoConcluido projectName todoName = (getStatus	projectName todoName) == "Concluido"
+
+editHours :: String -> String -> IO()
+editHours projectName todoName
+    | todoConcluido projectName todoName = do 
+        concludeScreen("Este ToDo já está concluído!")
+        mainTodo projectName todoName
+    | otherwise = do
+        putStrLn "Quantas horas deseja cadastrar?"
+        horasCadastradas <- getLine
+        addHorasTrabalhadas projectName todoName (read horasCadastradas :: Int)
+        concludeScreen("Horas cadastradas")
+        mainTodo projectName todoName
+
+
 mainTodo :: String -> String -> IO()
 mainTodo projectName todoName = do 
     putStrLn ("===== " ++ todoName ++ " ===== \n")
     putStrLn "1. Editar Nome"
     putStrLn "2. Editar Responsaveis"
     putStrLn "3. Editar Situacao"
+    putStrLn "4. Cadastrar horas"
     putStrLn "0. Sair\n"
     putStrLn ("Escolha: ")
     choice <- getLine
@@ -75,4 +92,5 @@ mainTodo projectName todoName = do
         "1" -> editTodoName projectName todoName
         "2" -> editResponsible projectName todoName
         "3" -> editSituation projectName todoName
+        "4" -> editHours projectName todoName
         "0" -> putStrLn ""

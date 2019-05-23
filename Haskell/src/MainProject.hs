@@ -54,9 +54,9 @@ createToDo projectName = do
             putStrLn "O nome da ToDo não pode ser o mesmo nome do projeto!"
             putStrLn "Por favor, pense em um nome válido e tente novamente.\n"
             createToDo projectName
-        else persistirTodo projectName name description responsible status (read duration)
+        else persistirTodo projectName name description responsible status duration "0"
 
-    concludeScreen("ToDo criado");
+    concludeScreen("ToDo criado")
     mainProject projectName
 
 editProjectName :: String -> IO()
@@ -64,19 +64,27 @@ editProjectName projectName = do
     putStrLn "Editar nome do Projeto"
     putStrLn ("Nome atual: " ++ projectName)
     putStrLn "Digite o novo nome: "
-    
+
     newName <- getLine
-    
+
     if(projectName == newName) then do
-        putStrLn "\nOs nomes dos Projetos são iguais"
-        putStrLn "Pressione a tecla Enter para voltar."
-        getLine
-        putStr ""
-    else do
+		putStrLn "\nOs nomes dos Projetos são iguais"
+		putStrLn "Pressione a tecla Enter para voltar."
+		getLine
+		putStr ""
+	else do
         putStrLn "Ok"
         setNomeProjeto projectName newName
         concludeScreen("Nome do Projeto atualizado")
     
+    mainProject projectName
+
+gerarRelatorio :: String -> IO()
+gerarRelatorio projectName = do 
+    -- Ainda sendo feito
+    clear
+    putStrLn ("Relatório de " ++ projectName)
+    concludeScreen("relatório gerado")
     mainProject projectName
 
 mainProject :: String -> IO()
@@ -98,7 +106,7 @@ mainProject projectName = do
                "2" -> editToDo projectName
                "3" -> putStrLn "ok"
                "4" -> filterTodo projectName
-               "5" -> putStrLn "ok"
+               "5" -> gerarRelatorio projectName
                "6" -> editProjectName projectName
                "0" -> returnScreen
                _   -> mainProject projectName
