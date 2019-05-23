@@ -67,7 +67,7 @@ todoConcluido projectName todoName = (getStatus	projectName todoName) == "Conclu
 editHours :: String -> String -> IO()
 editHours projectName todoName
     | todoConcluido projectName todoName = do 
-        concludeScreen("Este ToDo já está concluído!")
+        concludeScreen("Este ToDo já foi")
         mainTodo projectName todoName
     | otherwise = do
         putStrLn "Quantas horas deseja cadastrar?"

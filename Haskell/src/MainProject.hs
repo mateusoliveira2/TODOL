@@ -81,9 +81,8 @@ editProjectName projectName = do
 
 gerarRelatorio :: String -> IO()
 gerarRelatorio projectName = do 
-    -- Ainda sendo feito
     clear
-    putStrLn ("Relatório de " ++ projectName)
+	putStrLn ("===== Relatório de " ++ projectName ++ " ===== \n")
     concludeScreen("relatório gerado")
     mainProject projectName
 
