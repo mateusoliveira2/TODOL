@@ -11,6 +11,7 @@ filterByName projectName = do
     filterName <- getLine
 
     filterByNameAllToDos projectName filterName
+    mainFilter projectName
 
 filterBySituation :: String -> IO()
 filterBySituation projectName = do
@@ -28,6 +29,7 @@ filterBySituation projectName = do
                "1" -> filterBySituationAllToDos projectName "A fazer"
                "2" -> filterBySituationAllToDos projectName "Em andamento"
                "3" -> filterBySituationAllToDos projectName "Concluido"
+    mainFilter projectName
 
 filterByOwner :: String -> IO()
 filterByOwner projectName = do
@@ -37,6 +39,7 @@ filterByOwner projectName = do
     filterOwner <- getLine
 
     filterByOwnerAllToDos projectName filterOwner
+    mainFilter projectName
 
 mainFilter ::String -> IO()
 mainFilter projectName = do 
