@@ -8,6 +8,16 @@ import PersistenceTodo
 import PersistenceProject
 import System.Directory
 
+exibeProject :: String -> IO()
+exibeProject projectName = do
+	let project = returnProjeto projectName
+	putStrLn ("┌────────────────────────────────────────────────")
+	putStrLn ("│ Nome: " ++ (project !! 0))
+	putStrLn ("│ Descrição: " ++ (project !! 1))
+	putStrLn ("│ Responsável: " ++ (project !! 2))
+	putStrLn ("│ Estimativa: " ++ (project !! 4) ++ " hora(s)")
+	putStrLn ("└────────────────────────────────────────────────\n\n")
+
 editToDo :: String -> IO()
 editToDo projectName = do
     clear
@@ -81,31 +91,48 @@ editProjectName projectName = do
 
 gerarRelatorio :: String -> IO()
 gerarRelatorio projectName = do 
-    clear
+	clear
 	putStrLn ("===== Relatório de " ++ projectName ++ " ===== \n")
-    concludeScreen("relatório gerado")
-    mainProject projectName
+	concludeScreen("relatório gerado")
+	mainProject projectName
+
+exibeCadaToDo :: String -> [[String]] -> IO()
+exibeCadaToDo projectName [] = concludeScreen("ToDos exibidos")
+exibeCadaToDo projectName (toDo:resto)
+	| projectName == (toDo!!0) = exibeCadaToDo projectName resto
+	| otherwise = do
+		exibeToDo projectName (toDo!!0)
+		exibeCadaToDo projectName resto
+
+exibeToDos :: String -> IO()
+exibeToDos projectName = do
+	clear
+	putStrLn ("===== ToDos de " ++ projectName ++ " ===== \n")
+	let todos = returnAllTodosContent projectName
+	exibeCadaToDo projectName todos
 
 mainProject :: String -> IO()
 mainProject projectName = do 
-    clear
-    putStrLn ("===== " ++ projectName ++ " ===== \n")
-    putStrLn "1. Criar ToDo"
-    putStrLn "2. Editar ToDo"
-    putStrLn "3. Listar ToDo"
-    putStrLn "4. Filtrar ToDo"
-    putStrLn "5. Gerar Relatorio"
-    putStrLn "6. Editar Nome do Projeto"
-    putStrLn "0. Sair"
-    putStrLn "Escolha: "
-    choice <- getLine
+	clear
+	
+	exibeProject projectName
 
-    case choice of
-               "1" -> createToDo projectName
-               "2" -> editToDo projectName
-               "3" -> putStrLn "ok"
-               "4" -> filterTodo projectName
-               "5" -> gerarRelatorio projectName
-               "6" -> editProjectName projectName
-               "0" -> returnScreen
-               _   -> mainProject projectName
+	putStrLn "1. Criar ToDo"
+	putStrLn "2. Editar ToDo"
+	putStrLn "3. Listar ToDo"
+	putStrLn "4. Filtrar ToDo"
+	putStrLn "5. Gerar Relatorio"
+	putStrLn "6. Editar Nome do Projeto"
+	putStrLn "0. Sair"
+	putStrLn "Escolha: "
+	choice <- getLine
+
+	case choice of
+		"1" -> createToDo projectName
+		"2" -> editToDo projectName
+		"3" -> exibeToDos projectName
+		"4" -> filterTodo projectName
+		"5" -> gerarRelatorio projectName
+		"6" -> editProjectName projectName
+		"0" -> returnScreen
+		_   -> mainProject projectName
