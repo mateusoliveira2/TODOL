@@ -69,7 +69,6 @@ main = do
     putStrLn "0. Sair"
     putStr "Escolha: \n"
     choice <- getLine
-
     case choice of
         "1" -> receiverProjectsData
         "2" -> selectProject
