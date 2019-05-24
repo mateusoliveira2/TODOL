@@ -104,14 +104,16 @@ editProjectName projectName = do
 		putStrLn "Pressione a tecla Enter para voltar."
 		getLine
 		putStr ""
+		mainProject projectName
 	else do
-        if  newName `elem` returnAllProjectsName then do
-            putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
-        else do
-            setNomeProjeto projectName newName
-            concludeScreen("Nome do Projeto atualizado")
-    
-    mainProject projectName
+		x <- getDirectoryContents "Projects"
+		if newName `elem` x then do
+			putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
+			mainProject projectName
+		else do
+			setNomeProjeto projectName newName
+			concludeScreen("Nome do Projeto atualizado")
+			mainProject newName
 
 gerarRelatorio :: String -> IO()
 gerarRelatorio projectName = do 
