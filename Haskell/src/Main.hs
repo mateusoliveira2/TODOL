@@ -31,9 +31,26 @@ receiverProjectsData = do
 
     main
 
+listNames :: [String] -> Int -> IO()
+listNames list index = do
+    if length(list) > 0 then do
+        if (list!!0) /= "." && (list!!0) /= ".." then do
+            putStrLn ( (show index) ++ ". " ++ (list!!0) )
+            listNames (tail list) (index+1)
+        else listNames (tail list) index
+    else putStrLn "" 
+
+listProjects :: IO()
+listProjects = do
+    putStrLn "\nProjetos existentes: "
+    if length( returnAllProjectsName ) > 2 then 
+        listNames returnAllProjectsName 1
+    else
+        putStrLn "- Não há projetos cadastrados.\n"
+
 selectProject :: IO()
 selectProject = do
-    -- listagem dos projetos
+    listProjects
 
     putStrLn "Digite o nome do projeto que você deseja selecionar: "
     projectName <- getLine
@@ -52,18 +69,27 @@ selectProject = do
 
 concludeProject :: IO()
 concludeProject = do
-    -- listagem dos projetos
+    listProjects
 
     putStrLn "Digite o nome do projeto que você deseja concluir: "
     projectName <- getLine
     
-    -- verificacao se existe
-    -- marcar como concluido
+    projectExists <- doesDirectoryExist ("Projects/" ++ projectName)
+
+    if projectExists then do
+        setStatusProjeto projectName "Concluido"
+        putStrLn "Projeto concluído com sucesso!"
+    else
+        putStrLn "\nO projeto selecionado não existe!"
+
+    putStrLn "\nPressione a tecla Enter para voltar."
+    getLine
 
     main
 
 main :: IO()
-main = do 
+main = do
+    criaDiretorio ("Projects")
     clear
     putStrLn "TODOL \n"
     putStrLn "1. Criar Projeto"
