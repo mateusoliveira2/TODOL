@@ -89,6 +89,6 @@ teste x = (splitOn "." x) !! 0
 adicionaLista :: String -> [String] -> [[String]]
 adicionaLista projectName [] = []
 adicionaLista projectName (x:xs)
-    |x == "." || x == ".." || x == projectName = adicionaLista projectName xs
+    |x == "." || x == ".." || x == projectName || (x!!0) == '.' = adicionaLista projectName xs
     |xs == [] = [(returnTodo projectName (teste x))]
     |otherwise = (returnTodo projectName (teste x)):(adicionaLista projectName xs)

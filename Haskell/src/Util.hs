@@ -9,6 +9,10 @@ clear = putStrLn "\ESC[2J"
 returnScreen :: IO()
 returnScreen = putStrLn ""
 
+checkVazio :: String -> String
+checkVazio "" = "0"
+checkVazio a = a 
+
 porcentagem :: Int -> Int -> Float
 porcentagem a b
  	| a >= b = 100.0

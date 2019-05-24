@@ -89,6 +89,6 @@ returnAllProjectsContent = do
 
 adicionaLista :: [String] -> [[String]]
 adicionaLista (x:xs)
-    |x == "." || x == ".." = adicionaLista xs
+    |x == "." || x == ".." || (x!!0) == '.' = adicionaLista xs
     |xs == [] = [(returnProjeto x)]
     |otherwise = (returnProjeto x):(adicionaLista xs)

@@ -90,7 +90,7 @@ createToDo projectName = do
                 putStrLn "\nToDo com este nome ja existe!\n\nEscolha outro nome\n\n"
                 createToDo projectName
             else do
-                persistirTodo projectName name description responsible status duration "0"
+                persistirTodo projectName name description responsible status (checkVazio duration) "0"
                 concludeScreen("ToDo cadastrada")            
             
     mainProject projectName
@@ -191,6 +191,7 @@ exibeToDos :: String -> IO()
 exibeToDos projectName = do
 	clear
 	putStrLn ("===== ToDos de " ++ projectName ++ " ===== \n")
+	--print (returnAllTodosContent projectName)
 	let todos = returnAllTodosContent projectName
 	exibeCadaToDo projectName todos
 	mainProject projectName
