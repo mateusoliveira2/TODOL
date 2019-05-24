@@ -25,11 +25,18 @@ concludeScreen acao = do
     sair <- getLine
     returnScreen
 
+concludeScreenFail :: String -> IO()
+concludeScreenFail acao = do
+    putStrLn(acao ++ " sem sucesso! ")
+    putStrLn("Digite qualquer tecla para sair! ")
+    sair <- getLine
+    returnScreen
+
 ehNumero :: String -> Bool
 ehNumero "" = False
 ehNumero (dig:res) = (isDigit dig) && ((res == "") || ehNumero res)
 
-tiraPontos :: [String] -> [String]
+tiraPontos :: [FilePath] -> [String]
 tiraPontos [] = []
 tiraPontos (a:as)
 	| a == "." || a == ".." = tiraPontos as

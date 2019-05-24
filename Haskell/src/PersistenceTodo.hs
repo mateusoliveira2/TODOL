@@ -31,7 +31,9 @@ persistirTodo nomeProjeto nome descricao responsavel status previsao horas = do
 setNomeTodo :: String -> String -> String -> IO()
 setNomeTodo nomeProjeto nome novoNome = do
     let todo = returnTodo nomeProjeto nome
+    let nomeDiretorio = "Projects/" ++ nomeProjeto ++ "/"
     persistirTodo nomeProjeto novoNome (todo !! 1) (todo !! 2) (todo !! 3) (todo !! 4) (todo !! 5)
+    removeArquivo (nomeDiretorio ++ nome ++ ".txt")
 
 setDescricaoTodo :: String -> String -> String -> IO()
 setDescricaoTodo nomeProjeto nome descricao = do

@@ -76,7 +76,10 @@ createToDo projectName = do
 
     let status = "A fazer";
 
-    if projectName == name 
+    if name == "" then do 
+    	putStrLn "\n\nDigite um nome valido!\n"
+        concludeScreenFail("ToDo cadastrada")
+    else if projectName == name 
         then do
             clear
             putStrLn "O nome da ToDo não pode ser o mesmo nome do projeto!"
