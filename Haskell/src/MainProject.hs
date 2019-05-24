@@ -96,13 +96,13 @@ gerarRelatorio projectName = do
 	concludeScreen("relatório gerado")
 	mainProject projectName
 
-exibeCadaToDo :: String -> [[String]] -> IO()
-exibeCadaToDo projectName [] = concludeScreen("ToDos exibidos")
-exibeCadaToDo projectName (toDo:resto)
-	| projectName == (toDo!!0) = exibeCadaToDo projectName resto
-	| otherwise = do
-		exibeToDo projectName (toDo!!0)
-		exibeCadaToDo projectName resto
+-- exibeCadaToDo :: String -> [[String]] -> IO()
+-- exibeCadaToDo projectName [] = concludeScreen("ToDos exibidos")
+-- exibeCadaToDo projectName (toDo:resto)
+	-- | projectName == (toDo!!0) = exibeCadaToDo projectName resto
+	-- | otherwise = do
+		-- exibeToDo projectName (toDo!!0)
+		-- exibeCadaToDo projectName resto
 
 exibeToDos :: String -> IO()
 exibeToDos projectName = do
