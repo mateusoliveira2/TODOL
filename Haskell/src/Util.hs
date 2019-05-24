@@ -16,6 +16,15 @@ concludeScreen acao = do
     sair <- getLine
     returnScreen
 
+listNames :: [String] -> Int -> Int -> IO()
+listNames list index ignore = do
+    if length(list) > 0 then do
+        if (list!!0) /= "." && (list!!0) /= ".." then do
+            putStrLn ( (show index) ++ ". " ++ (take ( (length (list!!0)) - ignore ) (list!!0)) )
+            listNames (tail list) (index+1) ignore
+        else listNames (tail list) index ignore
+    else putStrLn "" 
+
 exibeToDo :: String -> String -> IO()
 exibeToDo projectName todoName = do
 	let todo = returnTodo projectName todoName
