@@ -3,17 +3,17 @@ module MainTodo where
 import Util
 import PersistenceTodo
 
-exibeToDo :: String -> String -> IO()
-exibeToDo projectName todoName = do
-	let todo = returnTodo projectName todoName
-	putStrLn ("┌────────────────────────────────────────────────")
-	putStrLn ("│ Nome: " ++ (todo !! 0))
-	putStrLn ("│ Descricao: " ++ (todo !! 1))
-	putStrLn ("│ Responsavel: " ++ (todo !! 2))
-	putStrLn ("│ Status:" ++ (todo !! 3))
-	putStrLn ("│ Previsao de Conclusao: " ++ (todo !! 4)  ++ " hora(s)")
-	putStrLn ("│ Horas Cadastradas: " ++ (todo !! 5)  ++ " hora(s)")
-	putStrLn ("└────────────────────────────────────────────────\n\n")
+-- exibeToDo :: String -> String -> IO()
+-- exibeToDo projectName todoName = do
+	-- let todo = returnTodo projectName todoName
+	-- putStrLn ("┌────────────────────────────────────────────────")
+	-- putStrLn ("│ Nome: " ++ (todo !! 0))
+	-- putStrLn ("│ Descricao: " ++ (todo !! 1))
+	-- putStrLn ("│ Responsavel: " ++ (todo !! 2))
+	-- putStrLn ("│ Status:" ++ (todo !! 3))
+	-- putStrLn ("│ Previsao de Conclusao: " ++ (todo !! 4)  ++ " hora(s)")
+	-- putStrLn ("│ Horas Cadastradas: " ++ (todo !! 5)  ++ " hora(s)")
+	-- putStrLn ("└────────────────────────────────────────────────\n\n")
 
 editTodoName :: String -> String -> IO()
 editTodoName projectName todoName = do
