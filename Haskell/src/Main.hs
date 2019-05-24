@@ -20,15 +20,21 @@ receiverProjectsData = do
     putStrLn "Digite a previsao de termino (em horas): "
     duration <- getLine
 
-    let status = "A fazer"
-    x <- getDirectoryContents "Projects"
-    if  name `elem` x then do
-        putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
-    else do
-        persistirProjeto name description responsible status (read duration)
-        concludeScreen("cadastro")
+    if name /= "" then do
+        let status = "A fazer"
+        x <- getDirectoryContents "Projects"
 
-    main
+        if  name `elem` x then do
+            putStrLn "\n\nProjeto ja existe!\n"
+            concludeScreenFail("cadastro")
+        else do
+            persistirProjeto name description responsible status (read duration)
+            concludeScreen("cadastro")
+        main
+    else do
+        putStrLn "\n\nDigite um nome valido!\n"
+        concludeScreenFail("cadastro")
+        main
 
 listProjects :: IO()
 listProjects = do
