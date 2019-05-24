@@ -8,11 +8,10 @@ filterByName projectName = do
     clear
     putStrLn "Digite o filtro de nome: "
     filterName <- getLine
-
+    
     let filtroTodos = filterByNameAllToDos projectName filterName
     exibeCadaToDo projectName filtroTodos
     mainFilter projectName
-
 
 filterBySituation :: String -> IO()
 filterBySituation projectName = do

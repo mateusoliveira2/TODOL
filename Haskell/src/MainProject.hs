@@ -40,7 +40,9 @@ editToDo projectName = do
     mainProject projectName
     
 filterTodo :: String -> IO()
-filterTodo projectName = mainFilter projectName
+filterTodo projectName = do
+    mainFilter projectName
+    mainProject projectName
 
 createToDo :: String -> IO()
 createToDo projectName = do
@@ -65,9 +67,14 @@ createToDo projectName = do
             putStrLn "O nome da ToDo não pode ser o mesmo nome do projeto!"
             putStrLn "Por favor, pense em um nome válido e tente novamente.\n"
             createToDo projectName
-        else persistirTodo projectName name description responsible status duration "0"
-
-    concludeScreen("ToDo criado")
+        else do
+            if  (name++".txt") `elem` (returnAllTodosName projectName) then do
+                putStrLn "\nToDo com este nome ja existe!\n\nEscolha outro nome\n\n"
+                createToDo projectName
+            else do
+                persistirTodo projectName name description responsible status duration "0"
+                concludeScreen("ToDo cadastrada")            
+            
     mainProject projectName
 
 editProjectName :: String -> IO()
@@ -84,9 +91,11 @@ editProjectName projectName = do
 		getLine
 		putStr ""
 	else do
-        putStrLn "Ok"
-        setNomeProjeto projectName newName
-        concludeScreen("Nome do Projeto atualizado")
+        if  newName `elem` returnAllProjectsName then do
+            putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
+        else do
+            setNomeProjeto projectName newName
+            concludeScreen("Nome do Projeto atualizado")
     
     mainProject projectName
 
@@ -114,6 +123,7 @@ exibeToDos projectName = do
 	mainProject projectName
 
 mainProject :: String -> IO()
+
 mainProject projectName
 	| projectName == "." || projectName == ".." || projectName == "" = do returnScreen
 	| otherwise = do
