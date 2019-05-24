@@ -25,26 +25,16 @@ receiverProjectsData = do
     if  name `elem` x then do
         putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
     else do
-        -- lembrar de passar a duracao como (read duration), para haver a conversão para Int
         persistirProjeto name description responsible status (read duration)
         concludeScreen("cadastro")
 
     main
 
-listNames :: [String] -> Int -> IO()
-listNames list index = do
-    if length(list) > 0 then do
-        if (list!!0) /= "." && (list!!0) /= ".." then do
-            putStrLn ( (show index) ++ ". " ++ (list!!0) )
-            listNames (tail list) (index+1)
-        else listNames (tail list) index
-    else putStrLn "" 
-
 listProjects :: IO()
 listProjects = do
     putStrLn "\nProjetos existentes: "
     if length( returnAllProjectsName ) > 2 then 
-        listNames returnAllProjectsName 1
+        listNames returnAllProjectsName 1 0
     else
         putStrLn "- Não há projetos cadastrados.\n"
 

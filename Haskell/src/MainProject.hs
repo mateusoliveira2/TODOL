@@ -19,17 +19,31 @@ exibeProject projectName = do
 	putStrLn ("│ Estimativa: " ++ (project !! 4) ++ " hora(s)")
 	putStrLn ("└────────────────────────────────────────────────\n\n")
 
+rmvProjectName :: String -> [String] -> [String]
+rmvProjectName projectName list
+	| length(list) == 0 = []
+	| (list!!0) == (projectName ++ ".txt") = rmvProjectName projectName (tail list)
+	| otherwise = [(list!!0)] ++ (rmvProjectName projectName (tail list))
+
+listTodos :: String -> IO()
+listTodos projectName = do
+    putStrLn "\nToDo's existentes: "
+    if length( returnAllTodosName projectName ) > 2 then 
+        listNames (rmvProjectName projectName (returnAllTodosName projectName)) 1 4
+    else
+        putStrLn "- Não há ToDo's cadastrados para esse projeto.\n"
+
 editToDo :: String -> IO()
 editToDo projectName = do
     clear
-    -- mostrar todas ToDos
+    listTodos projectName
 
     putStrLn "Digite o nome da ToDo: "
     todoName <- getLine
     
     toDoExists <- doesFileExist ("Projects/" ++ projectName ++ "/" ++ todoName ++ ".txt")
 
-    if toDoExists then
+    if toDoExists && todoName /= projectName then
         mainTodo projectName todoName
     else do
         putStrLn "\nO toDo selecionado não existe!"
