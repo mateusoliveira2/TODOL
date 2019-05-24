@@ -45,9 +45,10 @@ setNomeProjeto nome novoNome = do
     let diretorioAntigo = "Projects/" ++ nome ++ "/"
     let diretorioNovo = "Projects/" ++ novoNome ++ "/"
     let infos = returnProjeto nome
-    persistirProjeto novoNome (infos !! 1) (infos !! 2) (infos !! 3) (read (infos !! 4))
-    removeFile ("Projects/" ++ nome ++ "/" ++ nome ++ ".txt")
-    removeDirectory (diretorioAntigo)
+    let conteudoProjeto = novoNome ++ "\n" ++ (infos !! 1) ++ "\n" ++ (infos !! 2) ++ "\n" ++ (infos !! 3) ++ "\n" ++ (infos !! 4) ++ "\n"
+    writeFile (diretorioAntigo ++ novoNome ++ ".txt") (conteudoProjeto)
+    renameDirectory diretorioAntigo diretorioNovo
+    removeArquivo (diretorioNovo ++ nome ++ ".txt")
 
 setDescricaoProjeto :: String -> String -> IO()
 setDescricaoProjeto nome descricao = do
