@@ -32,17 +32,21 @@ receiverProjectsData = do
 
 listProjects :: IO()
 listProjects = do
+    x <- getDirectoryContents "Projects"
     putStrLn "\nProjetos existentes: "
-    if length( returnAllProjectsName ) > 2 then 
-        listNames returnAllProjectsName 1 0
+    if length( x ) > 2 then 
+        listNames x 1 0
     else
         putStrLn "- Não há projetos cadastrados.\n"
 
 goToProject :: String -> IO()
-goToProject pName
-	| (ehNumero pName) && (read pName :: Int) <= length (tiraPontos returnAllProjectsName) && (read pName :: Int) > 0 = do
-		mainProject ( (tiraPontos returnAllProjectsName) !! ((read pName :: Int) - 1) )
-	| otherwise = do
+goToProject pName = do
+    x <- getDirectoryContents "Projects"
+    if ((ehNumero pName) && (read pName :: Int) <= length (tiraPontos x) && (read pName :: Int) > 0)
+        then do
+            x <- getDirectoryContents "Projects"
+            mainProject ( (tiraPontos x) !! ((read pName :: Int) - 1) )
+	else do
 		putStrLn "\nO projeto selecionado não existe!"
 		putStrLn "Pressione a tecla Enter para voltar."
 		getLine

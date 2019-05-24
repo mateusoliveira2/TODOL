@@ -29,7 +29,7 @@ ehNumero :: String -> Bool
 ehNumero "" = False
 ehNumero (dig:res) = (isDigit dig) && ((res == "") || ehNumero res)
 
-tiraPontos :: [String] -> [String]
+tiraPontos :: [FilePath] -> [String]
 tiraPontos [] = []
 tiraPontos (a:as)
 	| a == "." || a == ".." = tiraPontos as
