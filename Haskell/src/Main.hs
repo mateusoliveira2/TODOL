@@ -38,24 +38,32 @@ listProjects = do
     else
         putStrLn "- Não há projetos cadastrados.\n"
 
+goToProject :: String -> IO()
+goToProject pName
+	| (ehNumero pName) && (read pName :: Int) <= length (tiraPontos returnAllProjectsName) && (read pName :: Int) > 0 = do
+		mainProject ( (tiraPontos returnAllProjectsName) !! ((read pName :: Int) - 1) )
+	| otherwise = do
+		putStrLn "\nO projeto selecionado não existe!"
+		putStrLn "Pressione a tecla Enter para voltar."
+		getLine
+		putStr ""
+
+
 selectProject :: IO()
 selectProject = do
-    listProjects
+	listProjects
 
-    putStrLn "Digite o nome do projeto que você deseja selecionar: "
-    projectName <- getLine
-    
-    projectExists <- doesDirectoryExist ("Projects/" ++ projectName)
+	putStrLn "Digite o nome do projeto que você deseja selecionar: "
+	projectName <- getLine
 
-    if projectExists then
-        mainProject projectName
-    else do
-        putStrLn "\nO projeto selecionado não existe!"
-        putStrLn "Pressione a tecla Enter para voltar."
-        getLine
-        putStr ""
+	projectExists <- doesDirectoryExist ("Projects/" ++ projectName)
 
-    main
+	if projectExists then
+		mainProject projectName
+	else do
+		goToProject projectName
+	
+	main
 
 concludeProject :: IO()
 concludeProject = do

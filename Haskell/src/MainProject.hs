@@ -33,6 +33,7 @@ listTodos projectName = do
     else
         putStrLn "- Não há ToDo's cadastrados para esse projeto.\n"
 
+
 editToDo :: String -> IO()
 editToDo projectName = do
     clear

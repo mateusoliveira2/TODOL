@@ -25,6 +25,16 @@ concludeScreen acao = do
     sair <- getLine
     returnScreen
 
+ehNumero :: String -> Bool
+ehNumero "" = False
+ehNumero (dig:res) = (isDigit dig) && ((res == "") || ehNumero res)
+
+tiraPontos :: [String] -> [String]
+tiraPontos [] = []
+tiraPontos (a:as)
+	| a == "." || a == ".." = tiraPontos as
+	| otherwise = [a] ++ tiraPontos as
+
 listNames :: [String] -> Int -> Int -> IO()
 listNames list index ignore = do
     if length(list) > 0 then do
