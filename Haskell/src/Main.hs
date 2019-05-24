@@ -21,8 +21,8 @@ receiverProjectsData = do
     duration <- getLine
 
     let status = "A fazer"
-
-    if  name `elem` returnAllProjectsName then do
+    x <- getDirectoryContents "Projects"
+    if  name `elem` x then do
         putStrLn "\n\nProjeto ja existe!\n\nEscolha outro nome\n"
     else do
         -- lembrar de passar a duracao como (read duration), para haver a conversão para Int
