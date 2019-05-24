@@ -15,6 +15,7 @@ exibeProject projectName = do
 	putStrLn ("│ Nome: " ++ (project !! 0))
 	putStrLn ("│ Descrição: " ++ (project !! 1))
 	putStrLn ("│ Responsável: " ++ (project !! 2))
+	putStrLn ("│ Status: " ++ (project !! 3))
 	putStrLn ("│ Estimativa: " ++ (project !! 4) ++ " hora(s)")
 	putStrLn ("└────────────────────────────────────────────────\n\n")
 
@@ -113,27 +114,29 @@ exibeToDos projectName = do
 	mainProject projectName
 
 mainProject :: String -> IO()
-mainProject projectName = do 
-	clear
-	
-	exibeProject projectName
+mainProject projectName
+	| projectName == "." || projectName == ".." || projectName == "" = do returnScreen
+	| otherwise = do
+		clear
+		
+		exibeProject projectName
 
-	putStrLn "1. Criar ToDo"
-	putStrLn "2. Editar ToDo"
-	putStrLn "3. Listar ToDo"
-	putStrLn "4. Filtrar ToDo"
-	putStrLn "5. Gerar Relatorio"
-	putStrLn "6. Editar Nome do Projeto"
-	putStrLn "0. Sair"
-	putStrLn "Escolha: "
-	choice <- getLine
+		putStrLn "1. Criar ToDo"
+		putStrLn "2. Editar ToDo"
+		putStrLn "3. Listar ToDo"
+		putStrLn "4. Filtrar ToDo"
+		putStrLn "5. Gerar Relatorio"
+		putStrLn "6. Editar Nome do Projeto"
+		putStrLn "0. Sair"
+		putStrLn "Escolha: "
+		choice <- getLine
 
-	case choice of
-		"1" -> createToDo projectName
-		"2" -> editToDo projectName
-		"3" -> exibeToDos projectName
-		"4" -> filterTodo projectName
-		"5" -> gerarRelatorio projectName
-		"6" -> editProjectName projectName
-		"0" -> returnScreen
-		_   -> mainProject projectName
+		case choice of
+			"1" -> createToDo projectName
+			"2" -> editToDo projectName
+			"3" -> exibeToDos projectName
+			"4" -> filterTodo projectName
+			"5" -> gerarRelatorio projectName
+			"6" -> editProjectName projectName
+			"0" -> returnScreen
+			_   -> mainProject projectName
