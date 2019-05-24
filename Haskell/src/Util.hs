@@ -9,6 +9,15 @@ clear = putStrLn "\ESC[2J"
 returnScreen :: IO()
 returnScreen = putStrLn ""
 
+porcentagem :: Int -> Int -> Float
+porcentagem a b
+ 	| a >= b = 100.0
+	| otherwise = (fromIntegral a) / (fromIntegral b) * 100.0
+
+repeatString :: String -> Int -> String
+repeatString pal 0 = ""
+repeatString pal n = pal ++ repeatString pal (n-1)
+
 concludeScreen :: String -> IO()
 concludeScreen acao = do
     putStrLn(acao ++ " com sucesso! ")
@@ -28,13 +37,18 @@ exibeToDo projectName todoName = do
 	putStrLn ("│ Horas Cadastradas: " ++ (todo !! 5)  ++ " hora(s)")
 	putStrLn ("└────────────────────────────────────────────────\n\n")
 
-exibeCadaToDo :: String -> [[String]] -> IO()
-exibeCadaToDo projectName [] = concludeScreen("ToDos exibidos")
-exibeCadaToDo projectName (toDo:resto)
-	| projectName == (toDo!!0) = exibeCadaToDo projectName resto
+mapCadaToDo :: (String -> String -> IO()) -> String -> [[String]] -> IO()
+mapCadaToDo func projectName [] = returnScreen
+mapCadaToDo func projectName (toDo:resto) 
+	| projectName == (toDo!!0) = mapCadaToDo func projectName resto 
 	| otherwise = do
-		exibeToDo projectName (toDo!!0)
-		exibeCadaToDo projectName resto
+		func projectName (toDo!!0)
+		mapCadaToDo func projectName resto 
+
+exibeCadaToDo :: String -> [[String]] -> IO()
+exibeCadaToDo projectName toDos = do 
+	mapCadaToDo exibeToDo projectName toDos 
+	concludeScreen "ToDos exibidos"
 
 searchMatchingSub :: [Char] -> [Char] -> Bool
 searchMatchingSub [] [] = True

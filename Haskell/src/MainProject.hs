@@ -89,20 +89,73 @@ editProjectName projectName = do
     
     mainProject projectName
 
+
+barraProgressoToDo :: Int -> Int -> Float -> String
+barraProgressoToDo esperado cadastrado tam
+	| esperado < cadastrado = "[" ++ (repeatString "+" (round tam)) ++ "]" ++ " 100%"
+	| otherwise = do
+		let valorReal = porcentagem cadastrado esperado
+		let valor = round (valorReal / 100.0 * tam)
+		let preenchidos = repeatString "+" valor
+		let resto = repeatString "." ((round tam) - valor)
+		"[" ++ preenchidos ++ resto ++ "] " ++ (show (round valorReal)) ++ "%"	
+	
+visaoGeralToDo :: String -> String -> IO()
+visaoGeralToDo projectName todoName = do
+	let todo = returnTodo projectName todoName
+	let stringHoras = (todo!!5) ++ " hora(s) de " ++ (todo !! 4) ++ " hora(s) previstas"
+	let stringNome = (todo !! 0)
+	let stringEstado = if (todo!!3) == "Concluido" then " (Concluído)" else ""
+	putStrLn ("┌" ++ (repeatString "─" 55))
+	putStrLn ("│ " ++ stringNome ++ stringEstado)
+	putStrLn ("│ " ++ stringHoras)
+	putStrLn ("│ " ++ barraProgressoToDo (read (todo !! 4)) (read (todo !! 5)) 45)
+	putStrLn ("└" ++ repeatString "─" 55)
+
+somaHorasToDos :: [[String]] -> String -> Int -> Int
+somaHorasToDos [] pn idx = 0
+somaHorasToDos (toDo:resto) pn idx
+	| toDo!!0 == pn = somaHorasToDos resto pn idx
+	| otherwise = do
+		let cadastrado = read (toDo!!idx) :: Int
+		cadastrado + (somaHorasToDos resto pn idx)
+
+stringPrevisao :: Int -> Int -> String
+stringPrevisao real previsao
+	| real < previsao = "menor do que o esperado!"
+	| real > previsao = "mais do que o esperado!!"
+	| otherwise = "exatamente como esperado."
+
+visaoGeralProject :: String -> IO()
+visaoGeralProject projectName = do
+	let projeto = returnProjeto projectName
+	let stringPrevisaoProjeto = "Projeto previsto para " ++ (projeto !! 4) ++ " hora(s)"
+	let totalHorasPrevistas = somaHorasToDos (returnAllTodosContent projectName) projectName 4
+	let totalHorasTrabalhadas = somaHorasToDos (returnAllTodosContent projectName) projectName 5
+	let stringHorasPrevistas = (show totalHorasPrevistas) ++ " hora(s), "
+	putStrLn ("┌" ++ repeatString "─" 60)
+	putStrLn ("│ " ++ stringPrevisaoProjeto)
+	putStrLn ("│ Estima-se pelos ToDos " ++ stringHorasPrevistas ++ (stringPrevisao totalHorasPrevistas (read (projeto!!4))))
+	putStrLn ("│ Foram trabalhadas " ++ (show totalHorasTrabalhadas) ++ " hora(s)")
+	putStrLn ("│ " ++ barraProgressoToDo (read (projeto !! 4)) (totalHorasTrabalhadas) 50)
+	putStrLn ("└" ++ repeatString "─" 60)
+
 gerarRelatorio :: String -> IO()
 gerarRelatorio projectName = do 
 	clear
 	putStrLn ("===== Relatório de " ++ projectName ++ " ===== \n")
-	concludeScreen("relatório gerado")
-	mainProject projectName
 
--- exibeCadaToDo :: String -> [[String]] -> IO()
--- exibeCadaToDo projectName [] = concludeScreen("ToDos exibidos")
--- exibeCadaToDo projectName (toDo:resto)
-	-- | projectName == (toDo!!0) = exibeCadaToDo projectName resto
-	-- | otherwise = do
-		-- exibeToDo projectName (toDo!!0)
-		-- exibeCadaToDo projectName resto
+	putStrLn ("Resumo do progresso do Projeto")
+	visaoGeralProject projectName
+	
+	putStrLn "\n"
+
+	putStrLn ("Resumo do progresso dos ToDos:")
+	mapCadaToDo visaoGeralToDo projectName (returnAllTodosContent projectName)
+	
+
+	concludeScreen("Relatório gerado")
+	mainProject projectName
 
 exibeToDos :: String -> IO()
 exibeToDos projectName = do
