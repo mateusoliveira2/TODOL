@@ -1,7 +1,7 @@
-:- module(menuProject, [menuProject/1, showProject/0]).
+:- module(menuProject, [menuProject/1, receiverToDoData/1, showProject/0]).
 
-menuProject(NameProject):- repeat,
-        write("\n\n ------- "), write(NameProject), write(" ------- \n\n"),
+menuProject(ProjectName):- repeat,
+        write("\n\n ------- "), write(ProjectName), write(" ------- \n\n"),
        	write("1. Criar ToDo\n"),
         write("2. Editar ToDo\n"),
         write("3. Listar ToDo\n"),
@@ -13,8 +13,31 @@ menuProject(NameProject):- repeat,
         read(Choice),
         
         ( Choice = 0 -> !, fail ; true ),
+        (Choice = 1 -> receiverToDoData(ProjectName) ; true),
         
         fail.
+
+receiverToDoData(ProjectName):-
+        write("\n\n-------CRIAR TODO -------\n"),
+        write("Digite o nome da ToDO: \n"),
+        read(TodoName),
+        write("Digite a descrição da ToDo: \n"),
+        read(Description),
+        write("Digite os responsaveis pela ToDo: \n"),
+        read(Responsible),
+        write("Digite a duração (em horas) da ToDo: \n"),
+        read(Duration),
+        write(TodoName), write(" "), write(ProjectName),write(" ") , write(Description), write(" "),write(Responsible),
+        write(" "), write(Duration),
+        
+        menuProject(ProjectName).
+
+selectProject:-
+        write("\n\n-------SELECIONAR PROJETO-------\n"),
+        write("Digite o nome do projeto: \n"),
+        read(Name),
+        write(Name),write(' selecionado com sucesso!').
+
 
 showProject:-
 	write("\n\n┌────────────────────────────────────────────────\n"),

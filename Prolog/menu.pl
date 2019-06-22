@@ -21,14 +21,14 @@ menu:-repeat,
 receiverProjectsData:-
         write("\n\n-------CRIAR PROJETO-------\n"),
         write("Digite o nome do projeto: \n"),
-        read(Name),
+        read(ProjectName),
         write("Digite a descrição do projeto: \n"),
         read(Description),
         write("Digite os responsaveis pelo projeto: \n"),
         read(Responsible),
         write("Digite a previsao de termino (em horas): \n"),
         read(Duration),
-        write(Name),write(" ") , write(Description), write(" "),write(Responsible),
+        write(ProjectName),write(" ") , write(Description), write(" "),write(Responsible),
         write(" "), write(Duration),
         
         menu.
@@ -36,17 +36,17 @@ receiverProjectsData:-
 selectProject:-
         write("\n\n-------SELECIONAR PROJETO-------\n"),
         write("Digite o nome do projeto: \n"),
-        read(Name),
-        write(Name),write(' selecionado com sucesso!'),
-        menuProject(Name),
+        read(ProjectName),
+        write(ProjectName),write(' selecionado com sucesso!'),
+        menuProject(ProjectName),
 
         menu.
 
 concludeProject:-
         write("\n\n-------CONCLUIR PROJETO-------\n"),
         write("Digite o nome do projeto: \n"),
-        read(Name),
-        write(Name),write(' concluido com sucesso!').
+        read(ProjectName),
+        write(ProjectName),write(' concluido com sucesso!').
 
         menu.
 
