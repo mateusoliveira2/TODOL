@@ -1,4 +1,5 @@
-:-include('menuProject.pl').
+:- use_module(menuProject).
+
 :-initialization (main). 
     
 menu:-repeat,
