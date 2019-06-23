@@ -12,7 +12,7 @@ menu:-repeat,
         read(Choice),
         
         ( Choice = 0 -> !, fail ; true ),
-        (Choice = 1 -> receiverProjectsData; true),
+        ( Choice = 1 -> receiverProjectsData; true),
         ( Choice = 2 -> selectProject;
           Choice = 3 -> concludeProject),
         
@@ -49,7 +49,6 @@ concludeProject:-
         write(ProjectName),write(' concluido com sucesso!').
 
         menu.
-
 
 main :- 
     menu.
