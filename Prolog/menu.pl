@@ -38,17 +38,13 @@ selectProject:-
         write("Digite o nome do projeto: \n"),
         read(ProjectName),
         write(ProjectName),write(' selecionado com sucesso!'),
-        menuProject(ProjectName),
-
-        menu.
+        menuProject(ProjectName).
 
 concludeProject:-
         write("\n\n-------CONCLUIR PROJETO-------\n"),
         write("Digite o nome do projeto: \n"),
         read(ProjectName),
         write(ProjectName),write(' concluido com sucesso!').
-
-        menu.
 
 main :- 
     menu.

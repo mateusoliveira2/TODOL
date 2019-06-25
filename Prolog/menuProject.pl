@@ -31,9 +31,7 @@ receiverToDoData(ProjectName):-
         write("Digite a duração (em horas) da ToDo: \n"),
         read(Duration),
         write(ToDoName), write(" "), write(ProjectName),write(" ") , write(Description), write(" "),write(Responsible),
-        write(" "), write(Duration),
-        
-        menuProject(ProjectName).
+        write(" "), write(Duration).
 
 editToDo(ProjectName):-
         write("\n\n-------EDITAR TODO-------\n"),
