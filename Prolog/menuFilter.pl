@@ -1,3 +1,4 @@
+:- use_module(utils).
 
 menuProject(ProjectName):- repeat,
         write("\n\n ------- Filtro de ToDos do Projeto "), write(ProjectName), write(" ------- \n\n"),
