@@ -1,3 +1,13 @@
+:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7]).
+
+urlTodo(Nome, Caminho) :-
+    string_concat("Projects/", Nome, Caminho).
+
+urlTodoFile(NomeProjeto, NomeTodo, Caminho):-
+    urlTodo(NomeProjeto, UrlTodo),
+    string_concat(UrlTodo, "/", Auxiliar),
+    string_concat(Auxiliar, NomeTodo, Caminho).
+
 persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas) :- 
     string_concat("Projects/", NomeProjeto, Auxiliar1),
     string_concat(Auxiliar1, "/", Auxiliar2),
@@ -5,11 +15,22 @@ persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas
 
     open(Caminho, write, P),
     
-    write(P, Nome), write(P, "\n"),
-    write(P, Descricao), write(P, "\n"),
-    write(P, Responsavel), write(P, "\n"),
-    write(P, Status), write(P, "\n"),
-    write(P, Previsao), write(P, "\n"),
-    write(P, Horas), write(P, "\n"),
+    write(P, Nome), write(P, ".\n"),
+    write(P, Descricao), write(P, ".\n"),
+    write(P, Responsavel), write(P, ".\n"),
+    write(P, Status), write(P, ".\n"),
+    write(P, Previsao), write(P, ".\n"),
+    write(P, Horas), write(P, ".\n"),
 
     close(P).
+
+recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas) :-
+    urlTodoFile(NomeProjeto, NomeTodo, Caminho),
+    open(Caminho, read, Str),
+    read(Str, _),
+    read(Str, Descricao),
+    read(Str, Responsavel),
+    read(Str, Status),
+    read(Str, Previsao),
+    read(Str, Horas),
+    close(Str).

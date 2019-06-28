@@ -28,10 +28,7 @@ receiverProjectsData:-
         read(Responsible),
         write("Digite a previsao de termino (em horas): \n"),
         read(Duration),
-        persistirProjeto(ProjectName, Description, Responsible, "A Fazer", Duration),
-        write(ProjectName),write(" ") , write(Description), write(" "),write(Responsible),
-        write(" "), write(Duration),
-        
+        persistirProjeto(ProjectName, Description, Responsible, "A Fazer", Duration, "0"),
         menu.
 
 selectProject:-

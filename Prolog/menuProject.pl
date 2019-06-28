@@ -1,5 +1,6 @@
 :- module(menuProject, [menuProject/1, receiverToDoData/1, showProject/0]).
 :- use_module(menuToDo).
+:- use_module(persistenceToDo).
 
 menuProject(ProjectName):- repeat,
         write("\n\n ------- "), write(ProjectName), write(" ------- \n\n"),
@@ -15,6 +16,7 @@ menuProject(ProjectName):- repeat,
         
         ( Choice = 0 -> !, fail ; true ),
         ( Choice = 1 -> receiverToDoData(ProjectName) ; true),
+        ( Choice = 3 -> listarToDo(ProjectName); true),
         ( Choice = 2 -> editToDo(ProjectName); true),
         ( Choice = 6 -> editProjectName(ProjectName); true),
         
@@ -30,8 +32,20 @@ receiverToDoData(ProjectName):-
         read(Responsible),
         write("Digite a duração (em horas) da ToDo: \n"),
         read(Duration),
-        write(ToDoName), write(" "), write(ProjectName),write(" ") , write(Description), write(" "),write(Responsible),
-        write(" "), write(Duration).
+        persistirTodo(ProjectName, ToDoName, Description, Responsible, "A fazer", Duration, "0").
+
+listarToDo(ProjectName):-
+        write("\n\n-------LISTAR TODOS -------\n"),
+        write("Digite o nome da ToDO: \n"),
+        read(ToDoName),
+        recuperaTodo(ProjectName, ToDoName, Description, Responsible, Status, Duration, Horas),
+        write(ProjectName),nl,
+        write(ToDoName),nl,
+        write(Description),nl,
+        write(Responsible),nl,
+        write(Status),nl,
+        write(Duration),nl,
+        write(Horas),nl.
 
 editToDo(ProjectName):-
         write("\n\n-------EDITAR TODO-------\n"),
