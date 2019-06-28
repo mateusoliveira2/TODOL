@@ -1,8 +1,12 @@
 :- module(menuToDo, [menuToDo/2]).
+:- use_module(utils).
+:- use_module(persistenceToDo).
 
 menuToDo(ProjectName, ToDoName):- repeat,
-        write("\n\n ------- "), write(ToDoName), write(" ------- \n\n"),
-        write("1. Editar Nome\n"),
+		recuperaTodo(ProjectName, ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
+		showToDo(ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
+        
+		write("1. Editar Nome\n"),
         write("2. Editar Responsaveis\n"),
         write("3. Editar Situacao\n"),
         write("4. Cadastrar horas\n"),
@@ -11,7 +15,7 @@ menuToDo(ProjectName, ToDoName):- repeat,
         read_line_to_string(user_input, Choice),
         
         ( Choice = "0" -> !, fail ; true ),
-        ( Choice = "1" -> editTodoName(ProjectName, ToDoName) ; true ),
+        ( Choice = "1" -> editToDoName(ProjectName, ToDoName) ; true ),
         ( Choice = "2" -> editResponsible(ProjectName, ToDoName) ; true ),
         ( Choice = "3" -> editSituation(ProjectName, ToDoName) ; true ),
         ( Choice = "4" -> editHours(ProjectName, ToDoName) ; true ),

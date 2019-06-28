@@ -1,9 +1,12 @@
 :- module(menuProject, [menuProject/1, receiverToDoData/1, showProject/0]).
 :- use_module(menuToDo).
 :- use_module(persistenceToDo).
+:- use_module(utils).
 
 menuProject(ProjectName):- repeat,
-        write("\n\n ------- "), write(ProjectName), write(" ------- \n\n"),
+		recuperaProjeto(ProjectName, Descricao, Responsavel, Status, Previsao),
+		showProject(ProjectName, Descricao, Responsavel, Status, Previsao),
+
        	write("1. Criar ToDo\n"),
         write("2. Editar ToDo\n"),
         write("3. Listar ToDo\n"),
@@ -52,7 +55,7 @@ editToDo(ProjectName):-
         write("Digite o nome da ToDo: \n"),
         read_line_to_string(user_input, ToDoName),
 		( toDoExists(ProjectName, ToDoName) -> 
-			write(ToDoName), write(' selecionado com sucesso!'), menuToDo(ProjectName, ToDoName); 
+			write(ToDoName), write(' selecionado com sucesso!\n'), menuToDo(ProjectName, ToDoName); 
 			write('ToDo não existe!\n') ),
 
 		menuProject(ProjectName).
@@ -65,12 +68,3 @@ editProjectName(ProjectName):-
         read_line_to_string(user_input, NewProjectName),
         write("\nNome atualizado com sucesso. Novo nome: "), write(NewProjectName).
 
-showProject:-
-		write("\n\n"),
-		write("┌────────────────────────────────────────────────\n"),
-		write("│ Nome: \n" ),
-		write("│ Descrição: \n") ,
-		write("│ Responsável: \n") ,
-		write("│ Status: \n"),
-		write("│ Estimativa: \n") ,
-        write("└────────────────────────────────────────────────\n\n").

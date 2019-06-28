@@ -1,5 +1,18 @@
-showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
-	write("\n\n┌────────────────────────────────────────────────\n"),
+:- module(utils, [showToDo/6, showProject/5]).
+
+showProject(Name,Description,Responsable,Status,Prevision):-
+	write("\n\n"),
+	write("┌────────────────────────────────────────────────\n"),
+	write("│ Nome: "), writeln(Name),
+	write("│ Descricao: "), writeln(Description),
+	write("│ Responsavel: "), writeln(Responsable),
+	write("│ Status: "), writeln(Status),
+    write("│ Previsao: "), writeln(Prevision),
+    write("└────────────────────────────────────────────────\n\n").
+
+showToDo(Name,Description,Responsable,Status,Prevision,Hour):-
+	write("\n\n"),
+	write("┌────────────────────────────────────────────────\n"),
 	write("│ Nome: "), writeln(Name),
 	write("│ Descricao: "), writeln(Description),
 	write("│ Responsavel: "), writeln(Responsable),
@@ -7,6 +20,9 @@ showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
     write("│ Previsao: "), writeln(Prevision),
     write("│ Hora(s) cadastrada(s): "), writeln(Hour),
     write("└────────────────────────────────────────────────\n\n").
+
+showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
+	showToDo(Name,Description,Responsable,Status,Prevision,Hour).
 
 searchMatching(Key, Filter):- sub_atom(Key,Before,Length,After,Filter).
 
