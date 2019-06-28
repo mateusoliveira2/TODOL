@@ -31,7 +31,7 @@ editResponsible(ProjectName, ToDoName):-
         write("\nDigite os novos responsaveis: "),
         read_line_to_string(user_input, NewResponsible),
     
-        write("\nRespinsáveis atualizados com sucesso: "), write(NewResponsible).
+        write("\nResponsáveis atualizados com sucesso: "), write(NewResponsible).
 
 editSituation(ProjectName, ToDoName):-
         write("Editar Situação da ToDo\n\n"),

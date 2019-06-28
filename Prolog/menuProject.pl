@@ -51,8 +51,12 @@ editToDo(ProjectName):-
         write("\n\n-------EDITAR TODO-------\n"),
         write("Digite o nome da ToDo: \n"),
         read_line_to_string(user_input, ToDoName),
-        write(ToDoName),write(' selecionado com sucesso!'),
-        menuToDo(ProjectName, ToDoName).
+		( toDoExists(ProjectName, ToDoName) -> 
+			write(ToDoName), write(' selecionado com sucesso!'), menuToDo(ProjectName, ToDoName); 
+			write('ToDo não existe!\n') ),
+
+		menuProject(ProjectName).
+
 
 editProjectName(ProjectName):-
         write("\n\n-------EDITAR NOME DO PROJETO-------\n"),
@@ -62,10 +66,11 @@ editProjectName(ProjectName):-
         write("\nNome atualizado com sucesso. Novo nome: "), write(NewProjectName).
 
 showProject:-
-	write("\n\n┌────────────────────────────────────────────────\n"),
-	write("│ Nome: \n" ),
-	write("│ Descrição: \n") ,
-	write("│ Responsável: \n") ,
-	write("│ Status: \n"),
-	write("│ Estimativa: \n") ,
+		write("\n\n"),
+		write("┌────────────────────────────────────────────────\n"),
+		write("│ Nome: \n" ),
+		write("│ Descrição: \n") ,
+		write("│ Responsável: \n") ,
+		write("│ Status: \n"),
+		write("│ Estimativa: \n") ,
         write("└────────────────────────────────────────────────\n\n").

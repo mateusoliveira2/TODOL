@@ -35,8 +35,10 @@ selectProject:-
         write("\n\n-------SELECIONAR PROJETO-------\n"),
         write("Digite o nome do projeto: \n"),
         read_line_to_string(user_input, ProjectName),
-        write(ProjectName), write(' selecionado com sucesso!'), nl,
-		menuProject(ProjectName).
+        write(ProjectName), write(' selecionado com sucesso!\n'),
+		( projectExists(ProjectName) -> menuProject(ProjectName);
+		write("Projeto não existe!\n") ), 
+		main.
 
 concludeProject:-
         write("\n\n-------CONCLUIR PROJETO-------\n"),

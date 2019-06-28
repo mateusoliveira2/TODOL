@@ -1,4 +1,4 @@
-:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7]).
+:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7, toDoExists/2]).
 
 urlTodo(Nome, Caminho) :-
     string_concat("Projects/", Nome, Caminho).
@@ -7,6 +7,10 @@ urlTodoFile(NomeProjeto, NomeTodo, Caminho):-
     urlTodo(NomeProjeto, UrlTodo),
     string_concat(UrlTodo, "/", Auxiliar),
     string_concat(Auxiliar, NomeTodo, Caminho).
+
+toDoExists(NomeProjeto, NomeTodo) :- 
+	urlTodoFile(NomeProjeto, NomeTodo, Path),
+	exists_file(Path).
 
 persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas) :- 
     string_concat("Projects/", NomeProjeto, Auxiliar1),
