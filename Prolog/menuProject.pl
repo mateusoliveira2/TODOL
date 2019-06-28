@@ -25,38 +25,47 @@ menuProject(NomeProjeto):- repeat,
     ( Choice = "6" -> editNomeProjeto(NomeProjeto); true),
         
     fail.
+listarToDo([], NomeProjeto) :- write("").
+listTodos([H|T], NomeProjeto) :-
+	List == [] -> write("\n"); 
+	(visaoGeralTodo(NomeProjeto, H), 
+	listTodos(T, NomeProjeto)). 
 
-barraProgresso(Esperado, Cadastrado, Tam) :-
-	Esperado < Cadastrado -> ( write("["), repeatString("+", round(Tam)), write("] 100%\n") );
-	(porcentagem(Cadastrado, Esperado, ValorReal), 
-	ValorRealFloat is round(ValorReal),
-	Valor is round(ValorReal / 100 * Tam),
-	Resto is round(Tam) - Valor,
-	write("["),
-	repeatString("+", Valor),
-	repeatString(".", Resto),
-	write("] "),
-	write(ValorRealFloat),
-	write("%\n")).
+somaHoras([], NomeProjeto, Soma) :- Soma is 0.
+somaHoras([H|T], NomeProjeto, Soma) :- 
+	somaHoras(T, NomeProjeto, Resto),
+	getHoras(H, NomeProjeto, Horas),
+	Soma is Resto + Horas.
 
-visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao) :-
-	HorasPrevistasTodos = 1999,
-	TotalHorasTrabalhadas = 1999,
+somaPrevisoes([], NomeProjeto, Soma) :- Soma is 0.
+somaPrevisoes([H|T], NomeProjeto, Soma) :- 
+	somaPrevisoes(T, NomeProjeto, Resto),
+	getPrevisao(H, NomeProjeto, Previsao),
+	Soma is Resto + Previsao.
 
+visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao, TodoList) :-
+	somaPrevisoes(TodoList, NomeProjeto, HorasPrevistasTodos),
+	somaHoras(TodoList, NomeProjeto, TotalHorasTrabalhadas),
+	
 	write("┌"), repeatString("─", 55), nl,
 	write("│ "), write("Projeto previsto para "), write(Previsao), write(" hora(s)\n"),
 	write("│ As previsões dos ToDos somam "), write(HorasPrevistasTodos), write(" hora(s)\n"),
 	write("│ Foram trabalhadas "), write(TotalHorasTrabalhadas), write(" hora(s)\n"),
+	write("│ "), barraProgresso(HorasPrevistasTodos, TotalHorasTrabalhadas, 50),
     write("└"), repeatString("─", 55), nl.
 
 gerarRelatorio(NomeProjeto) :-
 	recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao),
 	showProject(NomeProjeto, Descricao, Responsavel, Status, Previsao),
+	allTodosList(NomeProjeto, TodoList),
 
 	write("===== Relatório de "), write(NomeProjeto), write(" =====\n"),
 
 	write("Resumo do progresso do projeto\n"),
-	visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao).
+	visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao, TodoList),
+	
+	write("Resumo do progresso dos ToDos\n"),
+	listTodos(TodoList, NomeProjeto).
 	
 
 receiverToDoData(NomeProjeto):-

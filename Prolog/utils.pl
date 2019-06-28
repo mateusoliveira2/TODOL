@@ -1,4 +1,17 @@
-:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3]).
+:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3, barraProgresso/3]).
+
+barraProgresso(Esperado, Cadastrado, Tam) :-
+	Esperado =< Cadastrado -> ( write("["), repeatString("+", round(Tam)), write("] 100%\n") );
+	(porcentagem(Cadastrado, Esperado, ValorReal), 
+	ValorRealFloat is round(ValorReal),
+	Valor is round(ValorReal / 100 * Tam),
+	Resto is round(Tam) - Valor,
+	write("["),
+	repeatString("+", Valor),
+	repeatString(".", Resto),
+	write("] "),
+	write(ValorRealFloat),
+	write("%\n")).
 
 porcentagem(A, B, Res) :-
 	A >= B,

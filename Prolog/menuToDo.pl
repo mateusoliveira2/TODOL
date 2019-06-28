@@ -1,4 +1,4 @@
-:- module(menuToDo, [menuToDo/2]).
+:- module(menuToDo, [menuToDo/2, visaoGeralTodo/2]).
 :- use_module(utils).
 :- use_module(persistenceToDo).
 
@@ -20,6 +20,16 @@ menuToDo(ProjectName, ToDoName):- repeat,
         ( Choice = "3" -> editSituation(ProjectName, ToDoName) ; true ),
         ( Choice = "4" -> editHours(ProjectName, ToDoName) ; true ),
         fail.
+
+visaoGeralTodo(ProjectName, ToDoName) :-
+	recuperaTodo(ProjectName, ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
+	atom_number(Previsao, PrevInt),
+	atom_number(Horas, HorasInt),
+	write("┌"), repeatString("─", 55), nl,
+	write("│ "), write(ToDoName), write(" "), writeln(Status),
+	write("│ "),write(Horas),write( " hora(s) de "),write(Previsao),write(" hora(s) previstas\n"),
+	write("│ "), barraProgresso(PrevInt, HorasInt, 45),
+    write("└"), repeatString("─", 55), nl, nl.
 
 
 editTodoName(ProjectName, ToDoName):-
