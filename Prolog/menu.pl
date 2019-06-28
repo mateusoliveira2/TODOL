@@ -28,7 +28,7 @@ receiverProjectsData:-
 		read_line_to_string(user_input, Responsible),
         write("Digite a previsao de termino (em horas): \n"),
 		read_line_to_string(user_input, Duration),
-        persistirProjeto(ProjectName, Description, Responsible, "A Fazer", Duration, "0"),
+        persistirProjeto(ProjectName, Description, Responsible, "A Fazer", Duration),
         menu.
 
 selectProject:-
