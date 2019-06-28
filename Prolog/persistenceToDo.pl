@@ -52,6 +52,12 @@ persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas
 
     close(P).
 
+setNome(NomeProjeto, NomeTodo, NovoNomeTodo) :-
+	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),
+	urlTodoFile(NomeProjeto, NomeTodo, CaminhoTodo),
+	delete_file(CaminhoTodo),
+	persistirTodo(NomeProjeto, NovoNomeTodo, Descricao, Resp, Status, Previsao, Horas).
+
 setResponsavel(NomeProjeto, NomeTodo, Resp) :-
 	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),
 	persistirTodo(NomeProjeto, NomeTodo, Descricao, Resp, Status, Previsao, Horas).

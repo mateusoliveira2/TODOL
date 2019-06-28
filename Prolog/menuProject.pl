@@ -1,6 +1,7 @@
 :- module(menuProject, [menuProject/1, receiverToDoData/1]).
 :- use_module(menuToDo).
 :- use_module(persistenceToDo).
+:- use_module(persistenceProject).
 :- use_module(utils).
 :- use_module(menuFilter).
 
@@ -114,4 +115,5 @@ editNomeProjeto(NomeProjeto):-
     write("Nome atual: "), write(NomeProjeto),
     write("\n Digite o novo nome: "),
     read_line_to_string(user_input, NewNomeProjeto),
+    persistenceProject:setNomeProjeto(NomeProjeto, NewNomeProjeto),
     write("\nNome atualizado com sucesso. Novo nome: "), write(NewNomeProjeto).

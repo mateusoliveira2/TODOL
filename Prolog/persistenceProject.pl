@@ -47,20 +47,18 @@ recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao) :-
 setNomeProjeto(Nome, NovoNome) :-
 	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
 	urlProjectFile(Nome, CaminhoProjeto),
-	open(CaminhoProjeto, write, Str),
-    
+	delete_file(CaminhoProjeto),
+	urlProject(Nome, CaminhoDiretorio),
+	urlProject(NovoNome, NovoCaminhoDiretorio),
+	rename_file(CaminhoDiretorio, NovoCaminhoDiretorio),
+	urlProjectFile(NovoNome, NovoCaminhoProjeto),
+	open(NovoCaminhoProjeto, write, Str),
     write(Str, NovoNome), write(Str, "\n"),
     write(Str, Descricao), write(Str, "\n"),
     write(Str, Responsavel), write(Str, "\n"),
     write(Str, Status), write(Str, "\n"),
     write(Str, Previsao), write(Str, "\n"),
-	close(Str),
-
-	urlProjectFile(NovoNome, NovoCaminhoProjeto),
-	rename_file(CaminhoProjeto, NovoCaminhoProjeto),
-	urlProject(Nome, CaminhoDiretorio),
-	urlProject(NovoNome, NovoCaminhoDiretorio),
-	rename_file(CaminhoProjeto, NovoCaminhoProjeto).
+	close(Str).
 
 setDescricaoProjeto(Nome, NovaDescricao) :-
 	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),

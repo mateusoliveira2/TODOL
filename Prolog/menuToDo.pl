@@ -32,12 +32,12 @@ visaoGeralTodo(ProjectName, ToDoName) :-
     write("└"), repeatString("─", 55), nl, nl.
 
 
-editTodoName(ProjectName, ToDoName):-
+editToDoName(ProjectName, ToDoName):-
         write("Editar nome do ToDo\n\n"),
         write("Nome atual: "), write(ToDoName),
         write("\nDigite o novo nome: "),
         read_line_to_string(user_input, NewName),
-		    
+	persistenceToDo:setNome(ProjectName, ToDoName, NewName),
         write("\nNome atuaizado com sucesso: "), write(NewName).
 
 editResponsible(ProjectName, ToDoName):-
