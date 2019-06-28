@@ -1,4 +1,4 @@
-:- module(menuProject, [menuProject/1, receiverToDoData/1, showProject/0]).
+:- module(menuProject, [menuProject/1, receiverToDoData/1]).
 :- use_module(menuToDo).
 :- use_module(persistenceToDo).
 :- use_module(utils).

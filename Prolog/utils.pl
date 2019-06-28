@@ -1,4 +1,18 @@
-:- module(utils, [showToDo/6, showProject/5]).
+:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1]).
+
+notEmpty(List):- member(_, List).
+
+problem(Element) :-
+    (Element == .);
+    (Element == ..).
+
+show(Element) :-
+    not(problem(Element)) -> write("- "), write(Element), write("\n"); write("").
+
+showList([]) :- write("").
+showList( [Head|Tail] ):-
+    show(Head),
+    (notEmpty(Tail) -> showList(Tail); write("")).
 
 showProject(Name,Description,Responsable,Status,Prevision):-
 	write("\n\n"),
