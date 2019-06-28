@@ -1,4 +1,5 @@
-:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3, barraProgresso/3]).
+:- module(utils, [showToDo/6, showToDo/2, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3, barraProgresso/3]).
+:- use_module(persistenceToDo).
 
 barraProgresso(Esperado, Cadastrado, Tam) :-
 	Esperado =< Cadastrado -> ( write("["), repeatString("+", round(Tam)), write("] 100%\n") );
@@ -56,6 +57,18 @@ showProject(Name,Description,Responsable,Status,Prevision):-
 	write("│ Status: "), writeln(Status),
     write("│ Previsao: "), write(Prevision), write(" hora(s)\n"),
     write("└────────────────────────────────────────────────\n\n").
+
+showToDo(Name, ProjectName) :-
+	recuperaTodo(ProjectName, Name, Descricao, Responsavel, Status, Previsao, Horas),
+	write("\n\n"),
+	write("┌────────────────────────────────────────────────\n"),
+	write("│ Nome: "), writeln(Name),
+	write("│ Descricao: "), writeln(Descricao),
+	write("│ Responsavel: "), writeln(Responsavel),
+	write("│ Status: "), writeln(Status),
+    write("│ Previsao: "), writeln(Previsao),
+    write("│ Hora(s) cadastrada(s): "), write(Horas), write(" hora(s)\n"),
+    write("└────────────────────────────────────────────────\n").
 
 showToDo(Name,Description,Responsable,Status,Prevision,Hour):-
 	write("\n\n"),

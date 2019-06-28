@@ -6,6 +6,7 @@
 menuProject(NomeProjeto):- repeat,
 	recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao),
 	showProject(NomeProjeto, Descricao, Responsavel, Status, Previsao),
+	allTodosList(NomeProjeto, Todos),	
 
    	write("1. Criar ToDo\n"),
     write("2. Editar ToDo\n"),
@@ -19,17 +20,21 @@ menuProject(NomeProjeto):- repeat,
         
     ( Choice = "0" -> !, fail ; true ),
     ( Choice = "1" -> receiverToDoData(NomeProjeto) ; true),
-    ( Choice = "3" -> listarToDo(NomeProjeto); true),
     ( Choice = "2" -> editToDo(NomeProjeto); true),
+    ( Choice = "3" -> listarTodos(Todos, NomeProjeto); true),
     ( Choice = "5" -> gerarRelatorio(NomeProjeto); true),
-    ( Choice = "6" -> editNomeProjeto(NomeProjeto); true),
-        
+    ( Choice = "6" -> editNomeProjeto(NomeProjeto); true),    
     fail.
-listarToDo([], NomeProjeto) :- write("").
+
+listToDos([], NomeProjeto) :- 
+	write("---------------------------------\n").
 listTodos([H|T], NomeProjeto) :-
-	List == [] -> write("\n"); 
-	(visaoGeralTodo(NomeProjeto, H), 
+	(showToDo(H, NomeProjeto), 
 	listTodos(T, NomeProjeto)). 
+
+listarTodos(Todos, NomeProjeto) :-
+	write("\n\n-----------------LISTA DE TODOS------------------\n"), 
+	listTodos(Todos, NomeProjeto).
 
 somaHoras([], NomeProjeto, Soma) :- Soma is 0.
 somaHoras([H|T], NomeProjeto, Soma) :- 
@@ -54,6 +59,11 @@ visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao, TodoLis
 	write("│ "), barraProgresso(HorasPrevistasTodos, TotalHorasTrabalhadas, 50),
     write("└"), repeatString("─", 55), nl.
 
+listVisaoGeralTodos([], NomeProjeto) :- write("").
+listVisaoGeralTodos([H|T], NomeProjeto) :-
+	(visaoGeralTodo(NomeProjeto, H), 
+	listVisaoGeralTodos(T, NomeProjeto)). 
+
 gerarRelatorio(NomeProjeto) :-
 	recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao),
 	showProject(NomeProjeto, Descricao, Responsavel, Status, Previsao),
@@ -65,7 +75,7 @@ gerarRelatorio(NomeProjeto) :-
 	visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao, TodoList),
 	
 	write("Resumo do progresso dos ToDos\n"),
-	listTodos(TodoList, NomeProjeto).
+	listVisaoGeralTodos(TodoList, NomeProjeto).
 	
 
 receiverToDoData(NomeProjeto):-
@@ -79,19 +89,6 @@ receiverToDoData(NomeProjeto):-
     write("Digite a duração (em horas) da ToDo: \n"),
     read_line_to_string(user_input, Duration),
     persistirTodo(NomeProjeto, ToDoName, Description, Responsible, "A fazer", Duration, "0").
-
-listarToDo(NomeProjeto):-
-    write("\n\n-------LISTAR TODOS -------\n"),
-    write("Digite o nome da ToDO: \n"),
-    read_line_to_string(user_input, ToDoName),
-    recuperaTodo(NomeProjeto, ToDoName, Description, Responsible, Status, Duration, Horas),
-    write(NomeProjeto),nl,
-    write(ToDoName),nl,
-    write(Description),nl,
-    write(Responsible),nl,
-    write(Status),nl,
-    write(Duration),nl,
-    write(Horas),nl.
 
 editToDo(ProjectName):-
     allTodosList(ProjectName, Todos),
