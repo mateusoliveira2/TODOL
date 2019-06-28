@@ -1,4 +1,4 @@
-:- module(persistenceProject, [persistirProjeto/6, recuperaProjeto/5]).
+:- module(persistenceProject, [persistirProjeto/5, recuperaProjeto/5]).
 
 createDirectory(Directory):- exists_directory(Directory) -> true; make_directory(Directory).
 
@@ -14,7 +14,7 @@ projectExists(Project) :-
 	urlProject(Project, Path),
 	exists_directory(Path).
 
-persistirProjeto(Nome, Descricao, Responsavel, Status, Previsao, Horas) :- 
+persistirProjeto(Nome, Descricao, Responsavel, Status, Previsao) :- 
     createDirectory("Projects"),
 	urlProject(Nome, CaminhoDiretorio),
     createDirectory(CaminhoDiretorio),
@@ -27,7 +27,6 @@ persistirProjeto(Nome, Descricao, Responsavel, Status, Previsao, Horas) :-
     write(P, Responsavel), write(P, "\n"),
     write(P, Status), write(P, "\n"),
     write(P, Previsao), write(P, "\n"),
-    write(P, Horas), write(P, "\n"),
 
     close(P).
 
@@ -40,3 +39,58 @@ recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao) :-
 	read_line_to_string(Str, Status),
 	read_line_to_string(Str, Previsao),
     close(Str).
+
+setNomeProjeto(Nome, NovoNome) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, NovoNome), write(Str, "\n"),
+    write(Str, Descricao), write(Str, "\n"),
+    write(Str, Responsavel), write(Str, "\n"),
+    write(Str, Status), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str),
+
+	urlProjectFile(NovoNome, NovoCaminhoProjeto),
+	rename_file(CaminhoProjeto, NovoCaminhoProjeto),
+	urlProject(Nome, CaminhoDiretorio),
+	urlProject(NovoNome, NovoCaminhoDiretorio),
+	rename_file(CaminhoProjeto, NovoCaminhoProjeto).
+
+setDescricaoProjeto(Nome, NovaDescricao) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, Nome), write(Str, "\n"),
+    write(Str, NovaDescricao), write(Str, "\n"),
+    write(Str, Responsavel), write(Str, "\n"),
+    write(Str, Status), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str).
+
+setResponsavelProjeto(Nome, NovoResponsavel) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, Nome), write(Str, "\n"),
+    write(Str, Descricao), write(Str, "\n"),
+    write(Str, NovoResponsavel), write(Str, "\n"),
+    write(Str, Status), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str).
+
+
+setStatusProjeto(Nome, NovoStatus) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, NovoNome), write(Str, "\n"),
+    write(Str, Descricao), write(Str, "\n"),
+    write(Str, Responsavel), write(Str, "\n"),
+    write(Str, NovoStatus), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str).
