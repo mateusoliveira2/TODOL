@@ -84,7 +84,24 @@ listarToDo(NomeProjeto):-
     write(Duration),nl,
     write(Horas),nl.
 
+%selectProject:-
+%    allProjectsList(Projects),
+%    length(Projects, SizeList),
+%    (SizeList > 2) -> (
+%        write("\n-------SELECIONAR PROJETO-------\n"),
+%        showExistentProjects(Projects),
+%        write("Digite o nome do projeto a ser selecionado: \n"),
+%        read_line_to_string(user_input, ProjectName),
+%        write(ProjectName), write(' selecionado com sucesso!\n'),
+%        ( projectExists(ProjectName) -> menuProject(ProjectName);
+%        write("Projeto não existe!\n") )
+%    ); 
+%    write("Não há projetos a serem selecionados! Escolha outra opção.\n"), 
+%    main.
+
 editToDo(NomeProjeto):-
+    allTodosList(NomeProjeto, Todos),
+    write("TODOS: "), write(Todos), nl,
     write("\n\n-------EDITAR TODO-------\n"),
     write("Digite o nome da ToDo: \n"),
     read_line_to_string(user_input, ToDoName),
@@ -93,7 +110,6 @@ editToDo(NomeProjeto):-
 		write('ToDo não existe!\n') ),
 
 	menuProject(NomeProjeto).
-
 
 editNomeProjeto(NomeProjeto):-
     write("\n\n-------EDITAR NOME DO PROJETO-------\n"),
