@@ -73,6 +73,7 @@ addHours(NomeProjeto, NomeTodo, Cadastrado) :-
 	Soma is CadastradoInt + HorasInt,
 	persistirTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Soma).
 
+
 getPrevisao(NomeTodo, NomeProjeto, Res) :-
 	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),
 	atom_number(Previsao, Res).

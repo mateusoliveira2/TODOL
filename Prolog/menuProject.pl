@@ -30,14 +30,15 @@ menuProject(NomeProjeto):- repeat,
     fail.
 
 listToDos([], NomeProjeto) :- 
-	write("---------------------------------\n").
+	write("-----------------------------------------------------\n").
 listTodos([H|T], NomeProjeto) :-
-	(showToDo(H, NomeProjeto), 
-	listTodos(T, NomeProjeto)). 
+	showToDo(H, NomeProjeto), 
+	listTodos(T, NomeProjeto). 
 
 listarTodos(Todos, NomeProjeto) :-
 	write("\n\n-----------------LISTA DE TODOS------------------\n"), 
-	listTodos(Todos, NomeProjeto).
+	listTodos(Todos, NomeProjeto),
+	write("\n\n-------------------------------------------------\n").
 
 somaHoras([], NomeProjeto, Soma) :- Soma is 0.
 somaHoras([H|T], NomeProjeto, Soma) :- 
@@ -55,11 +56,13 @@ visaoGeralProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao, TodoLis
 	somaPrevisoes(TodoList, NomeProjeto, HorasPrevistasTodos),
 	somaHoras(TodoList, NomeProjeto, TotalHorasTrabalhadas),
 	
+	atom_number(Previsao, TotalHorasPrevistas),
+	
 	write("┌"), repeatString("─", 55), nl,
 	write("│ "), write("Projeto previsto para "), write(Previsao), write(" hora(s)\n"),
 	write("│ As previsões dos ToDos somam "), write(HorasPrevistasTodos), write(" hora(s)\n"),
 	write("│ Foram trabalhadas "), write(TotalHorasTrabalhadas), write(" hora(s)\n"),
-	write("│ "), barraProgresso(HorasPrevistasTodos, TotalHorasTrabalhadas, 50),
+	write("│ "), barraProgresso(TotalHorasPrevistas, TotalHorasTrabalhadas, 50),
     write("└"), repeatString("─", 55), nl.
 
 listVisaoGeralTodos([], NomeProjeto) :- write("").
@@ -94,26 +97,27 @@ receiverToDoData(NomeProjeto):-
     persistirTodo(NomeProjeto, ToDoName, Description, Responsible, "A fazer", Duration, "0").
 
 editToDo(ProjectName):-
-    allTodosList(ProjectName, Todos),
-    length(Todos, SzList),
+	allTodosList(ProjectName, Todos),
+	length(Todos, SzList),
 
-    (SzList > 0) -> (
-        write("\n\n-------EDITAR TODO-------\n"),
-        showExistentTodos(Todos),
-        write("Digite o nome da ToDo: \n"),
-        read_line_to_string(user_input, ToDoName),
-        ( toDoExists(ProjectName, ToDoName) -> 
-            write(ToDoName), write(' selecionado com sucesso!\n'), menuToDo(ProjectName, ToDoName)
-            );
-        write("\nO toDo selecionado não existe.")
-    );
-    write("\nNão há todos a serem editados."),
-    menuProject(ProjectName).
+	(SzList > 0) -> (
+		write("\n\n-------EDITAR TODO-------\n"),
+		showExistentTodos(Todos),
+		write("Digite o nome da ToDo: \n"),
+		read_line_to_string(user_input, ToDoName),
+		toDoExists(ProjectName, ToDoName) -> (
+			write(ToDoName), write(' selecionado com sucesso!\n'), menuToDo(ProjectName, ToDoName)
+		) ; write("\nO toDo selecionado não existe.")
+	) ; (
+	write("\nNão há todos a serem editados.")
+	),
+
+menuProject(ProjectName).
 
 editNomeProjeto(NomeProjeto):-
-    write("\n\n-------EDITAR NOME DO PROJETO-------\n"),
-    write("Nome atual: "), write(NomeProjeto),
-    write("\n Digite o novo nome: "),
-    read_line_to_string(user_input, NewNomeProjeto),
-    persistenceProject:setNomeProjeto(NomeProjeto, NewNomeProjeto),
-    write("\nNome atualizado com sucesso. Novo nome: "), write(NewNomeProjeto).
+	write("\n\n-------EDITAR NOME DO PROJETO-------\n"),
+	write("Nome atual: "), write(NomeProjeto),
+	write("\n Digite o novo nome: "),
+	read_line_to_string(user_input, NewNomeProjeto),
+	persistenceProject:setNomeProjeto(NomeProjeto, NewNomeProjeto),
+	write("\nNome atualizado com sucesso. Novo nome: "), write(NewNomeProjeto).
