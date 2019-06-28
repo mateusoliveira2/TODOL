@@ -1,4 +1,16 @@
-:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1]).
+:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3]).
+
+porcentagem(A, B, Res) :-
+	A >= B,
+	Res is 100.0.
+
+porcentagem(A, B, Res) :-
+	Res is A / B * 100.0.
+
+repeatString(String, Num) :-
+	write(String), 
+	Prox is Num - 1,
+	Prox > 0 -> repeatString(String, Prox); write("").
 
 notEmpty(List):- member(_, List).
 
