@@ -7,19 +7,19 @@ menuProject(ProjectName):- repeat,
         write("3. Filtrar por responsavel\n"),
         write("0. Sair\n"),
         write("Escolha: \n\n"),
-        read(Choice),
+        read_line_to_string(user_input, Choice),
         
-        ( Choice = 0 -> !, fail ; true ),
-        ( Choice = 1 -> filterByName(ProjectName) ; true),
-        ( Choice = 2 -> filterBySituation(ProjectName); true),
-        ( Choice = 3 -> filterByResponsable(ProjectName); true),
+        ( Choice = "0" -> !, fail ; true ),
+        ( Choice = "1" -> filterByName(ProjectName) ; true),
+        ( Choice = "2" -> filterBySituation(ProjectName); true),
+        ( Choice = "3" -> filterByResponsable(ProjectName); true),
         
         fail.
 
 filterByName(ProjectName):-
         write("\n\n------- Filtro por nome -------\n"),
         write("Digite o filtro de nome: \n"),
-        read(FilterName),
+        read_line_to_string(user_input, FilterName),
         filterByNameAllToDos(ProjectName, FilterName).
 
 filterBySituation(ProjectName):-
@@ -28,7 +28,7 @@ filterBySituation(ProjectName):-
         write("2. Em andamento\n"),
         write("3. Concluido\n"),
         write("Escolha: \n\n"),
-        read(Choice),
+        read_line_to_string(user_input, Choice),
 
         ( Choice = 1 -> filterBySituationAllToDos(ProjectName, "A fazer") ),
         ( Choice = 2 -> filterBySituationAllToDos(ProjectName, "Em andamento") ),
@@ -37,5 +37,5 @@ filterBySituation(ProjectName):-
 filterByResponsable(ProjectName):-
         write("\n\n------- Filtro por responsavel -------\n"),
         write("Digite o filtro de responsavel: \n"),
-        read(FilterResponsable),
+        read_line_to_string(user_input, FilterResponsable),
         filterByResponsableAllToDos(ProjectName, FilterResponsable).

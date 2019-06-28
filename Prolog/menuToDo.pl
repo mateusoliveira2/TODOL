@@ -10,11 +10,11 @@ menuToDo(ProjectName, ToDoName):- repeat,
         write("Escolha: \n\n"),
         read_line_to_string(user_input, Choice),
         
-        ( Choice = 0 -> !, fail ; true ),
-        ( Choice = 1 -> editTodoName(ProjectName, ToDoName) ; true ),
-        ( Choice = 2 -> editResponsible(ProjectName, ToDoName) ; true ),
-        ( Choice = 3 -> editSituation(ProjectName, ToDoName) ; true ),
-        ( Choice = 4 -> editHours(ProjectName, ToDoName) ; true ),
+        ( Choice = "0" -> !, fail ; true ),
+        ( Choice = "1" -> editTodoName(ProjectName, ToDoName) ; true ),
+        ( Choice = "2" -> editResponsible(ProjectName, ToDoName) ; true ),
+        ( Choice = "3" -> editSituation(ProjectName, ToDoName) ; true ),
+        ( Choice = "4" -> editHours(ProjectName, ToDoName) ; true ),
         fail.
 
 

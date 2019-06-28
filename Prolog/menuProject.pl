@@ -14,11 +14,11 @@ menuProject(ProjectName):- repeat,
         write("Escolha: \n\n"),
         read_line_to_string(user_input, Choice),
         
-        ( Choice = 0 -> !, fail ; true ),
-        ( Choice = 1 -> receiverToDoData(ProjectName) ; true),
-        ( Choice = 3 -> listarToDo(ProjectName); true),
-        ( Choice = 2 -> editToDo(ProjectName); true),
-        ( Choice = 6 -> editProjectName(ProjectName); true),
+        ( Choice = "0" -> !, fail ; true ),
+        ( Choice = "1" -> receiverToDoData(ProjectName) ; true),
+        ( Choice = "3" -> listarToDo(ProjectName); true),
+        ( Choice = "2" -> editToDo(ProjectName); true),
+        ( Choice = "6" -> editProjectName(ProjectName); true),
         
         fail.
 
