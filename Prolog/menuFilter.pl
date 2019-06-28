@@ -31,9 +31,9 @@ filterBySituation(ProjectName):-
         write("Escolha: \n\n"),
         read_line_to_string(user_input, Choice),
 
-        ( Choice = "1" -> filterBySituationAllToDos(ProjectName, "A fazer") ),
-        ( Choice = "2" -> filterBySituationAllToDos(ProjectName, "Em andamento") ),
-        ( Choice = "3" -> filterBySituationAllToDos(ProjectName, "Concluido") ).
+        ( Choice = "1" -> filterBySituationAllToDos(ProjectName, "A fazer"); true ),
+        ( Choice = "2" -> filterBySituationAllToDos(ProjectName, "Em andamento"); true ),
+        ( Choice = "3" -> filterBySituationAllToDos(ProjectName, "Concluido"); true ).
 
 filterByResponsable(ProjectName):-
         write("\n\n------- Filtro por responsavel -------\n"),
