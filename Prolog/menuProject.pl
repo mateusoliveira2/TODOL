@@ -14,11 +14,11 @@ menuProject(ProjectName):- repeat,
         write("Escolha: \n\n"),
         read_line_to_string(user_input, Choice),
         
-        ( Choice = 0 -> !, fail ; true ),
-        ( Choice = 1 -> receiverToDoData(ProjectName) ; true),
-        ( Choice = 3 -> listarToDo(ProjectName); true),
-        ( Choice = 2 -> editToDo(ProjectName); true),
-        ( Choice = 6 -> editProjectName(ProjectName); true),
+        ( Choice = "0" -> !, fail ; true ),
+        ( Choice = "1" -> receiverToDoData(ProjectName) ; true),
+        ( Choice = "3" -> listarToDo(ProjectName); true), 
+        ( Choice = "2" -> editToDo(ProjectName); true),
+        ( Choice = "6" -> editProjectName(ProjectName); true),
         
         fail.
 
@@ -36,16 +36,7 @@ receiverToDoData(ProjectName):-
 
 listarToDo(ProjectName):-
         write("\n\n-------LISTAR TODOS -------\n"),
-        write("Digite o nome da ToDO: \n"),
-        read_line_to_string(user_input, ToDoName),
-        recuperaTodo(ProjectName, ToDoName, Description, Responsible, Status, Duration, Horas),
-        write(ProjectName),nl,
-        write(ToDoName),nl,
-        write(Description),nl,
-        write(Responsible),nl,
-        write(Status),nl,
-        write(Duration),nl,
-        write(Horas),nl.
+        recuperaAllTodos(ProjectName, Todos).
 
 editToDo(ProjectName):-
         write("\n\n-------EDITAR TODO-------\n"),

@@ -36,12 +36,7 @@ selectProject:-
         write("Digite o nome do projeto: \n"),
         read_line_to_string(user_input, ProjectName),
         write(ProjectName), write(' selecionado com sucesso!'), nl,
-		recuperaProjeto(ProjectName, Descricao, Responsavel, Status, Previsao),
-		write("Nome = "), write(ProjectName), nl,
-		write("Descricao = "), write(Descricao), nl,
-		write("Responsavel = "), write(Responsavel), nl,
-		write("Status = "), write(Status), nl,
-		write("Previsao = "), write(Previsao), nl.
+        menuProject(ProjectName).
 
 concludeProject:-
         write("\n\n-------CONCLUIR PROJETO-------\n"),

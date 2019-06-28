@@ -1,10 +1,10 @@
-:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7]).
+:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7, recuperaAllTodos/2]).
 
-urlTodo(Nome, Caminho) :-
+urlProject(Nome, Caminho) :-
     string_concat("Projects/", Nome, Caminho).
 
 urlTodoFile(NomeProjeto, NomeTodo, Caminho):-
-    urlTodo(NomeProjeto, UrlTodo),
+    urlProject(NomeProjeto, UrlTodo),
     string_concat(UrlTodo, "/", Auxiliar),
     string_concat(Auxiliar, NomeTodo, Caminho).
 
@@ -34,3 +34,27 @@ recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Ho
 	read_line_to_string(Str, Previsao),
     read_line_to_string(Str, Horas),
     close(Str).
+
+/*
+    A comparação de H \= NomeProjeto para evitar de pegar o arquivo com o nome do projeto
+    está dando errado, acredito que seja algo com o tipo ser diferente. Atom, String, ...
+
+    no trecho que tem recuperaTodo(NomeProjeto, H, ...) deve formar a lista descrita no
+    comentário mais abaixo, com a informação recuperada.
+*/
+forEachRecuperaTodo(NomeProjeto, [H|T], Todos) :-
+    H \= '.', H \= '..', H \= NomeProjeto -> (
+        write(NomeTodo), nl,
+        recuperaTodo(NomeProjeto, H, )
+        forEachRecuperaTodo(NomeProjeto, T, Todos) );
+        forEachRecuperaTodo(NomeProjeto, T, Todos).
+
+/*
+ Todos deveria ser algo como se fosse uma lista com informações das toDos como:
+ [[Nome1, Descricao1, Status1, ...],[Nome2, Descricao2, Status2, ...]]
+*/
+
+recuperaAllTodos(NomeProjeto, Todos) :-
+    urlProject(NomeProjeto, UrlProj),
+    directory_files(UrlProj, NomeTodos),
+    forEachRecuperaTodo(NomeProjeto, NomeTodos, Todos).
