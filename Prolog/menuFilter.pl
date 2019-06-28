@@ -1,6 +1,7 @@
+:- module(menuFilter, [menuFilter/1]).
 :- use_module(utils).
 
-menuProject(ProjectName):- repeat,
+menuFilter(ProjectName):- repeat,
         write("\n\n ------- Filtro de ToDos do Projeto "), write(ProjectName), write(" ------- \n\n"),
        	write("1. Filtrar por nome\n"),
         write("2. Fitrar por situacao\n"),
@@ -30,9 +31,9 @@ filterBySituation(ProjectName):-
         write("Escolha: \n\n"),
         read_line_to_string(user_input, Choice),
 
-        ( Choice = 1 -> filterBySituationAllToDos(ProjectName, "A fazer") ),
-        ( Choice = 2 -> filterBySituationAllToDos(ProjectName, "Em andamento") ),
-        ( Choice = 3 -> filterBySituationAllToDos(ProjectName, "Concluido") ).
+        ( Choice = "1" -> filterBySituationAllToDos(ProjectName, "A fazer") ),
+        ( Choice = "2" -> filterBySituationAllToDos(ProjectName, "Em andamento") ),
+        ( Choice = "3" -> filterBySituationAllToDos(ProjectName, "Concluido") ).
 
 filterByResponsable(ProjectName):-
         write("\n\n------- Filtro por responsavel -------\n"),

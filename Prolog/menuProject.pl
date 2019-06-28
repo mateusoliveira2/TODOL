@@ -2,6 +2,7 @@
 :- use_module(menuToDo).
 :- use_module(persistenceToDo).
 :- use_module(utils).
+:- use_module(menuFilter).
 
 menuProject(NomeProjeto):- repeat,
 	recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao),
@@ -21,6 +22,7 @@ menuProject(NomeProjeto):- repeat,
     ( Choice = "1" -> receiverToDoData(NomeProjeto) ; true),
     ( Choice = "3" -> listarToDo(NomeProjeto); true),
     ( Choice = "2" -> editToDo(NomeProjeto); true),
+    ( Choice = "4" -> menuFilter(NomeProjeto); true),
     ( Choice = "5" -> gerarRelatorio(NomeProjeto); true),
     ( Choice = "6" -> editNomeProjeto(NomeProjeto); true),
         

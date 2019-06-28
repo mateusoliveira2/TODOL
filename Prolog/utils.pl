@@ -1,4 +1,5 @@
-:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3, barraProgresso/3]).
+:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3, barraProgresso/3, filterByNameAllToDos/2, filterBySituationAllToDos/2, filterByResponsableAllToDos/2]).
+:- use_module(persistenceToDo).
 
 barraProgresso(Esperado, Cadastrado, Tam) :-
 	Esperado =< Cadastrado -> ( write("["), repeatString("+", round(Tam)), write("] 100%\n") );
@@ -73,32 +74,44 @@ showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
 
 searchMatching(Key, Filter):- sub_atom(Key,Before,Length,After,Filter).
 
-applyFilterByName([], _).
-applyFilterByName([[Name,Description,Responsable,Status,Prevision,Hour]|T], Filter):-
-        (searchMatching(Name, Filter), showToDo([Name,Description,Responsable,Status,Prevision,Hour]), applyFilterByName(T, Filter));
-        applyFilterByName(T, Filter).
+applyFilterByName(_, [], _).
+applyFilterByName(ProjectName, [NameTodo|T], Filter):-
+        recuperaTodo(ProjectName, NameTodo, Description, Responsable, Status, Prevision, Hour),
+        searchMatching(NameTodo, Filter) -> (
+            showToDo(NameTodo,Description,Responsable,Status,Prevision,Hour),
+            applyFilterByName(ProjectName, T, Filter)
+            );
+        applyFilterByName(ProjectName, T, Filter).
 
 filterByNameAllToDos(ProjectName, FilterName):- 
         write("\n\n------- ToDos filtradas por nome -------\n"),
-        captureAllTodos(ProjectName, Todos),
-        applyFilterByName(Todos, FilterName).
+        allTodosList(ProjectName, Todos),
+        applyFilterByName(ProjectName, Todos, FilterName).
 
-applyFilterBySituation([], _).
-applyFilterBySituation([[Name,Description,Responsable,Status,Prevision,Hour]|T], Filter):-
-        (searchMatching(Status, Filter), showToDo([Name,Description,Responsable,Status,Prevision,Hour]), applyFilterBySituation(T, Filter));
-        applyFilterBySituation(T, Filter).
+applyFilterBySituation(_, [], _).
+applyFilterBySituation(ProjectName, [NameTodo|T], Filter):-
+        recuperaTodo(ProjectName, NameTodo, Description, Responsable, Status, Prevision, Hour),
+        searchMatching(Status, Filter) -> (
+            showToDo(NameTodo,Description,Responsable,Status,Prevision,Hour),
+            applyFilterBySituation(ProjectName, T, Filter)
+            );
+        applyFilterBySituation(ProjectName, T, Filter).
 
 filterBySituationAllToDos(ProjectName, FilterSituation):-
         write("\n\n------- ToDos filtradas por situacao -------\n"),
-        captureAllTodos(ProjectName, Todos),
-        applyFilterBySituation(Todos, FilterSituation).
+        allTodosList(ProjectName, Todos),
+        applyFilterBySituation(ProjectName, Todos, FilterSituation).
 
-applyFilterByResponsable([], _).
-applyFilterByResponsable([[Name,Description,Responsable,Status,Prevision,Hour]|T], Filter):-
-        (searchMatching(Responsable, Filter), showToDo([Name,Description,Responsable,Status,Prevision,Hour]), applyFilterByResponsable(T, Filter));
-        applyFilterByResponsable(T, Filter).
+applyFilterByResponsable(_,[], _).
+applyFilterByResponsable(ProjectName, [NameTodo|T], Filter):-
+        recuperaTodo(ProjectName, NameTodo, Description, Responsable, Status, Prevision, Hour),
+        searchMatching(Responsable, Filter) -> (
+            showToDo(NameTodo,Description,Responsable,Status,Prevision,Hour),
+            applyFilterByResponsable(ProjectName, T, Filter)
+            );
+        applyFilterByResponsable(ProjectName, T, Filter).
 
 filterByResponsableAllToDos(ProjectName, FilterResponsable):-
         write("\n\n------- ToDos filtradas por responsavel -------\n"),
-        captureAllTodos(ProjectName, Todos),
-        applyFilterByResponsable(Todos, FilterResponsable).
+        allTodosList(ProjectName, Todos),
+        applyFilterByResponsable(ProjectName, Todos, FilterResponsable).
