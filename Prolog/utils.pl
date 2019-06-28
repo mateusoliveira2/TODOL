@@ -1,4 +1,4 @@
-:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1]).
+:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1]).
 
 notEmpty(List):- member(_, List).
 
@@ -13,6 +13,10 @@ showList([]) :- write("").
 showList( [Head|Tail] ):-
     show(Head),
     (notEmpty(Tail) -> showList(Tail); write("")).
+
+showExistentProjects(Projects) :-
+    write("\nProjetos existentes: \n"),
+    showList(Projects), write("\n").
 
 showProject(Name,Description,Responsable,Status,Prevision):-
 	write("\n\n"),
