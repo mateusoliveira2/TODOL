@@ -21,7 +21,7 @@ showProject(Name,Description,Responsable,Status,Prevision):-
 	write("│ Descricao: "), writeln(Description),
 	write("│ Responsavel: "), writeln(Responsable),
 	write("│ Status: "), writeln(Status),
-    write("│ Previsao: "), writeln(Prevision),
+    write("│ Previsao: "), write(Prevision), write(" hora(s)\n"),
     write("└────────────────────────────────────────────────\n\n").
 
 showToDo(Name,Description,Responsable,Status,Prevision,Hour):-
@@ -32,7 +32,7 @@ showToDo(Name,Description,Responsable,Status,Prevision,Hour):-
 	write("│ Responsavel: "), writeln(Responsable),
 	write("│ Status: "), writeln(Status),
     write("│ Previsao: "), writeln(Prevision),
-    write("│ Hora(s) cadastrada(s): "), writeln(Hour),
+    write("│ Hora(s) cadastrada(s): "), write(Hour), write(" hora(s)\n"),
     write("└────────────────────────────────────────────────\n\n").
 
 showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
