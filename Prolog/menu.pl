@@ -40,12 +40,14 @@ selectProject:-
         showExistentProjects(Projects),
         write("Digite o nome do projeto a ser selecionado: \n"),
         read_line_to_string(user_input, ProjectName),
-        write(ProjectName), write(' selecionado com sucesso!\n'),
-        ( projectExists(ProjectName) -> menuProject(ProjectName);
-        write("Projeto não existe!\n") )
+        ( projectExists(ProjectName) -> (
+            write(ProjectName), write(' selecionado com sucesso!\n'),
+            menuProject(ProjectName)
+        );
+        write("\nO projeto selecionado não existe!\n") )
     ); 
-    write("Não há projetos a serem selecionados! Escolha outra opção.\n"), 
-	main.
+    write("\nNão há projetos a serem selecionados! Escolha outra opção.\n"), 
+    main.
 
 concludeProject:-
     allProjectsList(Projects),
@@ -56,9 +58,9 @@ concludeProject:-
         write("Digite o nome do projeto: \n"),
         read_line_to_string(user_input, ProjectName),
         ( projectExists(ProjectName) ->  write(ProjectName), write(' concluido com sucesso!\n');
-        write("O projeto selecionado não existe!\n") )
+        write("\nO projeto selecionado não existe!\n") )
     ); 
-    write("Não existem projetos a serem concluídos. Escolha outra opção.\n"),
+    write("\nNão existem projetos a serem concluídos. Escolha outra opção.\n"),
     main.
 
 main :- 

@@ -94,9 +94,9 @@ editToDo(ProjectName):-
         write("Digite o nome da ToDo: \n"),
         read_line_to_string(user_input, ToDoName),
         ( toDoExists(ProjectName, ToDoName) -> 
-            write(ToDoName), write(' selecionado com sucesso!\n'), menuToDo(ProjectName, ToDoName); 
-            write('ToDo não existe!\n') );
-        write("O toDo selecionado não existe.")
+            write(ToDoName), write(' selecionado com sucesso!\n'), menuToDo(ProjectName, ToDoName)
+            );
+        write("\nO toDo selecionado não existe.")
     );
     write("\nNão há todos a serem editados."),
     menuProject(ProjectName).
