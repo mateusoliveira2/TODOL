@@ -1,4 +1,4 @@
-:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7, toDoExists/2, allTodosList/2, addHours/3]).
+:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7, toDoExists/2, allTodosList/2, addHours/3, setSituacao/3, setResponsavel/3]).
 
 notEmpty(List):- member(_, List).
 
@@ -51,6 +51,14 @@ persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas
     write(P, Horas), write(P, "\n"),
 
     close(P).
+
+setResponsavel(NomeProjeto, NomeTodo, Resp) :-
+	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),
+	persistirTodo(NomeProjeto, NomeTodo, Descricao, Resp, Status, Previsao, Horas).
+
+setSituacao(NomeProjeto, NomeTodo, Sit) :-
+	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),
+	persistirTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Sit, Previsao, Horas).
 
 addHours(NomeProjeto, NomeTodo, Cadastrado) :-
 	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),

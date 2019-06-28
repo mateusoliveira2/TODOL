@@ -3,7 +3,7 @@
 :- use_module(persistenceToDo).
 
 menuToDo(ProjectName, ToDoName):- repeat,
-        recuperaTodo(ProjectName, ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
+	recuperaTodo(ProjectName, ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
 	showToDo(ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
         
 	write("1. Editar Nome\n"),
@@ -27,15 +27,19 @@ editTodoName(ProjectName, ToDoName):-
         write("Nome atual: "), write(ToDoName),
         write("\nDigite o novo nome: "),
         read_line_to_string(user_input, NewName),
-    
+		    
         write("\nNome atuaizado com sucesso: "), write(NewName).
 
 editResponsible(ProjectName, ToDoName):-
         write("Editar Responsáveis pela ToDo\n\n"),
         write("\nDigite os novos responsaveis: "),
         read_line_to_string(user_input, NewResponsible),
-    
+    	setResponsavel(ProjectName, ToDoName, NewResponsible),
         write("\nResponsáveis atualizados com sucesso: "), write(NewResponsible).
+
+estado("1", "A fazer").
+estado("2", "Em andamento").
+estado("3", "Concluido").
 
 editSituation(ProjectName, ToDoName):-
         write("Editar Situação da ToDo\n\n"),
@@ -44,7 +48,9 @@ editSituation(ProjectName, ToDoName):-
         write("3. Concluido\n"),
         write("Escolha: \n"),
         read_line_to_string(user_input, ChoiceSituation),
-        write(ChoiceSituation).
+		estado(ChoiceSituation, Choice),
+		setSituacao(ProjectName, ToDoName, Choice).
+		
 
 editHours(ProjectName, ToDoName) :-
         write("Cadastrar horas da ToDo\n\n"),
