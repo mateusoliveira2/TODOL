@@ -1,4 +1,4 @@
-:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, repeatString/2, porcentagem/3]).
+:- module(utils, [showToDo/6, showProject/5, showList/1, notEmpty/1, showExistentProjects/1, showExistentTodos/1, repeatString/2, porcentagem/3]).
 
 porcentagem(A, B, Res) :-
 	A >= B,
@@ -25,6 +25,10 @@ showList([]) :- write("").
 showList( [Head|Tail] ):-
     show(Head),
     (notEmpty(Tail) -> showList(Tail); write("")).
+
+showExistentTodos(Todos) :-
+    write("\nTodos existentes: \n"),
+    showList(Todos), write("\n").
 
 showExistentProjects(Projects) :-
     write("\nProjetos existentes: \n"),

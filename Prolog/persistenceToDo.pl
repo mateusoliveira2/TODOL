@@ -3,20 +3,18 @@
 notEmpty(List):- member(_, List).
 
 problem(NomeProjeto, Element) :-
-	atom_string(NomeProjeto, Npa),
-	atom_string(Element, Ela),
     (Element = .);
     (Element = ..);
-    (Ela == Npa).
+	atom_string(NomeProjeto, Npa),
+	atom_string(Element, Ela),
+    (Ela = Npa).
 
 normalize(NomeProjeto, [Head|Tail], Auxiliar, Result) :-
 	(not( problem(NomeProjeto, Head) )) -> (
-		write("not problem with "), write(Head), nl,
 		length(Tail, SzList2),
 		append(Auxiliar, [Head], NewAux),
 		( (SzList2 > 0) -> normalize(NomeProjeto, Tail, NewAux, Result); append(NewAux, [], Result) )
 	);
-	write("Problem with "), write(Head), nl,
 	length(Tail, SzList),
 	( (SzList > 0) -> normalize(NomeProjeto, Tail, Auxiliar, Result); append(Auxiliar, [], Result) ).
 
