@@ -38,7 +38,7 @@ selectProject:-
         (SizeList > 2) -> (
             write("\nProjetos existentes: \n"),
             showList(Projects),
-            write("\n\n-------SELECIONAR PROJETO-------\n"),
+            write("\n-------SELECIONAR PROJETO-------\n"),
             write("Digite o nome do projeto: \n"),
             read_line_to_string(user_input, ProjectName),
             write(ProjectName), write(' selecionado com sucesso!\n'),
