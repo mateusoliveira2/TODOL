@@ -1,4 +1,8 @@
-:- module(persistenceProject, [persistirProjeto/5, recuperaProjeto/5, projectExists/1]).
+:- module(persistenceProject, [persistirProjeto/5, recuperaProjeto/5, projectExists/1, allProjectsList/1]).
+
+allProjectsList(Result) :-
+	createDirectory("Projects"),
+	directory_files("Projects", Result).
 
 createDirectory(Directory):- exists_directory(Directory) -> true; make_directory(Directory).
 
