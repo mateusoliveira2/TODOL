@@ -3,10 +3,10 @@
 :- use_module(persistenceToDo).
 
 menuToDo(ProjectName, ToDoName):- repeat,
-		recuperaTodo(ProjectName, ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
-		showToDo(ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
+        recuperaTodo(ProjectName, ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
+	showToDo(ToDoName, Descricao, Responsavel, Status, Previsao, Horas),
         
-		write("1. Editar Nome\n"),
+	write("1. Editar Nome\n"),
         write("2. Editar Responsaveis\n"),
         write("3. Editar Situacao\n"),
         write("4. Cadastrar horas\n"),
