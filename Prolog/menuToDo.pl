@@ -8,7 +8,7 @@ menuToDo(ProjectName, ToDoName):- repeat,
         write("4. Cadastrar horas\n"),
         write("0. Sair\n"),
         write("Escolha: \n\n"),
-        read(Choice),
+        read_line_to_string(user_input, Choice),
         
         ( Choice = 0 -> !, fail ; true ),
         ( Choice = 1 -> editTodoName(ProjectName, ToDoName) ; true ),
@@ -22,14 +22,14 @@ editTodoName(ProjectName, ToDoName):-
         write("Editar nome do ToDo\n\n"),
         write("Nome atual: "), write(ToDoName),
         write("\nDigite o novo nome: "),
-        read(NewName),
+        read_line_to_string(user_input, NewName),
     
         write("\nNome atuaizado com sucesso: "), write(NewName).
 
 editResponsible(ProjectName, ToDoName):-
         write("Editar Responsáveis pela ToDo\n\n"),
         write("\nDigite os novos responsaveis: "),
-        read(NewResponsible),
+        read_line_to_string(user_input, NewResponsible),
     
         write("\nRespinsáveis atualizados com sucesso: "), write(NewResponsible).
 
@@ -39,11 +39,11 @@ editSituation(ProjectName, ToDoName):-
         write("2. Em andamento\n"),
         write("3. Concluido\n"),
         write("Escolha: \n"),
-        read(ChoiceSituation),
+        read_line_to_string(user_input, ChoiceSituation),
         write(ChoiceSituation).
 
 editHours(ProjectName, ToDoName) :-
         write("Cadastrar horas da ToDo\n\n"),
         write("Quantas horas deseja cadastrar?"),
-        read(Hours),
+        read_line_to_string(user_input, Hours),
         write("Horas cadastradas").

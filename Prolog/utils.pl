@@ -1,4 +1,3 @@
-
 showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
 	write("\n\n┌────────────────────────────────────────────────\n"),
 	write("│ Nome: "), writeln(Name),
@@ -8,7 +7,6 @@ showToDo([Name,Description,Responsable,Status,Prevision,Hour]):-
     write("│ Previsao: "), writeln(Prevision),
     write("│ Hora(s) cadastrada(s): "), writeln(Hour),
     write("└────────────────────────────────────────────────\n\n").
-
 
 searchMatching(Key, Filter):- sub_atom(Key,Before,Length,After,Filter).
 

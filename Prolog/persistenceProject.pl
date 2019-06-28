@@ -1,4 +1,4 @@
-:- module(persistenceProject, [persistirProjeto/5, recuperaProjeto/5]).
+:- module(persistenceProject, [persistirProjeto/6, recuperaProjeto/5]).
 
 createDirectory(Directory):- exists_directory(Directory) -> true; make_directory(Directory).
 
@@ -14,7 +14,7 @@ projectExists(Project) :-
 	urlProject(Project, Path),
 	exists_directory(Path).
 
-persistirProjeto(Nome, Descricao, Responsavel, Status, Previsao) :- 
+persistirProjeto(Nome, Descricao, Responsavel, Status, Previsao, Horas) :- 
     createDirectory("Projects"),
 	urlProject(Nome, CaminhoDiretorio),
     createDirectory(CaminhoDiretorio),
@@ -22,20 +22,21 @@ persistirProjeto(Nome, Descricao, Responsavel, Status, Previsao) :-
 
     open(CaminhoProjeto, write, P),
     
-    write(P, Nome), write(P, ".\n"),
-    write(P, Descricao), write(P, ".\n"),
-    write(P, Responsavel), write(P, ".\n"),
-    write(P, Status), write(P, ".\n"),
-    write(P, Previsao), write(P, ".\n"),
+    write(P, Nome), write(P, "\n"),
+    write(P, Descricao), write(P, "\n"),
+    write(P, Responsavel), write(P, "\n"),
+    write(P, Status), write(P, "\n"),
+    write(P, Previsao), write(P, "\n"),
+    write(P, Horas), write(P, "\n"),
 
     close(P).
 
 recuperaProjeto(NomeProjeto, Descricao, Responsavel, Status, Previsao) :-
 	urlProjectFile(NomeProjeto, Caminho),
-	open(Caminho, read, Str),
-	read(Str, _),
-	read(Str, Descricao),
-	read(Str, Responsavel),
-	read(Str, Status),
-	read(Str, Previsao),
-	close(Str).
+    open(Caminho, read, Str),
+	read_line_to_string(Str, _),
+	read_line_to_string(Str, Descricao),
+	read_line_to_string(Str, Responsavel),
+	read_line_to_string(Str, Status),
+	read_line_to_string(Str, Previsao),
+    close(Str).

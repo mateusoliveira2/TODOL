@@ -15,22 +15,22 @@ persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas
 
     open(Caminho, write, P),
     
-    write(P, Nome), write(P, ".\n"),
-    write(P, Descricao), write(P, ".\n"),
-    write(P, Responsavel), write(P, ".\n"),
-    write(P, Status), write(P, ".\n"),
-    write(P, Previsao), write(P, ".\n"),
-    write(P, Horas), write(P, ".\n"),
+    write(P, Nome), write(P, "\n"),
+    write(P, Descricao), write(P, "\n"),
+    write(P, Responsavel), write(P, "\n"),
+    write(P, Status), write(P, "\n"),
+    write(P, Previsao), write(P, "\n"),
+    write(P, Horas), write(P, "\n"),
 
     close(P).
 
 recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas) :-
     urlTodoFile(NomeProjeto, NomeTodo, Caminho),
     open(Caminho, read, Str),
-    read(Str, _),
-    read(Str, Descricao),
-    read(Str, Responsavel),
-    read(Str, Status),
-    read(Str, Previsao),
-    read(Str, Horas),
+	read_line_to_string(Str, _),
+	read_line_to_string(Str, Descricao),
+	read_line_to_string(Str, Responsavel),
+	read_line_to_string(Str, Status),
+	read_line_to_string(Str, Previsao),
+    read_line_to_string(Str, Horas),
     close(Str).

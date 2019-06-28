@@ -12,7 +12,7 @@ menuProject(ProjectName):- repeat,
         write("6. Editar Nome do Projeto\n"),
         write("0. Sair\n"),
         write("Escolha: \n\n"),
-        read(Choice),
+        read_line_to_string(user_input, Choice),
         
         ( Choice = 0 -> !, fail ; true ),
         ( Choice = 1 -> receiverToDoData(ProjectName) ; true),
@@ -25,19 +25,19 @@ menuProject(ProjectName):- repeat,
 receiverToDoData(ProjectName):-
         write("\n\n-------CRIAR TODO -------\n"),
         write("Digite o nome da ToDO: \n"),
-        read(ToDoName),
+        read_line_to_string(user_input, ToDoName),
         write("Digite a descrição da ToDo: \n"),
-        read(Description),
+        read_line_to_string(user_input, Description),
         write("Digite os responsaveis pela ToDo: \n"),
-        read(Responsible),
+        read_line_to_string(user_input, Responsible),
         write("Digite a duração (em horas) da ToDo: \n"),
-        read(Duration),
+        read_line_to_string(user_input, Duration),
         persistirTodo(ProjectName, ToDoName, Description, Responsible, "A fazer", Duration, "0").
 
 listarToDo(ProjectName):-
         write("\n\n-------LISTAR TODOS -------\n"),
         write("Digite o nome da ToDO: \n"),
-        read(ToDoName),
+        read_line_to_string(user_input, ToDoName),
         recuperaTodo(ProjectName, ToDoName, Description, Responsible, Status, Duration, Horas),
         write(ProjectName),nl,
         write(ToDoName),nl,
@@ -50,7 +50,7 @@ listarToDo(ProjectName):-
 editToDo(ProjectName):-
         write("\n\n-------EDITAR TODO-------\n"),
         write("Digite o nome da ToDo: \n"),
-        read(ToDoName),
+        read_line_to_string(user_input, ToDoName),
         write(ToDoName),write(' selecionado com sucesso!'),
         menuToDo(ProjectName, ToDoName).
 
@@ -58,7 +58,7 @@ editProjectName(ProjectName):-
         write("\n\n-------EDITAR NOME DO PROJETO-------\n"),
         write("Nome atual: "), write(ProjectName),
         write("\n Digite o novo nome: "),
-        read(NewProjectName),
+        read_line_to_string(user_input, NewProjectName),
         write("\nNome atualizado com sucesso. Novo nome: "), write(NewProjectName).
 
 showProject:-
