@@ -1,4 +1,4 @@
-:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7, toDoExists/2, allTodosList/2]).
+:- module(persistenceToDo, [persistirTodo/7, recuperaTodo/7, toDoExists/2, allTodosList/2, addHours/3]).
 
 notEmpty(List):- member(_, List).
 
@@ -53,6 +53,13 @@ persistirTodo(NomeProjeto, Nome, Descricao, Responsavel, Status, Previsao, Horas
     write(P, Horas), write(P, "\n"),
 
     close(P).
+
+addHours(NomeProjeto, NomeTodo, Cadastrado) :-
+	recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas),
+	atom_number(Horas, HorasInt),
+	atom_number(Cadastrado, CadastradoInt),
+	Soma is CadastradoInt + HorasInt,
+	persistirTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Soma).
 
 recuperaTodo(NomeProjeto, NomeTodo, Descricao, Responsavel, Status, Previsao, Horas) :-
     urlTodoFile(NomeProjeto, NomeTodo, Caminho),
