@@ -57,3 +57,40 @@ setNomeProjeto(Nome, NovoNome) :-
 	urlProject(Nome, CaminhoDiretorio),
 	urlProject(NovoNome, NovoCaminhoDiretorio),
 	rename_file(CaminhoProjeto, NovoCaminhoProjeto).
+
+setDescricaoProjeto(Nome, NovaDescricao) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, Nome), write(Str, "\n"),
+    write(Str, NovaDescricao), write(Str, "\n"),
+    write(Str, Responsavel), write(Str, "\n"),
+    write(Str, Status), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str).
+
+setResponsavelProjeto(Nome, NovoResponsavel) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, Nome), write(Str, "\n"),
+    write(Str, Descricao), write(Str, "\n"),
+    write(Str, NovoResponsavel), write(Str, "\n"),
+    write(Str, Status), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str).
+
+
+setStatusProjeto(Nome, NovoStatus) :-
+	recuperaProjeto(Nome, Descricao, Responsavel, Status, Previsao),
+	urlProjectFile(Nome, CaminhoProjeto),
+	open(CaminhoProjeto, write, Str),
+    
+    write(Str, NovoNome), write(Str, "\n"),
+    write(Str, Descricao), write(Str, "\n"),
+    write(Str, Responsavel), write(Str, "\n"),
+    write(Str, NovoStatus), write(Str, "\n"),
+    write(Str, Previsao), write(Str, "\n"),
+	close(Str).
