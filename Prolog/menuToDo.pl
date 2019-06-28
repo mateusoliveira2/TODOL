@@ -50,4 +50,5 @@ editHours(ProjectName, ToDoName) :-
         write("Cadastrar horas da ToDo\n\n"),
         write("Quantas horas deseja cadastrar?"),
         read_line_to_string(user_input, Hours),
+		addHours(ProjectName, ToDoName, Hours),
         write("Horas cadastradas").
