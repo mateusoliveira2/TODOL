@@ -2,6 +2,8 @@
 	Main da aplicacao.
 	Controlla o loop principal e a entrada e saida de dados
 	no menu principal para o usuario.
+	@author Matheus Oliveira
+	@author Gabriel Tavares
 */
 
 #include <cstdio>
